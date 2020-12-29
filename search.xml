@@ -607,14 +607,14 @@
 <li>焦距越长(200mm)，视角越窄，拍进画面的景物范围也越窄，被摄体成像就会越大</li>
 <li>焦距越短(100mm)，视角越广，拍进画面的景物范围也越广，被摄体成像就会越小</li>
 </ul>
-<img src="/Users/xiaoli/Documents/HexoBlogs/source/images/ViewFromFocus.png" alt="ViewFromFocus" style="zoom:67%;" />
+<img src="/images/ViewFromFocus.png" alt="ViewFromFocus" style="zoom:67%;" />
 </li>
 <li><p><strong>焦距不同带来画面纵深感的差异(被摄体大小不变)</strong></p>
 <ul>
 <li>焦距越长(200mm)，拍进画面的范围越窄，视觉上被摄体离背景更近，纵深感更弱</li>
 <li>焦距越短(100mm)，拍进画面的范围越宽，视觉上被摄体离背景更远，纵深感更强</li>
 </ul>
-<img src="/Users/xiaoli/Documents/HexoBlogs/source/images/LayerFromFocus.png" alt="LayerFromFocus" style="zoom:67%;" />
+<img src="/images/LayerFromFocus.png" alt="LayerFromFocus" style="zoom:67%;" />
 </li>
 </ul>
 </li>
