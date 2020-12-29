@@ -575,10 +575,100 @@
   <entry>
     <title>单反镜头介绍</title>
     <url>/2020/%E5%8D%95%E5%8F%8D%E9%95%9C%E5%A4%B4%E4%BB%8B%E7%BB%8D/</url>
-    <content><![CDATA[<h4 id="相机镜头介绍"><a href="#相机镜头介绍" class="headerlink" title="相机镜头介绍"></a>相机镜头介绍</h4><p><strong>装卸方法:</strong>    将机身镜头卡口朝下，迅速更换镜头。</p>
-<p>​    1. 取下机身盖和镜头的后盖，准备安装镜头。</p>
-<p>​    2. 将镜头的红色标志与机身的红色标志对齐，缓慢、平稳地将镜头安装与机身。</p>
-<p>​    3. 镜身插入机身后，沿顺时针方向(面向相机正面)旋转镜头，听到“咔”的声音，说明安装的镜头已锁定。</p>
+    <content><![CDATA[<h4 id="相机镜头介绍"><a href="#相机镜头介绍" class="headerlink" title="相机镜头介绍"></a>相机镜头介绍</h4><ul>
+<li><p><strong>装卸方法:</strong> 将机身镜头卡口朝下，迅速更换镜头</p>
+<ul>
+<li>取下机身盖和镜头的后盖，准备安装镜头</li>
+<li>将镜头的红色标志与机身的红色标志对齐，缓慢、平稳地将镜头安装与机身</li>
+<li>镜身插入机身后，沿顺时针方向(面向相机正面)旋转镜头，听到“咔”的声音，说明安装的镜头已锁定</li>
+</ul>
+</li>
+</ul>
+<h4 id="重要参数"><a href="#重要参数" class="headerlink" title="重要参数"></a>重要参数</h4><ul>
+<li><p><strong>口径:</strong> 相机镜头前端的螺纹口径</p>
+</li>
+<li><p><strong>光圈:</strong> 控制光线进入镜头的装置，光圈大小以F值表示</p>
+<ul>
+<li>恒定光圈: F4G指每一个焦段都可以使用最大为F4的光圈值来拍摄</li>
+<li>浮动光圈: F4-5.6指焦距变化时，最大光圈也在F4和F5.6之间进行变化</li>
+<li>通常情况下，光圈越大越好，恒定光圈比浮动光圈好</li>
+</ul>
+</li>
+<li><p><strong>焦距:</strong> 定焦镜头 / 变焦镜头</p>
+<ul>
+<li><p><strong>最近对焦距离</strong></p>
+<ul>
+<li>镜头可以对焦的最短距离，镜头无法在短于最小对焦距离的位置对焦</li>
+<li>测量与拍摄对象间的距离是从相机机身上的焦平面标记开始而不是从相机前部开始</li>
+</ul>
+</li>
+<li><p><strong>焦距不同带来画面视角的差异(相机位置不变)</strong></p>
+<ul>
+<li>焦距越长(200mm)，视角越窄，拍进画面的景物范围也越窄，被摄体成像就会越大</li>
+<li>焦距越短(100mm)，视角越广，拍进画面的景物范围也越广，被摄体成像就会越小</li>
+</ul>
+<img src="/Users/xiaoli/Documents/HexoBlogs/source/images/ViewFromFocus.png" alt="ViewFromFocus" style="zoom:67%;" />
+</li>
+<li><p><strong>焦距不同带来画面纵深感的差异(被摄体大小不变)</strong></p>
+<ul>
+<li>焦距越长(200mm)，拍进画面的范围越窄，视觉上被摄体离背景更近，纵深感更弱</li>
+<li>焦距越短(100mm)，拍进画面的范围越宽，视觉上被摄体离背景更远，纵深感更强</li>
+</ul>
+<img src="/Users/xiaoli/Documents/HexoBlogs/source/images/LayerFromFocus.png" alt="LayerFromFocus" style="zoom:67%;" />
+</li>
+</ul>
+</li>
+<li><p><strong>防抖:</strong> 通过一组矫正镜组对因抖动产生的光路偏移进行矫正，防止成像模糊的问题</p>
+</li>
+</ul>
+<h4 id="镜头选择"><a href="#镜头选择" class="headerlink" title="镜头选择"></a>镜头选择</h4><ul>
+<li>变焦镜头由于要控制镜头的体积和重量，因此在画质上有所妥协，成像效果不及同规格的定焦镜头</li>
+<li>定焦镜头具备更大的光圈，非常适合拍摄背景虚化的人像照片和弱光环境下的星空题材</li>
+<li><strong>广角镜头(14<del>20mm 或 24</del>38mm):</strong><ul>
+<li>视野宽阔，比人眼看到的景物范围大得多，同时具备大景深的特点，可以将远景和近景都拍摄得很清楚。广角镜头能强调画面的透视效果，并且善于夸张前景和表象景物的远近感</li>
+</ul>
+</li>
+<li><strong>人物纪实(35mm):</strong><ul>
+<li>透视变形不严重的小广角镜头</li>
+</ul>
+</li>
+<li><strong>标准镜头(40~55mm):</strong><ul>
+<li>接近人眼看到的景象，其透视关系接近于人眼所感觉到的透视关系，所以能够逼真地再现被摄物体的真实特征</li>
+</ul>
+</li>
+<li><strong>中焦镜头(85mm 或 105mm 或 135mm):</strong><ul>
+<li>变形效果小，配合大光圈可以获得极佳的背景虚化效果</li>
+</ul>
+</li>
+<li><strong>长变焦镜头(70~200mm):</strong><ul>
+<li>具备望远功能，可以压缩画面的空间感</li>
+</ul>
+</li>
+<li><strong>微距镜头:</strong><ul>
+<li>能把主体的细节纤毫毕现地表现出来，主要用于拍摄十分微小的物体</li>
+</ul>
+</li>
+<li><strong>鱼眼镜头:</strong><ul>
+<li>180度超大广角，会导致桶形畸变</li>
+</ul>
+</li>
+<li><strong>移轴镜头:</strong><ul>
+<li>可实现倾角与偏移功能的特殊镜头，其主要目的是调整透视变形。通过使用倾角与偏移功能像各种角度和位置转动镜头，可以移动合焦面或对被摄体的形状进行补偿。主要用于建筑摄影和广告摄影</li>
+</ul>
+</li>
+<li><strong>UV镜:</strong><ul>
+<li>紫外线滤光镜，主要作用是保护镜头，同时能过滤紫外线(有助于提高成像清晰度和色彩效果)</li>
+</ul>
+</li>
+<li><strong>偏光镜PL:</strong><ul>
+<li>偏振镜，它利用偏振光的特性，把非金属物体、水面等被摄物体的反光进行过滤消除，使成像色彩更加鲜艳。PL分为圆偏光镜(CPL)和线性偏光镜(LPL)</li>
+</ul>
+</li>
+<li><strong>中灰滤镜:</strong><ul>
+<li>ND镜，中灰密度镜，仅一块灰色纯透明的光学玻璃，其目的是减少进入镜头的通光量，从而有效降低曝光量</li>
+</ul>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>photography</category>
