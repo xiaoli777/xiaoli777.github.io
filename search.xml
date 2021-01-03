@@ -194,64 +194,6 @@
       </tags>
   </entry>
   <entry>
-    <title>DIY a VPN</title>
-    <url>/2020/DIY-a-VPN/</url>
-    <content><![CDATA[<p>Website: <a href="https://www.vultr.com/">https://www.vultr.com/</a></p>
-<p>Software: Shadowsocks</p>
-<ol>
-<li>一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端；</li>
-</ol>
-<p>wget –no-check-certificate -O shadowsocks-all.sh <a href="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh">https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</a></p>
-<p>chmod +x shadowsocks-all.sh</p>
-<p>./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</p>
-<p>卸载方法</p>
-<p>./shadowsocks-all.sh uninstall</p>
-<ol start="2">
-<li>各版本的启动脚本及配置文件名不再重合；</li>
-</ol>
-<p>启动脚本后面的参数含义，从左至右依次为：启动，停止，重启，查看状态。</p>
-<p>Shadowsocks-Python 版：</p>
-<p>/etc/init.d/shadowsocks-python start | stop | restart | status</p>
-<p>ShadowsocksR 版：</p>
-<p>/etc/init.d/shadowsocks-r start | stop | restart | status</p>
-<p>Shadowsocks-Go 版：</p>
-<p>/etc/init.d/shadowsocks-go start | stop | restart | status</p>
-<p>Shadowsocks-libev 版：</p>
-<p>/etc/init.d/shadowsocks-libev start | stop | restart | status</p>
-<p>各版本默认配置文件</p>
-<p>Shadowsocks-Python 版：</p>
-<p>/etc/shadowsocks-python/config.json</p>
-<p>ShadowsocksR 版：</p>
-<p>/etc/shadowsocks-r/config.json</p>
-<p>Shadowsocks-Go 版：</p>
-<p>/etc/shadowsocks-go/config.json</p>
-<p>Shadowsocks-libev 版：</p>
-<p>/etc/shadowsocks-libev/config.json</p>
-<ol start="3">
-<li>安装加速器</li>
-</ol>
-<p>wget “<a href="https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh&quot;">https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh&quot;</a> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</p>
-<p>安装 BBR</p>
-<p>wget –no-check-certificate <a href="https://github.com/teddysun/across/raw/master/bbr.sh">https://github.com/teddysun/across/raw/master/bbr.sh</a></p>
-<p>获取读写权限</p>
-<p>chmod +x bbr.sh</p>
-<p>启动BBR安装</p>
-<p>./bbr.sh</p>
-<ol start="4">
-<li>解决Host key verification failed</li>
-</ol>
-<p>ssh-keygen -R 你要访问的IP地址</p>
-]]></content>
-      <categories>
-        <category>Configuration</category>
-      </categories>
-      <tags>
-        <tag>Chinese</tag>
-        <tag>Linux</tag>
-        <tag>VPN</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Introduction to Camera Lens</title>
     <url>/2020/Introduction-to-Camera-Lens/</url>
     <content><![CDATA[<h4 id="相机镜头介绍"><a href="#相机镜头介绍" class="headerlink" title="相机镜头介绍"></a>相机镜头介绍</h4><ul>
@@ -361,7 +303,7 @@
   <entry>
     <title>Parameters of Camera</title>
     <url>/2020/Parameters-of-Camera/</url>
-    <content><![CDATA[<h4 id="Step-1-设置存储格式和白平衡"><a href="#Step-1-设置存储格式和白平衡" class="headerlink" title="Step 1: 设置存储格式和白平衡"></a>Step 1: 设置存储格式和白平衡</h4><ul>
+    <content><![CDATA[<h4 id="Step-1-设置存储格式和白平衡"><a href="#Step-1-设置存储格式和白平衡" class="headerlink" title="Step 1. 设置存储格式和白平衡"></a>Step 1. 设置存储格式和白平衡</h4><ul>
 <li><p><strong>存储格式</strong></p>
 <ul>
 <li>RAW格式: 未经任何处理和压缩的无损照片格式</li>
@@ -397,7 +339,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="Step-2-选择曝光模式"><a href="#Step-2-选择曝光模式" class="headerlink" title="Step 2: 选择曝光模式"></a>Step 2: 选择曝光模式</h4><ul>
+<h4 id="Step-2-选择曝光模式"><a href="#Step-2-选择曝光模式" class="headerlink" title="Step 2. 选择曝光模式"></a>Step 2. 选择曝光模式</h4><ul>
 <li><p><strong>光圈</strong></p>
 <ul>
 <li>光圈的F值 = 镜头的焦距 / 镜头光圈的直径<ul>
@@ -528,7 +470,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="Step-3-设置曝光组合"><a href="#Step-3-设置曝光组合" class="headerlink" title="Step 3: 设置曝光组合"></a>Step 3: 设置曝光组合</h4><ul>
+<h4 id="Step-3-设置曝光组合"><a href="#Step-3-设置曝光组合" class="headerlink" title="Step 3. 设置曝光组合"></a>Step 3. 设置曝光组合</h4><ul>
 <li>室外晴天时的曝光组合设置<ul>
 <li>小光圈 + 低感光度<ul>
 <li>保证细腻画质和较大的景深效果</li>
@@ -586,7 +528,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="Step-4-选择测光模式"><a href="#Step-4-选择测光模式" class="headerlink" title="Step 4: 选择测光模式"></a>Step 4: 选择测光模式</h4><ul>
+<h4 id="Step-4-选择测光模式"><a href="#Step-4-选择测光模式" class="headerlink" title="Step 4. 选择测光模式"></a>Step 4. 选择测光模式</h4><ul>
 <li>区域平均测光<ul>
 <li>着重于焦点所对应的区域进行测光，同时对其他区域进行大体平均测光的智能测光模式</li>
 </ul>
@@ -606,7 +548,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="Step-5-选择对焦模式"><a href="#Step-5-选择对焦模式" class="headerlink" title="Step 5: 选择对焦模式"></a>Step 5: 选择对焦模式</h4><ul>
+<h4 id="Step-5-选择对焦模式"><a href="#Step-5-选择对焦模式" class="headerlink" title="Step 5. 选择对焦模式"></a>Step 5. 选择对焦模式</h4><ul>
 <li><strong>自动对焦</strong><ul>
 <li>单次自动对焦模式(AF-S)<ul>
 <li>每半按一次快门就会锁定对焦</li>
@@ -690,7 +632,7 @@
 </li>
 </ul>
 <p>​    </p>
-<h4 id="Step-6-设置曝光补偿，纠正曝光效果"><a href="#Step-6-设置曝光补偿，纠正曝光效果" class="headerlink" title="Step 6: 设置曝光补偿，纠正曝光效果"></a>Step 6: 设置曝光补偿，纠正曝光效果</h4><ul>
+<h4 id="Step-6-设置曝光补偿，纠正曝光效果"><a href="#Step-6-设置曝光补偿，纠正曝光效果" class="headerlink" title="Step 6. 设置曝光补偿，纠正曝光效果"></a>Step 6. 设置曝光补偿，纠正曝光效果</h4><ul>
 <li>曝光: 照片成像的明暗效果<ul>
 <li>曝光不足: 欠曝</li>
 <li>曝光过度: 过曝</li>
@@ -799,6 +741,54 @@
         <tag>Camera</tag>
         <tag>Hobbies</tag>
         <tag>Chinese</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DIY a VPN With SSR</title>
+    <url>/2020/DIY-a-VPN-With-SSR/</url>
+    <content><![CDATA[<p>Website: <a href="https://www.vultr.com/">https://www.vultr.com/</a></p>
+<p>Software: Shadowsocks</p>
+<h4 id="Step-1-服务器端安装Shadowsocks"><a href="#Step-1-服务器端安装Shadowsocks" class="headerlink" title="Step 1. 服务器端安装Shadowsocks"></a>Step 1. 服务器端安装Shadowsocks</h4><p>服务端版本：Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev（四选一）</p>
+<p>wget –no-check-certificate -O shadowsocks-all.sh <a href="https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh">https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</a></p>
+<p>chmod +x shadowsocks-all.sh</p>
+<p>./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</p>
+<p>卸载方法</p>
+<p>./shadowsocks-all.sh uninstall</p>
+<h4 id="Step-2-各版本的启动脚本及配置文件名"><a href="#Step-2-各版本的启动脚本及配置文件名" class="headerlink" title="Step 2. 各版本的启动脚本及配置文件名"></a>Step 2. 各版本的启动脚本及配置文件名</h4><p>启动脚本后面的参数含义，从左至右依次为：启动，停止，重启，查看状态。</p>
+<p>Shadowsocks-Python 版：</p>
+<p>/etc/init.d/shadowsocks-python start | stop | restart | status</p>
+<p>ShadowsocksR 版：</p>
+<p>/etc/init.d/shadowsocks-r start | stop | restart | status</p>
+<p>Shadowsocks-Go 版：</p>
+<p>/etc/init.d/shadowsocks-go start | stop | restart | status</p>
+<p>Shadowsocks-libev 版：</p>
+<p>/etc/init.d/shadowsocks-libev start | stop | restart | status</p>
+<p>各版本默认配置文件</p>
+<p>Shadowsocks-Python 版：</p>
+<p>/etc/shadowsocks-python/config.json</p>
+<p>ShadowsocksR 版：</p>
+<p>/etc/shadowsocks-r/config.json</p>
+<p>Shadowsocks-Go 版：</p>
+<p>/etc/shadowsocks-go/config.json</p>
+<p>Shadowsocks-libev 版：</p>
+<p>/etc/shadowsocks-libev/config.json</p>
+<h4 id="Step-3-安装VPN加速器"><a href="#Step-3-安装VPN加速器" class="headerlink" title="Step 3. 安装VPN加速器"></a>Step 3. 安装VPN加速器</h4><p>wget “<a href="https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh&quot;">https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh&quot;</a> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</p>
+<p>安装 BBR</p>
+<p>wget –no-check-certificate <a href="https://github.com/teddysun/across/raw/master/bbr.sh">https://github.com/teddysun/across/raw/master/bbr.sh</a></p>
+<p>获取读写权限</p>
+<p>chmod +x bbr.sh</p>
+<p>启动BBR安装</p>
+<p>./bbr.sh</p>
+<h4 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A?"></a>Q &amp; A?</h4><p>Q: 解决Host key verification failed</p>
+<p>A: ssh-keygen -R 你要访问的IP地址</p>
+]]></content>
+      <categories>
+        <category>Configuration</category>
+      </categories>
+      <tags>
+        <tag>Chinese</tag>
+        <tag>Linux</tag>
+        <tag>VPN</tag>
       </tags>
   </entry>
 </search>
