@@ -801,8 +801,7 @@
 </li>
 <li><p>We can confirm whether gdb is installed successfully by running:</p>
 <p><code>gdb --version</code></p>
-</li>
-<li><p>On my Mac, we can see:</p>
+<p>On my Mac, we can see:</p>
 <img src="/images/gdbversion.png" alt="ViewFromFocus" style="zoom:67%;" />
 </li>
 <li><p>However, we will get the information as follows while try to run a program:</p>
