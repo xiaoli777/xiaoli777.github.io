@@ -57,8 +57,6 @@
       </categories>
       <tags>
         <tag>Camera</tag>
-        <tag>Hobbies</tag>
-        <tag>Chinese</tag>
       </tags>
   </entry>
   <entry>
@@ -189,8 +187,6 @@
       </categories>
       <tags>
         <tag>Camera</tag>
-        <tag>Hobbies</tag>
-        <tag>Chinese</tag>
       </tags>
   </entry>
   <entry>
@@ -236,10 +232,8 @@
         <category>Configuration</category>
       </categories>
       <tags>
-        <tag>Chinese</tag>
         <tag>Linux</tag>
         <tag>VPN</tag>
-        <tag>Tools</tag>
       </tags>
   </entry>
   <entry>
@@ -345,8 +339,6 @@
       </categories>
       <tags>
         <tag>Camera</tag>
-        <tag>Hobbies</tag>
-        <tag>Chinese</tag>
       </tags>
   </entry>
   <entry>
@@ -739,8 +731,6 @@
       </categories>
       <tags>
         <tag>Camera</tag>
-        <tag>Hobbies</tag>
-        <tag>Chinese</tag>
       </tags>
   </entry>
   <entry>
@@ -782,8 +772,6 @@
       </categories>
       <tags>
         <tag>Camera</tag>
-        <tag>Hobbies</tag>
-        <tag>Chinese</tag>
       </tags>
   </entry>
   <entry>
@@ -862,7 +850,7 @@
         <category>Configuration</category>
       </categories>
       <tags>
-        <tag>Tools</tag>
+        <tag>Linux</tag>
         <tag>C Language</tag>
         <tag>Mac</tag>
       </tags>
@@ -913,7 +901,6 @@
         <category>Container</category>
       </categories>
       <tags>
-        <tag>Chinese</tag>
         <tag>Linux</tag>
         <tag>Docker</tag>
         <tag>Overlay</tag>
