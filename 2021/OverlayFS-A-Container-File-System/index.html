@@ -24,24 +24,26 @@
   </script>
 <meta name="description" content="本篇主要介绍单反相机的镜头装卸、参数与规格，以及适用场景。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Introduction to Camera Lens">
-<meta property="og:url" content="https://xiaoli777.github.io/2020/Introduction-to-Camera-Lens/index.html">
+<meta property="og:title" content="OverlayFS -- A Container File System">
+<meta property="og:url" content="https://xiaoli777.github.io/2021/OverlayFS-A-Container-File-System/index.html">
 <meta property="og:site_name" content="xiaoli7 IS HERE.">
 <meta property="og:description" content="本篇主要介绍单反相机的镜头装卸、参数与规格，以及适用场景。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://xiaoli777.github.io/images/ViewFromFocus.png">
-<meta property="og:image" content="https://xiaoli777.github.io/images/LayerFromFocus.png">
-<meta property="article:published_time" content="2020-12-29T07:30:48.000Z">
-<meta property="article:modified_time" content="2021-01-02T19:08:34.494Z">
+<meta property="og:image" content="https://xiaoli777.github.io/images/overlayarch.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/overlayatom.png">
+<meta property="article:published_time" content="2021-01-05T02:06:55.000Z">
+<meta property="article:modified_time" content="2021-01-04T11:44:07.799Z">
 <meta property="article:author" content="xiaoli7">
-<meta property="article:tag" content="Camera">
-<meta property="article:tag" content="Hobbies">
 <meta property="article:tag" content="Chinese">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Overlay">
+<meta property="article:tag" content="File System">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xiaoli777.github.io/images/ViewFromFocus.png">
+<meta name="twitter:image" content="https://xiaoli777.github.io/images/overlayarch.png">
 
 
-<link rel="canonical" href="https://xiaoli777.github.io/2020/Introduction-to-Camera-Lens/">
+<link rel="canonical" href="https://xiaoli777.github.io/2021/OverlayFS-A-Container-File-System/">
 
 
 <script class="page-configurations">
@@ -53,7 +55,7 @@
     lang   : 'en'
   };
 </script>
-<title>Introduction to Camera Lens | xiaoli7 IS HERE.</title>
+<title>OverlayFS -- A Container File System | xiaoli7 IS HERE.</title>
   
 
 
@@ -210,7 +212,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E6%9C%BA%E9%95%9C%E5%A4%B4%E4%BB%8B%E7%BB%8D"><span class="nav-text">相机镜头介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E5%8F%82%E6%95%B0"><span class="nav-text">重要参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%95%9C%E5%A4%B4%E9%80%89%E6%8B%A9"><span class="nav-text">镜头选择</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E7%89%B9%E5%BE%81"><span class="nav-text">1. 基本概念和特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-text">2. 基本文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%93%8D%E4%BD%9C"><span class="nav-text">1) 文件读取操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-text">2) 文件写入操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E6%93%8D%E4%BD%9C"><span class="nav-text">3) 文件创建操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E6%96%87%E4%BB%B6%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="nav-text">4) 文件删除操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%8E%9F%E5%AD%90%E6%80%A7%E4%BF%9D%E8%AF%81%E4%BB%B6"><span class="nav-text">3. 原子性保证件</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -292,7 +294,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://xiaoli777.github.io/2020/Introduction-to-Camera-Lens/">
+    <link itemprop="mainEntityOfPage" href="https://xiaoli777.github.io/2021/OverlayFS-A-Container-File-System/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/Me.jpeg">
@@ -305,7 +307,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Introduction to Camera Lens
+          OverlayFS -- A Container File System
         </h1>
 
         <div class="post-meta-container">
@@ -315,23 +317,17 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2020-12-29 00:30:48" itemprop="dateCreated datePublished" datetime="2020-12-29T00:30:48-07:00">2020-12-29</time>
+      <time title="Created: 2021-01-04 19:06:55 / Modified: 04:44:07" itemprop="dateCreated datePublished" datetime="2021-01-04T19:06:55-07:00">2021-01-04</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-01-02 12:08:34" itemprop="dateModified" datetime="2021-01-02T12:08:34-07:00">2021-01-02</time>
-      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Photography/" itemprop="url" rel="index"><span itemprop="name">Photography</span></a>
+          <a href="/categories/Container/" itemprop="url" rel="index"><span itemprop="name">Container</span></a>
         </span>
     </span>
 
@@ -351,8 +347,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2020/Introduction-to-Camera-Lens/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/Introduction-to-Camera-Lens/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/OverlayFS-A-Container-File-System/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/OverlayFS-A-Container-File-System/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -367,100 +363,44 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h4 id="相机镜头介绍"><a href="#相机镜头介绍" class="headerlink" title="相机镜头介绍"></a>相机镜头介绍</h4><ul>
-<li><p><strong>装卸方法:</strong> 将机身镜头卡口朝下，迅速更换镜头</p>
-<ul>
-<li>取下机身盖和镜头的后盖，准备安装镜头</li>
-<li>将镜头的红色标志与机身的红色标志对齐，缓慢、平稳地将镜头安装与机身</li>
-<li>镜身插入机身后，沿顺时针方向(面向相机正面)旋转镜头，听到“咔”的声音，说明安装的镜头已锁定</li>
-</ul>
+        <h4 id="1-基本概念和特征"><a href="#1-基本概念和特征" class="headerlink" title="1. 基本概念和特征"></a>1. 基本概念和特征</h4><p>Docker容器最常用的文件系统是AUFS, 但随着Linux Kernel 3.18把Overlay纳入其中后，Overlay文件系统的地位就变得尤为重要。目前，Docker默认的存储文件系统是Overlay，相比于AUFS，其速度更快，实现也更为简单。</p>
+<p>Overlay文件系统将不同的目录(底层目录和高层目录)划分为不同的层次，并通过联合挂载过程将数个高、底层目录合并成一个统一的目录，即统一合并视图层。如下图所示，在Docker与Overlay文件系统的分层图中，只读镜像层是底层目录，读写容器层是高层目录，而容器运行实际的应用层是统一合并视图层。</p>
+<img src="/images/overlayarch.png" alt="overlayarch" style="zoom:67%;" />
+
+<p>在Overlay文件系统中，用户只能看到存在于统一合并视图层中的目录和文件，但这些目录和文件既可能来自于高层目录，也可能来自于底层目录。因此，当用户查看统一合并视图层的目录或文件时，用户会感觉到上下层同名目录合并和上下层同名文件覆盖：</p>
+<ol>
+<li><p><strong>上下层同名目录合并：</strong>如果某个目录并不是仅来自单独的一层(仅高层目录或底层目录)，它会逐级遍历(从高层目录到底层目录，再到更低的底层目录)扫描所有层中的同名目录，然后将同名目录中的内容合并后，返回给用户唯一一个包含全部内容的同名目录。</p>
 </li>
-</ul>
-<h4 id="重要参数"><a href="#重要参数" class="headerlink" title="重要参数"></a>重要参数</h4><ul>
-<li><p><strong>口径:</strong> 相机镜头前端的螺纹口径</p>
+<li><p><strong>上下层同名文件覆盖：</strong>如果在遍历扫描过程中发现同名文件，Overlay文件系统会优先向用户呈现较高层中的文件，即忽略来自底层目录的文件而只显示来自高层目录的文件，或者忽略来自较低底层目录的文件而显示来自更高底层目录的文件。</p>
 </li>
-<li><p><strong>光圈:</strong> 控制光线进入镜头的装置，光圈大小以F值表示</p>
-<ul>
-<li>恒定光圈: F4G指每一个焦段都可以使用最大为F4的光圈值来拍摄</li>
-<li>浮动光圈: F4-5.6指焦距变化时，最大光圈也在F4和F5.6之间进行变化</li>
-<li>通常情况下，光圈越大越好，恒定光圈比浮动光圈好</li>
-</ul>
-</li>
-<li><p><strong>焦距:</strong> 定焦镜头 / 变焦镜头</p>
-<ul>
-<li><p><strong>最近对焦距离</strong></p>
-<ul>
-<li>镜头可以对焦的最短距离，镜头无法在短于最小对焦距离的位置对焦</li>
-<li>测量与拍摄对象间的距离是从相机机身上的焦平面标记开始而不是从相机前部开始</li>
-</ul>
-</li>
-<li><p><strong>焦距不同带来画面视角的差异(相机位置不变)</strong></p>
-<ul>
-<li>焦距越长(200mm)，视角越窄，拍进画面的景物范围也越窄，被摄体成像就会越大</li>
-<li>焦距越短(100mm)，视角越广，拍进画面的景物范围也越广，被摄体成像就会越小</li>
-</ul>
-<img src="/images/ViewFromFocus.png" alt="ViewFromFocus" style="zoom:67%;" />
-</li>
-<li><p><strong>焦距不同带来画面纵深感的差异(被摄体大小不变)</strong></p>
-<ul>
-<li>焦距越长(200mm)，拍进画面的范围越窄，视觉上被摄体离背景更近，纵深感更弱</li>
-<li>焦距越短(100mm)，拍进画面的范围越宽，视觉上被摄体离背景更远，纵深感更强</li>
-</ul>
-<img src="/images/LayerFromFocus.png" alt="LayerFromFocus" style="zoom:67%;" />
-</li>
-</ul>
-</li>
-<li><p><strong>防抖:</strong> 通过一组矫正镜组对因抖动产生的光路偏移进行矫正，防止成像模糊的问题</p>
-</li>
-</ul>
-<h4 id="镜头选择"><a href="#镜头选择" class="headerlink" title="镜头选择"></a>镜头选择</h4><ul>
-<li>变焦镜头由于要控制镜头的体积和重量，因此在画质上有所妥协，成像效果不及同规格的定焦镜头</li>
-<li>定焦镜头具备更大的光圈，非常适合拍摄背景虚化的人像照片和弱光环境下的星空题材</li>
-<li><strong>广角镜头(14<del>20mm 或 24</del>38mm):</strong><ul>
-<li>视野宽阔，比人眼看到的景物范围大得多，同时具备大景深的特点，可以将远景和近景都拍摄得很清楚。广角镜头能强调画面的透视效果，并且善于夸张前景和表象景物的远近感</li>
-</ul>
-</li>
-<li><strong>人物纪实(35mm):</strong><ul>
-<li>透视变形不严重的小广角镜头</li>
-</ul>
-</li>
-<li><strong>标准镜头(40~55mm):</strong><ul>
-<li>接近人眼看到的景象，其透视关系接近于人眼所感觉到的透视关系，所以能够逼真地再现被摄物体的真实特征</li>
-</ul>
-</li>
-<li><strong>中焦镜头(85mm 或 105mm 或 135mm):</strong><ul>
-<li>变形效果小，配合大光圈可以获得极佳的背景虚化效果</li>
-</ul>
-</li>
-<li><strong>长变焦镜头(70~200mm):</strong><ul>
-<li>具备望远功能，可以压缩画面的空间感</li>
-</ul>
-</li>
-<li><strong>微距镜头:</strong><ul>
-<li>能把主体的细节纤毫毕现地表现出来，主要用于拍摄十分微小的物体</li>
-</ul>
-</li>
-<li><strong>鱼眼镜头:</strong><ul>
-<li>180度超大广角，会导致桶形畸变</li>
-</ul>
-</li>
-<li><strong>移轴镜头:</strong><ul>
-<li>可实现倾角与偏移功能的特殊镜头，其主要目的是调整透视变形。通过使用倾角与偏移功能像各种角度和位置转动镜头，可以移动合焦面或对被摄体的形状进行补偿。主要用于建筑摄影和广告摄影</li>
-</ul>
-</li>
-<li><strong>UV镜:</strong><ul>
-<li>紫外线滤光镜，主要作用是保护镜头，同时能过滤紫外线(有助于提高成像清晰度和色彩效果)</li>
-</ul>
-</li>
-<li><strong>偏光镜PL:</strong><ul>
-<li>偏振镜，它利用偏振光的特性，把非金属物体、水面等被摄物体的反光进行过滤消除，使成像色彩更加鲜艳。PL分为圆偏光镜(CPL)和线性偏光镜(LPL)</li>
-</ul>
-</li>
-<li><strong>中灰滤镜:</strong><ul>
-<li>ND镜，中灰密度镜，仅一块灰色纯透明的光学玻璃，其目的是减少进入镜头的通光量，从而有效降低曝光量</li>
-</ul>
-</li>
-</ul>
+</ol>
+<p>值得注意的是，高层目录和底层目录中文件的存储和组织方式是基于宿主机文件系统，即Ext4文件系统，而不是基于Overlay文件系统。Overlay文件系统提供的功能仅是将数个目录层联合挂载到统一合并视图层，并提供相应的文件访问接口。</p>
+<h4 id="2-基本文件操作"><a href="#2-基本文件操作" class="headerlink" title="2. 基本文件操作"></a>2. 基本文件操作</h4><p>在Overlay文件系统中，用户视角只能看到统一合并视图层的内容。因此，用户相应的Overlay基本文件操作(如文件创建、删除、读取、写入等)也都起始于统一合并视图层。然而，统一合并视图层仅提供实际文件的视图，并不存储和组织实际的文件(存储在属于Ext4文件系统的高层目录和底层目录中)。因此，当统一合并视图层的基本文件操作发生时，Overlay文件系统通过自身文件系统定义的函数接口找到操作对象在高层目录和底层目录对应的实际文件，然后将控制权转移给Ext4文件系统，最后通过VFS进一步调用操作系统定义的文件操作。而这个跨层文件的转换过程被称为文件重定向(file redirection)。</p>
+<p>Overlay文件系统的基本文件操作包括<strong>文件读取、文件写入、文件创建</strong>和<strong>文件删除</strong>。但是根据不同的操作类型和实际文件所在的层次，Overlay文件系统会分别采取不同的处理策略：</p>
+<h5 id="1-文件读取操作"><a href="#1-文件读取操作" class="headerlink" title="1) 文件读取操作"></a>1) 文件读取操作</h5><p><strong>场景1.</strong> 文件和目录只存在于底层目录，却不存在于高层目录：Overlay文件系统通过视图层的文件和目录的目录项，使用文件重定向找到其在底层目录中对应的实际目录项与索引节点，接着将操作的控制权转交给VFS，并由VFS进一步执行操作系统已定义好的读取操作；</p>
+<p><strong>场景2.</strong> 文件和目录只存在于高层目录，却不存在于底层目录：与场景1的过程基本相同，唯有通过文件重定向找到在高层目录中对应的实际目录项(real_dentry)与索引节点，再将控制权转交给VFS；</p>
+<p><strong>场景3.</strong> 文件和目录同时存在于高层目录和底层目录：由于Overlay文件系统的视图层会用高层目录中的文件覆盖底层目录中的文件，所以读取过程和场景2相同。</p>
+<h5 id="2-文件写入操作"><a href="#2-文件写入操作" class="headerlink" title="2) 文件写入操作"></a>2) 文件写入操作</h5><p><strong>场景1.</strong> 文件和目录是首次写入，仅存在于底层目录，且不存在于高层目录中：Overlay文件系统通过文件重定向找到底层目录中的实际文件，再执行写时复制(Copy-on-Write, CoW)，将对象从底层目录拷贝到高层目录；然后，将复制后的目录和文件的目录项和控制权转交给VFS；接着，VFS进一步执行宿主机文件系统已定义的文件写入操作，读取拷贝的文件和目录并修改，再将修改后的结果保存在高层目录。值得注意的是，Overlay属于文件级别的文件系统：即使文件只有很小一部分的修改，也会触发写时复制；</p>
+<p><strong>场景2.</strong> 文件和目录是首次写入，但存在于高层目录：与场景1处理基本相同，但不会发生写时复制(Copy-on-Write)。Overlay文件系统仅通过文件重定向将视图层对象的目录项转换为高层目录中对应的目录项，并将其和它的控制权转交给VFS；</p>
+<p><strong>场景3.</strong> 文件和目录是非首次写入，则一定存在于高层目录：解决方案与场景2完全相同。</p>
+<h5 id="3-文件创建操作"><a href="#3-文件创建操作" class="headerlink" title="3) 文件创建操作"></a>3) 文件创建操作</h5><p><strong>场景1.</strong> 创建在底层目录和高层目录中都不存在的文件或目录：直接在高层目录中创建新的文件或目录；</p>
+<p><strong>场景2.</strong> 创建在底层目录已经存在，且在高层目录有whiteout文件的同名文件：Overlay文件系统会删除高层目录中的whiteout文件，并用新创建的文件替换它。通过这种方式，用户就能在统一合并视图层中看到高层目录中创建的新文件；</p>
+<p><strong>场景3.</strong> 创建在底层目录已经存在，且在高层目录有whiteout文件的同名目录：由于同名目录上下层合并，所以若这时仅仅在高层目录中新建一个目录，则底层目录中对应目录中的内容也会暴露。因此，Overlay文件系统引入opaque属性，在读取上下层同名目录的目录项时，对高层目录中具有opaque属性的目录，Overlay文件系统会忽略在底层目录中同名目录下的所有目录项，以保证在用户视图中该新建目录仅是一个空目录。</p>
+<h5 id="4-文件删除操作"><a href="#4-文件删除操作" class="headerlink" title="4) 文件删除操作"></a>4) 文件删除操作</h5><p><strong>场景1.</strong> 删除的文件或目录来自高层目录，且在底层目录中没有同名对象：由于高层目录中的对象是可读可写的，因此所有的文件操作都可以直接作用在高层目录。因此，Overlay文件系统会直接删除高层目录中对应的文件或目录；</p>
+<p><strong>创建2.</strong> 删除的文件或目录来自底层目录，且在高层目录不存在覆盖文件：由于底层对象是只读的，因此Overlay文件系统不能直接删除底层目录中的文件或目录。Overlay文件系统必须既让用户认为目标已删除，却又不执行真正的删除操作；<br>为了达到这种效果，Overlay文件系统会在高层目录中删除文件的同时，创建同名的whiteout文件，用于屏蔽底层目录中的文件或目录。因此，当用户在视图层查看文件或目录时，由于whiteout文件的存在，底层目录中对应的文件或目录对用户不可见，就像被删除一样。但实际对象依旧存在于底层目录中；</p>
+<p><strong>场景3.</strong> 删除的文件是高层目录的文件覆盖底层目录的文件，或删除的目录是上下层合并的目录：该场景的属于场景1和场景2的合并，Overlay文件系统既要删除高层目录中的文件和目录，也会在高层目录中创建同名的whiteout文件，从而保证高层目录的文件或目录被删除后而不至于底层对象被暴露出来。</p>
+<h4 id="3-原子性保证件"><a href="#3-原子性保证件" class="headerlink" title="3. 原子性保证件"></a>3. 原子性保证件</h4><p>文件系统的原子性指所有的文件操作要么全部完成，要么全部不完成，不可能停滞在中间某个环节，否则有可能会破坏文件数据或元数据的原子性。而Overlay文件系统必须要保证文件创建、文件删除和写时复制等过程的原子性：</p>
+<p><strong>场景1.</strong> 删除高层目录中的文件并创建whiteout文件：Overlay文件系统要保证高层目录中的删除目标文件和创建whiteout文件两个操作同时发生的原子性，不存在删除文件后whiteout文件还未创建的状态；</p>
+<p><strong>场景2.</strong> 删除上下层合并目录：Overlay文件系统必须要保证被删除的目录为空，即目录和文件同时被删除的原子性，不存在部分数据删除，部分数据保留的状态；</p>
+<p><strong>场景3.</strong> 新创建与whiteout同名的文件和目录：Overlay文件系统要保证删除whiteout文件和创建新文件两个操作同时发生的原子性，不存在删除whiteout文件后新文件还未创建的状态；</p>
+<p><strong>场景4.</strong> 底层文件的写时复制：Overlay文件系统要保证文件拷贝的原子性，不存在只拷贝部分数据的状态。</p>
+<img src="/images/overlayatom.png" alt="overlayatom" style="zoom:67%;" />
+
+<p>为了保证自身文件操作的原子性，Overlay文件系统使用工作目录(workdir)和重命名操作(rename)。如上图所示，以删除同时存在于高 / 底层目录的文件为例，其原子性保证的工作原理主要分为三个步骤：</p>
+<p><strong>①创建：</strong>在工作目录中创建用于同名whiteout文件(若是写时复制过程，则将目标文件从底层目录复制到工作目录)；</p>
+<p><strong>②交换：</strong>使用重命名操作将被删除的目标文件与工作目录中的whiteout文件进行交换 (若是写诗赋值过程，则通过重命名操作移动拷贝文件)来实现文件的原子性替换，而其原子性由宿主机文件系统已定义的重命名操作来保证；</p>
+<p><strong>③删除：</strong>将工作目录中的目标文件删除(若是写时复制，则没有这个步骤)。</p>
+<p>在上述的每个步骤中，即使系统出现异常或崩溃，磁盘也只会在工作目录中多出未被及时删除的目标文件、whiteout文件或拷贝不完全的文件；当操作系统恢复正常且再次挂载Overlay文件系统时，工作目录中的文件会被继续清除。通过这种方式，Overlay文件系统能够保证文件系统中所有基本文件操作的原子性。</p>
 
     </div>
 
@@ -488,9 +428,11 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Camera/" rel="tag"># Camera</a>
-              <a href="/tags/Hobbies/" rel="tag"># Hobbies</a>
               <a href="/tags/Chinese/" rel="tag"># Chinese</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/Overlay/" rel="tag"># Overlay</a>
+              <a href="/tags/File-System/" rel="tag"># File System</a>
           </div>
 
         
@@ -507,12 +449,12 @@
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
 
-  <p><span>Title:  </span>Introduction to Camera Lens</a></p>
+  <p><span>Title:  </span>OverlayFS -- A Container File System</a></p>
   <p><span>Author: </span>xiaoli7</a></p>
-  <p><span>Created:</span>12/29/2020 - 00:30:48</p>
-  <p><span>Undated:</span>01/02/2021 - 12:08:34</p>
-  <p><span>WebLink:</span><a href="/2020/Introduction-to-Camera-Lens/" title="Introduction to Camera Lens">https://xiaoli777.github.io/2020/Introduction-to-Camera-Lens/</a>
-    <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2020/Introduction-to-Camera-Lens/"  aria-label="Copy Successfully!"></i></span>
+  <p><span>Created:</span>01/04/2021 - 19:06:55</p>
+  <p><span>Undated:</span>01/04/2021 - 04:44:07</p>
+  <p><span>WebLink:</span><a href="/2021/OverlayFS-A-Container-File-System/" title="OverlayFS -- A Container File System">https://xiaoli777.github.io/2021/OverlayFS-A-Container-File-System/</a>
+    <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/OverlayFS-A-Container-File-System/"  aria-label="Copy Successfully!"></i></span>
   </p>
   <p><span>License:</span><i class="fa fa-copyright"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">"CC BY-NC-ND 4.0"</a> Reprint please keep the original link and author. </p>  
 </div>
@@ -538,14 +480,11 @@
 	</div>
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/Photography-Skills/" rel="prev" title="Photography Skills">
-                  <i class="fa fa-chevron-left"></i> Photography Skills
+                <a href="/2021/GDB-Installation-on-Mac-OS/" rel="prev" title="GDB Installation on Mac OS">
+                  <i class="fa fa-chevron-left"></i> GDB Installation on Mac OS
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2020/Parameters-of-Camera/" rel="next" title="Parameters of Camera">
-                  Parameters of Camera <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -658,9 +597,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "https://xiaoli777.github.io/2020/Introduction-to-Camera-Lens/";
-    this.page.identifier = "2020/Introduction-to-Camera-Lens/";
-    this.page.title = "Introduction to Camera Lens";
+    this.page.url = "https://xiaoli777.github.io/2021/OverlayFS-A-Container-File-System/";
+    this.page.identifier = "2021/OverlayFS-A-Container-File-System/";
+    this.page.title = "OverlayFS -- A Container File System";
     };
   NexT.utils.loadComments('#disqus_thread', () => {
     if (window.DISQUS) {
