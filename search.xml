@@ -907,4 +907,52 @@
         <tag>File System</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Binary tree</title>
+    <url>/2021/Binary-tree/</url>
+    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义:"></a>定义:</h2><p><a href="https://en.wikipedia.org/wiki/Binary_tree">二叉树(Binary Tree)</a>是一种数据结构，它的每个父节点(parent)至多有两个子节点(children)，分别被称为<em>左孩子(the left child)<em>和</em>右孩子(the right child)</em>.</p>
+<p><img src="/images/bt/bt-1.png"></p>
+<p>如上图所示, 该二叉树的大小(size)为9且高度(height)为3，根结点(root)的值为2. 另外，这是一颗不平衡(unbalanced)且未排序(unsorted)的二叉树。</p>
+<br>
+
+<h2 id="特殊二叉树"><a href="#特殊二叉树" class="headerlink" title="特殊二叉树"></a>特殊二叉树</h2><ul>
+<li><p>满二叉树(full binary tree)：</p>
+<ul>
+<li><p>除叶子节点(leaf)外，所有分支节点都含有2个非空子节点的二叉树</p>
+</li>
+<li><p>满二叉树上的节点要么有0个子节点，要么有2个子节点</p>
+</li>
+<li><p>满二叉树的子树(subtree)是单个顶点(vertex)，或同样是满二叉树</p>
+<p><img src="/images/bt/bt-2.png"></p>
+</li>
+</ul>
+</li>
+<li><p>完全二叉树(complete binary tree)</p>
+<ul>
+<li><p>除了最后一层，其余层都是“满”的，且叶子节点尽可能向左靠齐</p>
+</li>
+<li><p>or 在最后一层中，移除最右边的叶子节点(rightmost leaves)</p>
+</li>
+<li><p>完全二叉树节点总数在1 ～ $2^h$ 之间，其中h为树的高度</p>
+<p><img src="/images/bt/bt-3.png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="Common-Attributes"><a href="#Common-Attributes" class="headerlink" title="Common Attributes"></a>Common Attributes</h2><br>
+
+
+
+<h2 id="Simple-Operations"><a href="#Simple-Operations" class="headerlink" title="Simple Operations"></a>Simple Operations</h2><p>Search</p>
+]]></content>
+      <categories>
+        <category>Data Structure</category>
+      </categories>
+      <tags>
+        <tag>Binary Tree</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
 </search>

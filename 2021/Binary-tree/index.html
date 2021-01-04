@@ -22,22 +22,26 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"xiaoli777.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="Never too high, never too low.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="xiaoli7 IS HERE.">
-<meta property="og:url" content="https://xiaoli777.github.io/categories/Container/index.html">
+<meta name="description" content="Introduction a data structure called binary tree, and how to traverse it.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Binary tree">
+<meta property="og:url" content="https://xiaoli777.github.io/2021/Binary-tree/index.html">
 <meta property="og:site_name" content="xiaoli7 IS HERE.">
-<meta property="og:description" content="Never too high, never too low.">
+<meta property="og:description" content="Introduction a data structure called binary tree, and how to traverse it.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xiaoli777.github.io/images/bt/bt-1.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/bt/bt-2.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/bt/bt-3.png">
+<meta property="article:published_time" content="2021-01-05T03:27:44.000Z">
+<meta property="article:modified_time" content="2021-01-04T14:18:50.174Z">
 <meta property="article:author" content="xiaoli7">
-<meta property="article:tag" content="Cloud Computing">
-<meta property="article:tag" content="Operating Systems">
-<meta property="article:tag" content="Machine Learning">
-<meta property="article:tag" content="LeetCode">
+<meta property="article:tag" content="Binary Tree">
+<meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaoli777.github.io/images/bt/bt-1.png">
 
 
-<link rel="canonical" href="https://xiaoli777.github.io/categories/Container/">
+<link rel="canonical" href="https://xiaoli777.github.io/2021/Binary-tree/">
 
 
 <script class="page-configurations">
@@ -45,11 +49,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
-<title>Category: Container | xiaoli7 IS HERE.</title>
+<title>Binary tree | xiaoli7 IS HERE.</title>
   
 
 
@@ -193,7 +197,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -206,6 +210,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-text">定义:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-text">特殊二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Attributes"><span class="nav-text">Common Attributes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simple-Operations"><span class="nav-text">Simple Operations</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -276,51 +281,221 @@
 </noscript>
 
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h2 class="collection-header">Container
-          <small>Category</small>
-        </h2>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xiaoli777.github.io/2021/Binary-tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Me.jpeg">
+      <meta itemprop="name" content="xiaoli7">
+      <meta itemprop="description" content="Never too high, never too low.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoli7 IS HERE.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Binary tree
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+
+      <time title="Created: 2021-01-04 20:27:44 / Modified: 07:18:50" itemprop="dateCreated datePublished" datetime="2021-01-04T20:27:44-07:00">2021-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Data-Structure/" itemprop="url" rel="index"><span itemprop="name">Data Structure</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/Binary-tree/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/Binary-tree/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">Introduction a data structure called binary tree, and how to traverse it.</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义:"></a>定义:</h2><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Binary_tree">二叉树(Binary Tree)</a>是一种数据结构，它的每个父节点(parent)至多有两个子节点(children)，分别被称为<em>左孩子(the left child)<em>和</em>右孩子(the right child)</em>.</p>
+<p><img src="/images/bt/bt-1.png"></p>
+<p>如上图所示, 该二叉树的大小(size)为9且高度(height)为3，根结点(root)的值为2. 另外，这是一颗不平衡(unbalanced)且未排序(unsorted)的二叉树。</p>
+<br>
+
+<h2 id="特殊二叉树"><a href="#特殊二叉树" class="headerlink" title="特殊二叉树"></a>特殊二叉树</h2><ul>
+<li><p>满二叉树(full binary tree)：</p>
+<ul>
+<li><p>除叶子节点(leaf)外，所有分支节点都含有2个非空子节点的二叉树</p>
+</li>
+<li><p>满二叉树上的节点要么有0个子节点，要么有2个子节点</p>
+</li>
+<li><p>满二叉树的子树(subtree)是单个顶点(vertex)，或同样是满二叉树</p>
+<p><img src="/images/bt/bt-2.png"></p>
+</li>
+</ul>
+</li>
+<li><p>完全二叉树(complete binary tree)</p>
+<ul>
+<li><p>除了最后一层，其余层都是“满”的，且叶子节点尽可能向左靠齐</p>
+</li>
+<li><p>or 在最后一层中，移除最右边的叶子节点(rightmost leaves)</p>
+</li>
+<li><p>完全二叉树节点总数在1 ～ $2^h$ 之间，其中h为树的高度</p>
+<p><img src="/images/bt/bt-3.png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="Common-Attributes"><a href="#Common-Attributes" class="headerlink" title="Common Attributes"></a>Common Attributes</h2><br>
+
+
+
+<h2 id="Simple-Operations"><a href="#Simple-Operations" class="headerlink" title="Simple Operations"></a>Simple Operations</h2><p>Search</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2021-01-04T19:06:55-07:00"
-              content="2021-01-04">
-          01-04
-        </time>
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatforReward.jpeg" alt="xiaoli7 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipayforReward.jpeg" alt="xiaoli7 Alipay">
+        <span>Alipay</span>
       </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/OverlayFS-A-Container-File-System/" itemprop="url">
-            <span itemprop="name">OverlayFS -- A Container File System</span>
-          </a>
-      </div>
+  </div>
+</div>
 
-      
-    </header>
+          <div class="post-tags">
+              <a href="/tags/Binary-Tree/" rel="tag"># Binary Tree</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+
+	<div>
+    		
+        	
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>Title:  </span>Binary tree</a></p>
+  <p><span>Author: </span>xiaoli7</a></p>
+  <p><span>Created:</span>01/04/2021 - 20:27:44</p>
+  <p><span>Undated:</span>01/04/2021 - 07:18:50</p>
+  <p><span>WebLink:</span><a href="/2021/Binary-tree/" title="Binary tree">https://xiaoli777.github.io/2021/Binary-tree/</a>
+    <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/Binary-tree/"  aria-label="Copy Successfully!"></i></span>
+  </p>
+  <p><span>License:</span><i class="fa fa-copyright"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">"CC BY-NC-ND 4.0"</a> Reprint please keep the original link and author. </p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy Successfully!',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+
+
+
+    		
+	</div>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/OverlayFS-A-Container-File-System/" rel="prev" title="OverlayFS -- A Container File System">
+                  <i class="fa fa-chevron-left"></i> OverlayFS -- A Container File System
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
     </div>
   </div>
   
-  
-  
-
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -412,6 +587,26 @@
   }
   // defer loading until the whole page loading is completed
   window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://xiaoli777.github.io/2021/Binary-tree/";
+    this.page.identifier = "2021/Binary-tree/";
+    this.page.title = "Binary tree";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xiaoli7.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
 </script>
 
 </body>
