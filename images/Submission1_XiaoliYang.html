@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/DRlogo.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/DRlogo.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/DRlogo.jpeg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaoli777.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="[TOC] Outline of Operating SystemMy OS will include these features as follows:  The OS will support multiple threads, because the thread is a lightweight process which could execute a specific functio">
+<meta property="og:type" content="website">
+<meta property="og:title" content="xiaoli7 IS HERE.">
+<meta property="og:url" content="https://xiaoli777.github.io/images/Submission1_XiaoliYang.html">
+<meta property="og:site_name" content="xiaoli7 IS HERE.">
+<meta property="og:description" content="[TOC] Outline of Operating SystemMy OS will include these features as follows:  The OS will support multiple threads, because the thread is a lightweight process which could execute a specific functio">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-24T17:12:21.092Z">
+<meta property="article:modified_time" content="2021-01-24T17:10:31.135Z">
+<meta property="article:author" content="xiaoli7">
+<meta property="article:tag" content="Cloud Computing">
+<meta property="article:tag" content="Operating Systems">
+<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xiaoli777.github.io/images/Submission1_XiaoliYang">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+<title> | xiaoli7 IS HERE.
+</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">xiaoli7 IS HERE.</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline-of-Operating-System"><span class="nav-text">Outline of Operating System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#List-of-APIs"><span class="nav-text">List of APIs</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Kernel-Mode"><span class="nav-text">Kernel Mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#User-Mode"><span class="nav-text">User Mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Threads"><span class="nav-text">Threads</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Controller"><span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Text-Mode"><span class="nav-text">Text Mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Graphics-Mode"><span class="nav-text">Graphics Mode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Memory"><span class="nav-text">Memory</span></a></li></ol></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xiaoli7"
+      src="/images/Me.jpeg">
+  <p class="site-author-name" itemprop="name">xiaoli7</p>
+  <div class="site-description" itemprop="description">Never too high, never too low.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiaoli777" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiaoli777" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xiaoliyang1994@outlook.com" title="E-Mail → mailto:xiaoliyang1994@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/xiaoli727" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;xiaoli727" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/jueqingzhan163" title="Wechat → jueqingzhan163"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner page posts-expand">
+  
+  
+
+
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta-container">
+</div>
+
+</header>
+
+      
+      
+      <div class="post-body">
+          <p>[TOC]</p>
+<h2 id="Outline-of-Operating-System"><a href="#Outline-of-Operating-System" class="headerlink" title="Outline of Operating System"></a>Outline of Operating System</h2><p>My OS will include these features as follows:</p>
+<ol>
+<li>The OS will support multiple threads, because the thread is a lightweight process which could execute a specific function and use shared memory. For the mechanisms, I want to define a library (e.g., thread_create(), thread_exit()) to implement a lifecycle of threads, and I will design a Thread Control Block (TCB) to monitor the status of them.</li>
+<li>The OS will support events, because it must provide the communication and interaction between controller and screen. For example, if a user click a botton on the controller, then it will trigger the event which links the API provide by OS and the botton. Finally, the corresponding result will be shown on the screen. I will design a Event Queue which stores evnets and handles with them one by one. Additionally, for the registration of handlers, I will implement a table to build the links between handlers and events. So, if an event is trigged, the OS will use this table to find the address of the corresponding handles.</li>
+<li>The OS will provide virtual address and TLB for the management of memory.</li>
+<li>The OS will provide the concurrency mechanisms, such as the input from the controller, the vision of the screen, and the tolerance of system errors.</li>
+<li>The user input will trigger the events which provide the interation between users and OS, then OS will call APIs for the game process. For the first version of OS, I do not think it can support a second controller.</li>
+<li>In order to simplify the game development, I think the underlying OS must provide APIs to developers for the interaction of the video graphics. So, if a game developer calls the APIs provided by OS, the video graphics will be changed.</li>
+<li>The OS will prevent the rogue cartridges from damaging the console by two ways: 1) we can release a certificate for the cartridges, that is, the rogue cartridges which do not have certificates cannot be run on the OS; 2) we can define two modes (user mode and kernel mode) in this OS. In user mode, process cannnot execute privileged instructions which might hurts the OS. And, all cartridges will be run under the user mode.</li>
+</ol>
+<h2 id="List-of-APIs"><a href="#List-of-APIs" class="headerlink" title="List of APIs"></a>List of APIs</h2><h4 id="Kernel-Mode"><a href="#Kernel-Mode" class="headerlink" title="Kernel Mode"></a>Kernel Mode</h4><p><strong>Name</strong></p>
+<p>event_handler - a handler which will be used to handler with events. If an event happens, this API will be triggered, and then redirects the event to the corresponding function</p>
+<p><strong>Signature</strong></p>
+<p>#include “event.h”</p>
+<p>void *event_handler(struct signal sig, void *handler, void *args)</p>
+<p><strong>Parameters</strong></p>
+<p>struct signal sig - a data structure which defines differnt signal and each signal presents a kind of event</p>
+<p>void *handler - the function or handler which will be called by this event</p>
+<p>void *args - the arguments of the handler</p>
+<p><strong>Return Values</strong></p>
+<p>None</p>
+<p><strong>Name</strong></p>
+<p>boot_OS - system booting</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;os.h&gt;</p>
+<p>int boot_OS() - system booting</p>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>terminate_OS - terminates the OS in a gentle way</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;os.h&gt;</p>
+<p>void terminate_OS()</p>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Return Values</strong></p>
+<p>None</p>
+<h4 id="User-Mode"><a href="#User-Mode" class="headerlink" title="User Mode"></a>User Mode</h4><p><strong>Name</strong></p>
+<p>load_cartridge - loads the cartridge process, and runs the corresponding game</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;cartridge.h&gt;</p>
+<p>int load_cartridge(char *filename)</p>
+<p><strong>Parameters</strong></p>
+<p>char *filename - the cartridge’s name</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>terminate_cartridge - if a rogue cartridge is running or the cartridge cannot be run , OS call it to terminate the cartridge process.</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;cartridge.h&gt;</p>
+<p>Void terminate_cartridge()</p>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Return Values</strong></p>
+<p>None</p>
+<h4 id="Threads"><a href="#Threads" class="headerlink" title="Threads"></a>Threads</h4><p><strong>Name</strong></p>
+<p>thread_create - creates a thread to execute a more specific task</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;thread.h&gt;</p>
+<p>int thread_create(struct thread *thr, void *func, void *arg)</p>
+<p><strong>Parameters</strong></p>
+<p>struct thread *thr - a data structure to control and manage a thread</p>
+<p>void *func - a function the thread executes</p>
+<p>void *arg - the arguments of the function</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>thread_start - starts a thread</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;thread.h&gt;</p>
+<p>int thread_start(struct thread *thr)</p>
+<p><strong>Parameters</strong></p>
+<p>struct thread *thr - a data structure to control and manage a thread</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>thread_stop - stops a thread</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;thread.h&gt;</p>
+<p>int thread_stop(struct thread *thr)</p>
+<p><strong>Parameters</strong></p>
+<p>struct thread *thr - a data structure to control and manage a thread</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>thread_exit - terminates a thread and releases its resources</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;thread.h&gt;</p>
+<p>int thread_exit(struct thread *thr)</p>
+<p><strong>Parameters</strong></p>
+<p>struct thread *thr - a data structure to control and manage a thread</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<h4 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h4><p><strong>Name</strong></p>
+<p>direction_controller - the direction of movement on the screen</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;controller.h&gt;</p>
+<p>void *direction_controller(int direction, struct time duration)</p>
+<p><strong>Parameters</strong></p>
+<p>int direction - 0: up, 1: down, 2: left, 3 right</p>
+<p>struct time duration - how much time the user presses on the button</p>
+<p><strong>Return Values</strong></p>
+<p>None</p>
+<p><strong>Name</strong></p>
+<p>cmd_controller - generates an interrupt via the chipset</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;controller.h&gt;</p>
+<p>void *cmd_controller()</p>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Return Values</strong></p>
+<p>None</p>
+<p><strong>Name</strong></p>
+<p>function_controller - define the functionality of four toggle buttons</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;controller.h&gt;</p>
+<p>void *function_controller(int behavior)</p>
+<p><strong>Parameters</strong></p>
+<p>int behavior - different behavior represents different toggle buttons</p>
+<p><strong>Return Values</strong></p>
+<p>None</p>
+<h4 id="Text-Mode"><a href="#Text-Mode" class="headerlink" title="Text Mode"></a>Text Mode</h4><p><strong>Name</strong></p>
+<p>generate_text - generates characters or text</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;text.h&gt;</p>
+<p>int generate_text(char *text)</p>
+<p><strong>Parameters</strong></p>
+<p>char *text - the content of text</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>update_text - updates characters or text</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;text.h&gt;</p>
+<p>int update_text(char *text)</p>
+<p><strong>Parameters</strong></p>
+<p>char *text - the content of text</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>remove_text - removes characters or text</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;text.h&gt;</p>
+<p>int remove_text()</p>
+<p><strong>Parameters</strong></p>
+<p>None</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<h4 id="Graphics-Mode"><a href="#Graphics-Mode" class="headerlink" title="Graphics Mode"></a>Graphics Mode</h4><p><strong>Name</strong></p>
+<p>generate_palette - generates a global array which contains 16777216 possible colors</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;graphics.h&gt;</p>
+<p>void generate_palette(struct palette *pal)</p>
+<p><strong>Parameters</strong></p>
+<p>struct palette *pal - a data structure which define and manage the palette</p>
+<p><strong>Return Values</strong></p>
+<p>None</p>
+<p><strong>Name</strong></p>
+<p>destroy_palette - destorys the palette array</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;graphics.h&gt;</p>
+<p>void destroy_palette(struct palette *pal)</p>
+<p><strong>Parameters</strong></p>
+<p>struct palette *pal - a data structure which define and manage the palette</p>
+<p><strong>Return Values</strong></p>
+<p>None</p>
+<p><strong>Name</strong></p>
+<p>load_backgroud - loads the background </p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;graphics.h&gt;</p>
+<p>int load_background(char *filename, struct background *bg)</p>
+<p><strong>Parameters</strong></p>
+<p>char *filename - the name of background images</p>
+<p>struct background *bg - the parameters of background</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>update_backgroud - changes the background </p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;graphics.h&gt;</p>
+<p>int update_backgroud(char *filename, struct background *bg)</p>
+<p><strong>Parameters</strong></p>
+<p>char *filename - the name of background images</p>
+<p>struct background *bg - the parameters of background</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>generate_image - generates an image wihch contains sprites</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;graphics.h&gt;</p>
+<p>int generate_image(struct image *img)</p>
+<p><strong>Parameters</strong></p>
+<p>struct image *img - a data structure which contains the information of the image</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>refresh_images - updates the image</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;graphics.h&gt;</p>
+<p>int refresh_images(struct image *img)</p>
+<p><strong>Parameters</strong></p>
+<p>struct image *img - a data structure which contains the information of the image</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<p><strong>Name</strong></p>
+<p>destroy_images - destroys the image and releases the resources</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;graphics.h&gt;</p>
+<p>int destroy_images(struct image *img)</p>
+<p><strong>Parameters</strong></p>
+<p>struct image *img - a data structure which contains the information of the image</p>
+<p><strong>Return Values</strong></p>
+<p>It will return 0 if successfully, and the failure will return -1</p>
+<h4 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h4><p><strong>Name</strong></p>
+<p>xmalloc - allocates memory</p>
+<p><strong>Signature</strong></p>
+<p>#include &lt;memory.h&gt;</p>
+<p>void xmalloc(int size)</p>
+<p><strong>Parameters</strong></p>
+<p>int size - the size of memory</p>
+<p><strong>Return Values</strong></p>
+<p>None</p>
+
+      </div>
+      
+      
+      
+    </div>
+
+    
+    
+
+
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoli7</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://xiaoli7.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://xiaoli777.github.io/images/Submission1_XiaoliYang.html";
+    this.page.identifier = "images/Submission1_XiaoliYang.html";
+    this.page.title = "";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xiaoli7.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

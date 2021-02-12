@@ -998,4 +998,23 @@
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
+  <entry>
+    <title>Windows GoLang</title>
+    <url>/2021/Windows-GoLang/</url>
+    <content><![CDATA[<h3 id="1-下载安装包，根据操作系统选择GoLang版本"><a href="#1-下载安装包，根据操作系统选择GoLang版本" class="headerlink" title="1. 下载安装包，根据操作系统选择GoLang版本"></a>1. 下载安装包，根据操作系统选择GoLang版本</h3><p>下载地址：<a href="https://golang.org/dl/">https://golang.org/dl/</a></p>
+<p><img src="/images/go/go-1.png"></p>
+<h3 id="2-打开安装包，并根据提示安装GoLang"><a href="#2-打开安装包，并根据提示安装GoLang" class="headerlink" title="2. 打开安装包，并根据提示安装GoLang"></a>2. 打开安装包，并根据提示安装GoLang</h3><p>将安装路径设置为C:\Go\</p>
+<p><img src="/images/go/go-2.png"></p>
+<h3 id="3-打开cmd，查看GoLand是否安装成功"><a href="#3-打开cmd，查看GoLand是否安装成功" class="headerlink" title="3. 打开cmd，查看GoLand是否安装成功"></a>3. 打开cmd，查看GoLand是否安装成功</h3><p>win+R并输入cmd打开命令行界面，接着使用go version来查看GoLand的版本信息</p>
+<p><img src="/images/go/go-3.png"></p>
+<h3 id="4-创建mygo目录，并设置为GOPATH的系统变量"><a href="#4-创建mygo目录，并设置为GOPATH的系统变量" class="headerlink" title="4. 创建mygo目录，并设置为GOPATH的系统变量"></a>4. 创建mygo目录，并设置为GOPATH的系统变量</h3><p><img src="/images/go/go-4.png"></p>
+]]></content>
+      <categories>
+        <category>Configuration</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+        <tag>Programming</tag>
+      </tags>
+  </entry>
 </search>
