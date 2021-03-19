@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://xiaoli777.github.io/images/kube/kube-5.png">
 <meta property="og:image" content="https://xiaoli777.github.io/images/kube/kube-6.png">
 <meta property="article:published_time" content="2021-03-20T08:25:23.000Z">
-<meta property="article:modified_time" content="2021-03-19T18:02:07.235Z">
+<meta property="article:modified_time" content="2021-03-19T18:19:36.398Z">
 <meta property="article:author" content="xiaoli7">
 <meta property="article:tag" content="Kubernetes">
 <meta property="article:tag" content="Containerization">
@@ -213,7 +213,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%81%E8%AE%B8-iptables-%E6%A3%80%E6%9F%A5%E6%A1%A5%E6%8E%A5%E6%B5%81%E9%87%8F"><span class="nav-text">允许 iptables 检查桥接流量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-kubeadm%E3%80%81kubelet-%E5%92%8C-kubectl"><span class="nav-text">安装 kubeadm、kubelet 和 kubectl</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-text">机器配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%81%E8%AE%B8-iptables-%E6%A3%80%E6%9F%A5%E6%A1%A5%E6%8E%A5%E6%B5%81%E9%87%8F"><span class="nav-text">允许 iptables 检查桥接流量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-kubeadm%E3%80%81kubelet-%E5%92%8C-kubectl"><span class="nav-text">安装 kubeadm、kubelet 和 kubectl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8kubeadm%E5%AE%89%E8%A3%85master%E9%9B%86%E7%BE%A4"><span class="nav-text">使用kubeadm安装master集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85flannel%E7%BD%91%E7%BB%9C"><span class="nav-text">安装flannel网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86Slave%E8%8A%82%E7%82%B9%E5%8A%A0%E5%85%A5%E9%9B%86%E7%BE%A4"><span class="nav-text">将Slave节点加入集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E9%9B%86%E7%BE%A4%E8%8A%82%E7%82%B9%E7%8A%B6%E6%80%81"><span class="nav-text">查看集群节点状态</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -326,7 +326,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-03-19 11:02:07" itemprop="dateModified" datetime="2021-03-19T11:02:07-07:00">2021-03-19</time>
+        <time title="Modified: 2021-03-19 11:19:36" itemprop="dateModified" datetime="2021-03-19T11:19:36-07:00">2021-03-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -370,7 +370,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <table>
+        <h2 id="机器配置"><a href="#机器配置" class="headerlink" title="机器配置"></a>机器配置</h2><table>
 <thead>
 <tr>
 <th>主机名</th>
@@ -398,15 +398,15 @@
 <td>CentOS 8.2 64bit</td>
 </tr>
 </tbody></table>
+<p>注⚠️：三台机器均已安装Docker。</p>
 <h2 id="允许-iptables-检查桥接流量"><a href="#允许-iptables-检查桥接流量" class="headerlink" title="允许 iptables 检查桥接流量"></a>允许 iptables 检查桥接流量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/modules-load.d/k8s.conf</span></span><br><span class="line"><span class="string">br_netfilter</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/sysctl.d/k8s.conf</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">sudo sysctl --system</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="安装-kubeadm、kubelet-和-kubectl"><a href="#安装-kubeadm、kubelet-和-kubectl" class="headerlink" title="安装 kubeadm、kubelet 和 kubectl"></a>安装 kubeadm、kubelet 和 kubectl</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/yum.repos.d/kubernetes.repo</span></span><br><span class="line"><span class="string">[kubernetes]</span></span><br><span class="line"><span class="string">name=Kubernetes</span></span><br><span class="line"><span class="string">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">repo_gpgcheck=1</span></span><br><span class="line"><span class="string">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span></span><br><span class="line"><span class="string">exclude=kubelet kubeadm kubectl</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 SELinux 设置为 permissive 模式（相当于将其禁用）</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">&#x27;s/^SELINUX=enforcing$/SELINUX=permissive/&#x27;</span> /etc/selinux/config</span><br><span class="line"></span><br><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br></pre></td></tr></table></figure>
-
-
+<p>查看kubelet、kubeadm和kubectl是否安装成功</p>
 <p><img src="/images/kube/kube-1.png"></p>
-<p><img src="/images/kube/kube-2.png"></p>
-<p>kubeadm init –apiserver-advertise-address=192.168.0.96 –pod-network-cidr=10.244.0.0/16</p>
+<h2 id="使用kubeadm安装master集群"><a href="#使用kubeadm安装master集群" class="headerlink" title="使用kubeadm安装master集群"></a>使用kubeadm安装master集群</h2><p><img src="/images/kube/kube-2.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --apiserver-advertise-address=192.168.0.96 --pod-network-cidr=10.244.0.0/16</span><br></pre></td></tr></table></figure>
 <p><img src="/images/kube/kube-3.png"></p>
 <p>要使非 root 用户可以运行 kubectl，请运行以下命令， 它们也是 <code>kubeadm init</code> 输出的一部分：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
@@ -414,11 +414,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> KUBECONFIG=/etc/kubernetes/admin.conf</span><br></pre></td></tr></table></figure>
 
 
-<p>kubectl apply -f <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml">https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</a></p>
+<h2 id="安装flannel网络"><a href="#安装flannel网络" class="headerlink" title="安装flannel网络"></a>安装flannel网络</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
 <p><img src="/images/kube/kube-4.png"></p>
-<p>kubeadm join 192.168.0.96:6443 –token 8axber.2vzp1am4kcr7qpxd <br>    –discovery-token-ca-cert-hash sha256:10e0a25cc62687435f0211feeea1896d1ea512f3233a258ab0ef56a921224436</p>
+<h2 id="将Slave节点加入集群"><a href="#将Slave节点加入集群" class="headerlink" title="将Slave节点加入集群"></a>将Slave节点加入集群</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join 192.168.0.96:6443 --token 8axber.2vzp1am4kcr7qpxd \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:10e0a25cc62687435f0211feeea1896d1ea512f3233a258ab0ef56a921224436</span><br></pre></td></tr></table></figure>
 <p><img src="/images/kube/kube-5.png"></p>
-<p><img src="/images/kube/kube-6.png"></p>
+<h2 id="查看集群节点状态"><a href="#查看集群节点状态" class="headerlink" title="查看集群节点状态"></a>查看集群节点状态</h2><p><img src="/images/kube/kube-6.png"></p>
 
     </div>
 
@@ -467,7 +467,7 @@
   <p><span>Title:  </span>Kubernetes Installation</a></p>
   <p><span>Author: </span>xiaoli7</a></p>
   <p><span>Created:</span>03/20/2021 - 01:25:23</p>
-  <p><span>Undated:</span>03/19/2021 - 11:02:07</p>
+  <p><span>Undated:</span>03/19/2021 - 11:19:36</p>
   <p><span>WebLink:</span><a href="/2021/Kubernetes-Installation/" title="Kubernetes Installation">https://xiaoli777.github.io/2021/Kubernetes-Installation/</a>
     <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/Kubernetes-Installation/"  aria-label="Copy Successfully!"></i></span>
   </p>
