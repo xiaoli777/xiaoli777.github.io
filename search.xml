@@ -1017,4 +1017,103 @@
         <tag>Programming</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Kubernetes Installation</title>
+    <url>/2021/Kubernetes-Installation/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>角色</th>
+<th>IP</th>
+<th>系统</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>y50017117-centos-istio-0001</td>
+<td>Slave</td>
+<td>159.138.51.216</td>
+<td>CentOS 8.2 64bit</td>
+</tr>
+<tr>
+<td>y50017117-centos-istio-0002</td>
+<td>Slave</td>
+<td>159.138.57.247</td>
+<td>CentOS 8.2 64bit</td>
+</tr>
+<tr>
+<td>y50017117-centos-istio-0003</td>
+<td>Master</td>
+<td>182.160.9.140</td>
+<td>CentOS 8.2 64bit</td>
+</tr>
+</tbody></table>
+<h2 id="允许-iptables-检查桥接流量"><a href="#允许-iptables-检查桥接流量" class="headerlink" title="允许 iptables 检查桥接流量"></a>允许 iptables 检查桥接流量</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/modules-load.d/k8s.conf</span></span><br><span class="line"><span class="string">br_netfilter</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/sysctl.d/k8s.conf</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">sudo sysctl --system</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="安装-kubeadm、kubelet-和-kubectl"><a href="#安装-kubeadm、kubelet-和-kubectl" class="headerlink" title="安装 kubeadm、kubelet 和 kubectl"></a>安装 kubeadm、kubelet 和 kubectl</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/yum.repos.d/kubernetes.repo</span></span><br><span class="line"><span class="string">[kubernetes]</span></span><br><span class="line"><span class="string">name=Kubernetes</span></span><br><span class="line"><span class="string">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">repo_gpgcheck=1</span></span><br><span class="line"><span class="string">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span></span><br><span class="line"><span class="string">exclude=kubelet kubeadm kubectl</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 SELinux 设置为 permissive 模式（相当于将其禁用）</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">&#x27;s/^SELINUX=enforcing$/SELINUX=permissive/&#x27;</span> /etc/selinux/config</span><br><span class="line"></span><br><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/kube/kube-1.png"></p>
+<p><img src="/images/kube/kube-2.png"></p>
+<p>kubeadm init –apiserver-advertise-address=192.168.0.96 –pod-network-cidr=10.244.0.0/16</p>
+<p><img src="/images/kube/kube-3.png"></p>
+<p>要使非 root 用户可以运行 kubectl，请运行以下命令， 它们也是 <code>kubeadm init</code> 输出的一部分：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+<p>或者，如果你是 <code>root</code> 用户，则可以运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> KUBECONFIG=/etc/kubernetes/admin.conf</span><br></pre></td></tr></table></figure>
+
+
+<p>kubectl apply -f <a href="https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml">https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</a></p>
+<p><img src="/images/kube/kube-4.png"></p>
+<p>kubeadm join 192.168.0.96:6443 –token 8axber.2vzp1am4kcr7qpxd <br>    –discovery-token-ca-cert-hash sha256:10e0a25cc62687435f0211feeea1896d1ea512f3233a258ab0ef56a921224436</p>
+<p><img src="/images/kube/kube-5.png"></p>
+<p><img src="/images/kube/kube-6.png"></p>
+]]></content>
+      <categories>
+        <category>Cloud Computing</category>
+      </categories>
+      <tags>
+        <tag>Kubernetes</tag>
+        <tag>Containerization</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux GoLang</title>
+    <url>/2021/Linux-GoLang/</url>
+    <content><![CDATA[<h3 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1. 下载安装包"></a>1. 下载安装包</h3><p>在Go语言下载官网（**<a href="https://golang.org/dl/**%EF%BC%89%EF%BC%8C%E4%B8%8B%E8%BD%BD%E6%89%80%E9%9C%80%E7%9A%84Linux%E5%AE%89%E8%A3%85%E5%8C%85">https://golang.org/dl/**），下载所需的Linux安装包</a></p>
+<p><img src="/images/go/go-5.png"></p>
+<h3 id="2-上传并解压"><a href="#2-上传并解压" class="headerlink" title="2. 上传并解压"></a>2. 上传并解压</h3><p>将下载的tar.gz包上传到Linux机器上，并使用<strong>tar -zxvf go1.16.2.linux-amd64.tar.gz</strong>解压</p>
+<p><img src="/images/go/go-6.png"></p>
+<h3 id="3-拷贝到-usr-local下"><a href="#3-拷贝到-usr-local下" class="headerlink" title="3. 拷贝到/usr/local下"></a>3. 拷贝到/usr/local下</h3><p>通过<strong>mv go /usr/local/go</strong>，将解压后的文件夹拷贝到/user/local下</p>
+<p><img src="/images/go/go-7.png"></p>
+<h3 id="4-查看go的版本号"><a href="#4-查看go的版本号" class="headerlink" title="4. 查看go的版本号"></a>4. 查看go的版本号</h3><p><img src="/images/go/go-8.png"></p>
+<h3 id="5-设置环境变量"><a href="#5-设置环境变量" class="headerlink" title="5. 设置环境变量"></a>5. 设置环境变量</h3><p>编辑/etc/profile文件，并加入如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=~/golib:~/goproject</span><br><span class="line"><span class="built_in">export</span> GBIN=~/gobin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin/:<span class="variable">$GOBIN</span></span><br></pre></td></tr></table></figure>
+<p>执行source /etc/profile命令使得环境变量生效</p>
+<p><img src="/images/go/go-9.png"></p>
+]]></content>
+      <categories>
+        <category>Configuration</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+        <tag>Programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KubeEdge Beehive</title>
+    <url>/2021/KubeEdge-Beehive/</url>
+    <content><![CDATA[<p>下载地址：<a href="https://github.com/kubeedge/kubeedge">https://github.com/kubeedge/kubeedge</a></p>
+<p>版本：<a href="https://github.com/kubeedge/kubeedge/releases/tag/v1.5.0">KubeEdge v1.5.0 release</a></p>
+]]></content>
+      <categories>
+        <category>Edge Computing</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+        <tag>Containerization</tag>
+        <tag>KubeEdge</tag>
+      </tags>
+  </entry>
 </search>
