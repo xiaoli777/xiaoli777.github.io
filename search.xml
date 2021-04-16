@@ -987,7 +987,22 @@
   <entry>
     <title>This is xiaoli7</title>
     <url>/2020/This-is-xiaoli7/</url>
-    <content><![CDATA[<p>First-year graduate student at UC Davis, Master of Engineering in CS at HUST, Bachelor of Engineering in SE at HNU. I am good at C/C++, python and Linux. I have passion about algorithm, and also optimized the architecture.</p>
+    <content><![CDATA[<h2 id="Education"><a href="#Education" class="headerlink" title="Education"></a>Education</h2><h3 id="University-of-California-Davis-2020-9-Present"><a href="#University-of-California-Davis-2020-9-Present" class="headerlink" title="University of California, Davis 2020.9 - Present"></a><strong>University of California, Davis</strong> <code>2020.9 - Present</code></h3><figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Sacramento,</span> America</span><br></pre></td></tr></table></figure>
+<ul>
+<li>M.S. in Computer Science</li>
+<li>Cumulative GPA: <strong>3.7+/4.0</strong></li>
+</ul>
+<h3 id="Huazhong-University-of-Science-and-Technology-2017-9-2020-6"><a href="#Huazhong-University-of-Science-and-Technology-2017-9-2020-6" class="headerlink" title="Huazhong University of Science and Technology 2017.9 - 2020.6"></a><strong>Huazhong University of Science and Technology</strong> <code>2017.9 - 2020.6</code></h3><figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Wuhan,</span> China</span><br></pre></td></tr></table></figure>
+<ul>
+<li>M.S. in Computer System Architecture</li>
+<li>Cumulative GPA: <strong>82.65/100.00</strong></li>
+<li>Computer Science Departmental Honors</li>
+</ul>
+<h3 id="Hunan-University-2013-9-2017-6"><a href="#Hunan-University-2013-9-2017-6" class="headerlink" title="Hunan University 2013.9 - 2017.6"></a><strong>Hunan University</strong> <code>2013.9 - 2017.6</code></h3><figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Changsha,</span> China</span><br></pre></td></tr></table></figure>
+<ul>
+<li>B.S. in Software Engineering</li>
+<li>Cumulative GPA: <strong>3.62/4.50</strong></li>
+</ul>
 ]]></content>
   </entry>
   <entry>
@@ -1347,7 +1362,42 @@
   <entry>
     <title>Sorting Algorithms</title>
     <url>/2021/Sorting-Algorithms/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><ul>
+<li>概念：从头到尾逐个处理数据，将当前数据和它前面的序列进行比较：若当前数据小于前一个数据，则交换位置；否则移动数组，处理下一个数据。</li>
+<li>特征：稳定性</li>
+<li>时间复杂度：O(n) / O(n^2) / O(n^2)</li>
+</ul>
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><ul>
+<li>概念：从头到尾逐个处理数据，每次将当前数据和它后面的序列进行比较：若当前数据大于后一个数据，则交换位置，并后移下标；否则仅后移下标。</li>
+<li>特征：稳定性</li>
+<li>时间复杂度：O(n^2) / O(n^2) / O(n^2)</li>
+</ul>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><ul>
+<li>概念：第i次选择数组中第i小的数值，插入到第i个位置。</li>
+<li>特征：不稳定性</li>
+<li>时间复杂度：O(n^2) / O(n^2) / O(n^2)</li>
+</ul>
+<h2 id="shell排序"><a href="#shell排序" class="headerlink" title="shell排序"></a>shell排序</h2><ul>
+<li>概念：用INTERVAL将数组等分划分，对较小的划分数组进行插入排序，再将较小的划分数组合并为较大的数据，并进行插入排序，直到得到完整的有序数组。</li>
+<li>特征：不稳定性</li>
+<li>时间复杂度(INTERVAL=3)：O(n) / O(n^2) / O(n^1.5)</li>
+</ul>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><ul>
+<li>概念：选择数组中的一个数字作为轴值，将比轴值小的数放在轴值左边，比轴值大的数放在轴值右边，并通过递归依次处理轴值左边和右边的序列。</li>
+<li>特征：不稳定性</li>
+<li>时间复杂度：O(nlogn) / O(n^2) / O(nlogn)</li>
+</ul>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><ul>
+<li>概念：每次通过递归将数组划分为长度相同的子序列，并用临时数组来进行排序；接着将子序列合并为一个更大的数组并排序。</li>
+<li>特征：稳定性 / 使用等长度的临时数组(也可以通过reverse来实现)</li>
+<li>时间复杂度：O(nlogn) / O(nlogn) / O(nlogn)</li>
+</ul>
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><ul>
+<li>概念：构建最大堆，每次将堆顶元素弹出，并用剩余元素继续构建最大堆，直到空堆。</li>
+<li>特征：不稳定性</li>
+<li>时间复杂度：O(nlogn)</li>
+</ul>
+]]></content>
       <categories>
         <category>Algorithm</category>
       </categories>
