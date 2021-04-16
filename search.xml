@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Common Knowledge of Camera</title>
+    <url>/2020/Common-Knowledge-of-Camera/</url>
+    <content><![CDATA[<h4 id="数码单镜头反光相机-DSLR-组成"><a href="#数码单镜头反光相机-DSLR-组成" class="headerlink" title="数码单镜头反光相机(DSLR)组成"></a>数码单镜头反光相机(DSLR)组成</h4><ul>
+<li>五棱镜</li>
+<li>取景器目镜</li>
+<li>感光元件(CMOS)</li>
+<li>快门</li>
+<li>反光板</li>
+</ul>
+<h4 id="相机画幅"><a href="#相机画幅" class="headerlink" title="相机画幅"></a>相机画幅</h4><ul>
+<li><strong>全画幅(36mm * 24mm):</strong> 感光元件大、成像质量好</li>
+<li><strong>非全幅(23mm * 15mm, APS-C):</strong> 小型化、低成本</li>
+</ul>
+<h4 id="视角"><a href="#视角" class="headerlink" title="视角"></a>视角</h4><ul>
+<li><p>从感光元件(像方焦平面)对角线的两端至镜头主点连线之间的夹角</p>
+</li>
+<li><p>视角角度的大小决定了被摄物体的成像范围</p>
+</li>
+</ul>
+<h4 id="像素"><a href="#像素" class="headerlink" title="像素"></a>像素</h4><ul>
+<li><p>照片的分辨率，像素越高，获得的照片尺寸越大</p>
+</li>
+<li><p>在相同的像素下，感光元件尺寸越大，单个像素的感光面积就越大，能捕获的光子就越多，记录的暗部细节和亮部细节就越丰富，其画质也就越好</p>
+</li>
+<li><p>相同尺寸的感光元件，其像素越高，单个像素的感光面积就越小，受到的干扰就越大，噪点也就越大，画质反而会下降</p>
+</li>
+</ul>
+<h4 id="对焦系统"><a href="#对焦系统" class="headerlink" title="对焦系统"></a>对焦系统</h4><ul>
+<li><strong>对焦点数:</strong> 取景器里所能看到的对焦点的数量，对焦点越多，构图越方便</li>
+<li><strong>对焦精度:</strong> 十字型对焦点数的多少</li>
+<li><strong>十字型:</strong> 对焦点对横、竖方向都敏感，对较准确</li>
+<li><strong>一字型:</strong> 对焦点只对单向(纵、横)敏感，没有十字型对焦点准确</li>
+</ul>
+<h4 id="高感性能"><a href="#高感性能" class="headerlink" title="高感性能"></a>高感性能</h4><ul>
+<li><p>感光度(ISO)越高，画面噪点越多，画质越差</p>
+</li>
+<li><p>高感光度性能的强弱对拍摄弱光环境下的题材尤为重要</p>
+</li>
+</ul>
+<h4 id="连拍速度"><a href="#连拍速度" class="headerlink" title="连拍速度"></a>连拍速度</h4><ul>
+<li><p>每秒拍摄照片的张数</p>
+</li>
+<li><p>连拍速度越快，越容易捕捉到精彩的瞬间</p>
+</li>
+</ul>
+<h4 id="模式介绍"><a href="#模式介绍" class="headerlink" title="模式介绍"></a>模式介绍</h4><ul>
+<li><strong>Av档:</strong> 光圈优先模式。在手动确定相机光圈的情况下，相机自动根据光圈值大小及当时环境找到最佳的快门速度，这种模式多用于拍摄人像及风光。我们知道光圈直接影响着景深，当我们拍摄人像需要浅景深时，就可以通过自定义大光圈，相机自动匹配快门速度，可以在很快情况下找到合适的曝光</li>
+<li><strong>Tv档:</strong> 快门优先模式。即我们手动设置好快门速度，相机根据快门速度来确定最佳光圈值。快门优先模式一般用于拍摄运动的物体，例如体育比赛、水流、舞蹈中的人以及飞行中的物体等。拍摄运动物体最容易出现的问题是即使对了焦，照片也容易模糊，这是由于相机快门速度没有跟上被摄物体的运动速度导致的</li>
+<li><strong>P档</strong>: 半自动档，与AUTO档不同的是它允许我们手动设置曝光补偿、ISO感光度等。在设置后相机自动匹配出最佳的光圈值和快门速度，特别适合用来抓拍。如果在暗光情况下使用P档，自动跳出的闪光灯可能会因为照射不到远处而导致远景过暗的情况，所以P档适合光线充足且摄距不远的情况下使用</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Photography</category>
+      </categories>
+      <tags>
+        <tag>Camera</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Binary tree</title>
     <url>/2021/Binary-tree/</url>
     <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><a href="https://en.wikipedia.org/wiki/Binary_tree">二叉树(Binary Tree)</a>是一种数据结构，它的每个父节点(parent)至多有两个子节点(children)，分别被称为<em>左孩子(the left child)<em>和</em>右孩子(the right child)</em>.</p>
@@ -89,65 +148,6 @@
       <tags>
         <tag>Binary Tree</tag>
         <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Common Knowledge of Camera</title>
-    <url>/2020/Common-Knowledge-of-Camera/</url>
-    <content><![CDATA[<h4 id="数码单镜头反光相机-DSLR-组成"><a href="#数码单镜头反光相机-DSLR-组成" class="headerlink" title="数码单镜头反光相机(DSLR)组成"></a>数码单镜头反光相机(DSLR)组成</h4><ul>
-<li>五棱镜</li>
-<li>取景器目镜</li>
-<li>感光元件(CMOS)</li>
-<li>快门</li>
-<li>反光板</li>
-</ul>
-<h4 id="相机画幅"><a href="#相机画幅" class="headerlink" title="相机画幅"></a>相机画幅</h4><ul>
-<li><strong>全画幅(36mm * 24mm):</strong> 感光元件大、成像质量好</li>
-<li><strong>非全幅(23mm * 15mm, APS-C):</strong> 小型化、低成本</li>
-</ul>
-<h4 id="视角"><a href="#视角" class="headerlink" title="视角"></a>视角</h4><ul>
-<li><p>从感光元件(像方焦平面)对角线的两端至镜头主点连线之间的夹角</p>
-</li>
-<li><p>视角角度的大小决定了被摄物体的成像范围</p>
-</li>
-</ul>
-<h4 id="像素"><a href="#像素" class="headerlink" title="像素"></a>像素</h4><ul>
-<li><p>照片的分辨率，像素越高，获得的照片尺寸越大</p>
-</li>
-<li><p>在相同的像素下，感光元件尺寸越大，单个像素的感光面积就越大，能捕获的光子就越多，记录的暗部细节和亮部细节就越丰富，其画质也就越好</p>
-</li>
-<li><p>相同尺寸的感光元件，其像素越高，单个像素的感光面积就越小，受到的干扰就越大，噪点也就越大，画质反而会下降</p>
-</li>
-</ul>
-<h4 id="对焦系统"><a href="#对焦系统" class="headerlink" title="对焦系统"></a>对焦系统</h4><ul>
-<li><strong>对焦点数:</strong> 取景器里所能看到的对焦点的数量，对焦点越多，构图越方便</li>
-<li><strong>对焦精度:</strong> 十字型对焦点数的多少</li>
-<li><strong>十字型:</strong> 对焦点对横、竖方向都敏感，对较准确</li>
-<li><strong>一字型:</strong> 对焦点只对单向(纵、横)敏感，没有十字型对焦点准确</li>
-</ul>
-<h4 id="高感性能"><a href="#高感性能" class="headerlink" title="高感性能"></a>高感性能</h4><ul>
-<li><p>感光度(ISO)越高，画面噪点越多，画质越差</p>
-</li>
-<li><p>高感光度性能的强弱对拍摄弱光环境下的题材尤为重要</p>
-</li>
-</ul>
-<h4 id="连拍速度"><a href="#连拍速度" class="headerlink" title="连拍速度"></a>连拍速度</h4><ul>
-<li><p>每秒拍摄照片的张数</p>
-</li>
-<li><p>连拍速度越快，越容易捕捉到精彩的瞬间</p>
-</li>
-</ul>
-<h4 id="模式介绍"><a href="#模式介绍" class="headerlink" title="模式介绍"></a>模式介绍</h4><ul>
-<li><strong>Av档:</strong> 光圈优先模式。在手动确定相机光圈的情况下，相机自动根据光圈值大小及当时环境找到最佳的快门速度，这种模式多用于拍摄人像及风光。我们知道光圈直接影响着景深，当我们拍摄人像需要浅景深时，就可以通过自定义大光圈，相机自动匹配快门速度，可以在很快情况下找到合适的曝光</li>
-<li><strong>Tv档:</strong> 快门优先模式。即我们手动设置好快门速度，相机根据快门速度来确定最佳光圈值。快门优先模式一般用于拍摄运动的物体，例如体育比赛、水流、舞蹈中的人以及飞行中的物体等。拍摄运动物体最容易出现的问题是即使对了焦，照片也容易模糊，这是由于相机快门速度没有跟上被摄物体的运动速度导致的</li>
-<li><strong>P档</strong>: 半自动档，与AUTO档不同的是它允许我们手动设置曝光补偿、ISO感光度等。在设置后相机自动匹配出最佳的光圈值和快门速度，特别适合用来抓拍。如果在暗光情况下使用P档，自动跳出的闪光灯可能会因为照射不到远处而导致远景过暗的情况，所以P档适合光线充足且摄距不远的情况下使用</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Photography</category>
-      </categories>
-      <tags>
-        <tag>Camera</tag>
       </tags>
   </entry>
   <entry>
@@ -281,6 +281,258 @@
       </tags>
   </entry>
   <entry>
+    <title>DIY a VPN With SSR</title>
+    <url>/2020/DIY-a-VPN-With-SSR/</url>
+    <content><![CDATA[<p>Website: <a href="https://www.vultr.com/">https://www.vultr.com/</a></p>
+<p>Software: Shadowsocks + Ubuntu OS</p>
+<h4 id="Step-1-服务器端安装Shadowsocks"><a href="#Step-1-服务器端安装Shadowsocks" class="headerlink" title="Step 1. 服务器端安装Shadowsocks"></a>Step 1. 服务器端安装Shadowsocks</h4><p>服务端版本：Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev（四选一）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod +x shadowsocks-all.sh</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span></span><br></pre></td></tr></table></figure>
+
+
+<p>卸载方法</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./shadowsocks-all.sh uninstall</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Step-2-各版本的启动脚本及配置文件名"><a href="#Step-2-各版本的启动脚本及配置文件名" class="headerlink" title="Step 2. 各版本的启动脚本及配置文件名"></a>Step 2. 各版本的启动脚本及配置文件名</h4><p>启动脚本后面的参数含义，从左至右依次为：启动，停止，重启，查看状态。</p>
+<p>Shadowsocks-Python 版：</p>
+<p>/etc/init.d/shadowsocks-python start | stop | restart | status</p>
+<p>ShadowsocksR 版：</p>
+<p>/etc/init.d/shadowsocks-r start | stop | restart | status</p>
+<p>Shadowsocks-Go 版：</p>
+<p>/etc/init.d/shadowsocks-go start | stop | restart | status</p>
+<p>Shadowsocks-libev 版：</p>
+<p>/etc/init.d/shadowsocks-libev start | stop | restart | status</p>
+<p>各版本默认配置文件</p>
+<p>Shadowsocks-Python 版：</p>
+<p>/etc/shadowsocks-python/config.json</p>
+<p>ShadowsocksR 版：</p>
+<p>/etc/shadowsocks-r/config.json</p>
+<p>Shadowsocks-Go 版：</p>
+<p>/etc/shadowsocks-go/config.json</p>
+<p>Shadowsocks-libev 版：</p>
+<p>/etc/shadowsocks-libev/config.json</p>
+<h4 id="Step-3-安装VPN加速器"><a href="#Step-3-安装VPN加速器" class="headerlink" title="Step 3. 安装VPN加速器"></a>Step 3. 安装VPN加速器</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget <span class="string">&quot;https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh&quot;</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span></span><br></pre></td></tr></table></figure>
+
+
+<p>安装 BBR</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh</span></span><br></pre></td></tr></table></figure>
+<p>获取读写权限</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chmod +x bbr.sh</span></span><br></pre></td></tr></table></figure>
+<p>启动BBR安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./bbr.sh</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A?"></a>Q &amp; A?</h4><p>Q: 解决Host key verification failed</p>
+<p>A: ssh-keygen -R 你要访问的IP地址</p>
+]]></content>
+      <categories>
+        <category>Configuration</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>VPN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>EdgeMesh概述</title>
+    <url>/2021/EdgeMesh%E6%A6%82%E8%BF%B0/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>EdgeMesh是一种服务网格，它与KubeEdge紧密结合，并适用于边缘场景。</p>
+<p>近年来，随着云原生和微服务架构的越来越流行，边缘节点的功能也越来越完善。在这个场景下，用户能够在边缘节点上部署自己的应用，而这些边缘节点必须通过服务被外部用户所访问。出于这个目的，EdgeMesh向用户（在KubeEdge内运行应用的用户）提供运行在不同节点上的外部访问服务，从而使他们访问其它边缘节点。此外，EdgeMesh还向用户供负载均衡和流量治理的能力。</p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>EdgeMesh满足边缘场景下的新需求（如边缘资源有限，边云网络不稳定等），即实现了高可用性，高可靠性，和极致轻量化：</p>
+<ul>
+<li>高可用性<ul>
+<li>利用KubeEdge中的边云通道，来打通边缘节点间的网络</li>
+<li>将边缘节点间的通信分为局域网内和跨局域网<ul>
+<li>局域网内的通信：直接访问</li>
+<li>跨局域网的通信：通过云端转发</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>高可靠性 （离线场景）<ul>
+<li>控制面和数据面流量都通过边云通道下发</li>
+<li>EdgeMesh内部实现轻量级的DNS服务器，不再访问云端DNS</li>
+</ul>
+</li>
+<li>极致轻量化<ul>
+<li>每个节点有且仅有一个EdgeMesh，节省边缘资源</li>
+</ul>
+</li>
+</ul>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><img src="/images/kube/em-arch.jpg"></p>
+<p>如图所示，Edgemesh的工作流如下：</p>
+<ul>
+<li>通过服务器域名，客户端向服务器发起请求</li>
+<li>根据iptables规则，DNS被劫持到EdgeMesh，并返回一个虚假IP</li>
+<li>根据iptables规则，请求也被劫持到EdgeMesh</li>
+<li>EdgeMesh解析请求，获得域名，协议和请求等信息，</li>
+<li>EdgeMesh的负载均衡：<ul>
+<li>从域名中获得服务名和命名空间</li>
+<li>在MetaManager中，查询该服务的后端Pods</li>
+<li>基于负载均衡策略，选择一个后端Pod</li>
+</ul>
+</li>
+<li>EdgeMesh向服务器传输请求，等待服务器的响应，并将响应返回给客户端</li>
+</ul>
+<h2 id="功能性"><a href="#功能性" class="headerlink" title="功能性"></a>功能性</h2><table>
+<thead>
+<tr>
+<th align="center">功能</th>
+<th align="center">子功能</th>
+<th align="center">Edgemesh 0.1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">服务发现</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">流量治理</td>
+<td align="center">HTTP</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">TCP</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">UDP</td>
+<td align="center"><code>+</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">HTTPS</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Websocket</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">gRPC</td>
+<td align="center"><code>+</code></td>
+</tr>
+<tr>
+<td align="center">负载均衡</td>
+<td align="center">随机</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">轮询</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">会话保持</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">外部访问</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">多网卡监听</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+</tbody></table>
+<p>注：</p>
+<ul>
+<li><code>✓</code> EdgeMesh版本所支持的功能</li>
+<li><code>+</code> EdgeMesh版本不具备的功能，但在后续版本中会支持</li>
+<li><code>-</code> EdgeMesh版本不具备的功能，或已弃用的功能</li>
+</ul>
+<h2 id="操作指导"><a href="#操作指导" class="headerlink" title="操作指导"></a>操作指导</h2><h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>在边缘节点，关闭edgemesh，打开metaserver，并重启edgecore</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/edgecore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  edgeMesh:</span><br><span class="line">    enable: false</span><br><span class="line">  metaManager:</span><br><span class="line">    metaServer:</span><br><span class="line">      enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl restart edgecore</span></span><br></pre></td></tr></table></figure>
+<p>在云端，开启dynamic controller模块，并重启cloudcore</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/cloudcore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  dynamicController:</span><br><span class="line">    enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
+<p>在边缘节点，查看listwatch是否开启</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 127.0.0.1:10550/api/v1/services</span></span><br><span class="line">&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;items&quot;:[&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:05Z&quot;,&quot;labels&quot;:&#123;&quot;component&quot;:&quot;apiserver&quot;,&quot;provider&quot;:&quot;kubernetes&quot;&#125;,&quot;name&quot;:&quot;kubernetes&quot;,&quot;namespace&quot;:&quot;default&quot;,&quot;resourceVersion&quot;:&quot;147&quot;,&quot;selfLink&quot;:&quot;default/services/kubernetes&quot;,&quot;uid&quot;:&quot;55eeebea-08cf-4d1a-8b04-e85f8ae112a9&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.1&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;https&quot;,&quot;port&quot;:443,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:6443&#125;],&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;,&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;annotations&quot;:&#123;&quot;prometheus.io/port&quot;:&quot;9153&quot;,&quot;prometheus.io/scrape&quot;:&quot;true&quot;&#125;,&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:07Z&quot;,&quot;labels&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;,&quot;kubernetes.io/cluster-service&quot;:&quot;true&quot;,&quot;kubernetes.io/name&quot;:&quot;KubeDNS&quot;&#125;,&quot;name&quot;:&quot;kube-dns&quot;,&quot;namespace&quot;:&quot;kube-system&quot;,&quot;resourceVersion&quot;:&quot;203&quot;,&quot;selfLink&quot;:&quot;kube-system/services/kube-dns&quot;,&quot;uid&quot;:&quot;c221ac20-cbfa-406b-812a-c44b9d82d6dc&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.10&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;dns&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;UDP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;dns-tcp&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;metrics&quot;,&quot;port&quot;:9153,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:9153&#125;],&quot;selector&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;&#125;,&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;],&quot;kind&quot;:&quot;ServiceList&quot;,&quot;metadata&quot;:&#123;&quot;resourceVersion&quot;:&quot;377360&quot;,&quot;selfLink&quot;:&quot;/api/v1/services&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>部署configmap，并创建Istio的用户自定义资源</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span></span><br><span class="line">configmap/edgemesh-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
+<p>使用daemonset的方式来部署edgemesh</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 05-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="测试样例"><a href="#测试样例" class="headerlink" title="测试样例"></a>测试样例</h3><pre><code>**HTTP协议**
+
+在边缘节点上，部署支持http协议的容器应用和相关服务</code></pre>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f hostname.yaml</span></span><br></pre></td></tr></table></figure>
+<pre><code>到边缘节点上，使用curl去访问相关服务，打印出容器的hostname</code></pre>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl hostname-lb-svc.edgemesh-test:12345</span></span><br></pre></td></tr></table></figure>
+
+
+<pre><code>**TCP协议**
+
+在边缘节点1，部署支持tcp协议的容器应用和相关服务</code></pre>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
+<pre><code>在边缘节点2，使用telnet去访问相关服务</code></pre>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> telnet tcp-echo-service.edgemesh-test 2701</span></span><br></pre></td></tr></table></figure>
+
+
+<pre><code>**Websocket协议**
+
+在边缘节点1，部署支持websocket协议的容器应用和相关服务</code></pre>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
+<pre><code>进入websocket的容器环境，并使用client去访问相关服务</code></pre>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it 2a6ae1a490ae bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./client --addr ws-svc.edgemesh-test:12348</span></span><br></pre></td></tr></table></figure>
+
+
+<pre><code>**负载均衡**
+
+使用DestinationRule中的loadBalancer属性来选择不同的负载均衡模式</code></pre>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim edgemesh-gateway-dr.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh ingress gateway 提供了外部访问集群里服务的能力。</p>
+<p><img src="/images/kube/em-001.png"></p>
+<h3 id="部署-1"><a href="#部署-1" class="headerlink" title="部署"></a>部署</h3><p>创建istio的用户自定义资源</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
+<p>配置configmap，并使用deployment来部署edgemesh-gateway</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span> </span><br><span class="line">configmap/edgemesh-gateway-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 04-deployment.yaml</span> </span><br><span class="line">deployment.apps/edgemesh-gateway created</span><br></pre></td></tr></table></figure>
+<p>创建gateway资源对象，和路由规则Virtual Service</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f edgemesh-gateway-gw-vsvc.yaml</span></span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-vsvc created</span><br></pre></td></tr></table></figure>
+<p>查看edgemesh-gateway是否部署成功</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
+<p>最后，使用IP和Virtual Service暴露的端口来进行访问</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
+<p><a href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
+]]></content>
+      <categories>
+        <category>Cloud Computing</category>
+      </categories>
+      <tags>
+        <tag>KubeEdge</tag>
+        <tag>ServiceMesh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KubeEdge Beehive</title>
+    <url>/2021/KubeEdge-Beehive/</url>
+    <content><![CDATA[<p>下载地址：<a href="https://github.com/kubeedge/kubeedge">https://github.com/kubeedge/kubeedge</a></p>
+<p>版本：<a href="https://github.com/kubeedge/kubeedge/releases/tag/v1.5.0">KubeEdge v1.5.0 release</a></p>
+]]></content>
+      <categories>
+        <category>Edge Computing</category>
+      </categories>
+      <tags>
+        <tag>KubeEdge</tag>
+        <tag>Go</tag>
+        <tag>Containerization</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>GDB Installation on Mac OS</title>
     <url>/2021/GDB-Installation-on-Mac-OS/</url>
     <content><![CDATA[<h4 id="Step-1-Install-gdb"><a href="#Step-1-Install-gdb" class="headerlink" title="Step 1. Install gdb"></a>Step 1. Install gdb</h4><ol>
@@ -347,62 +599,9 @@
         <category>Configuration</category>
       </categories>
       <tags>
+        <tag>Linux</tag>
         <tag>C Language</tag>
-        <tag>Linux</tag>
         <tag>Mac</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DIY a VPN With SSR</title>
-    <url>/2020/DIY-a-VPN-With-SSR/</url>
-    <content><![CDATA[<p>Website: <a href="https://www.vultr.com/">https://www.vultr.com/</a></p>
-<p>Software: Shadowsocks + Ubuntu OS</p>
-<h4 id="Step-1-服务器端安装Shadowsocks"><a href="#Step-1-服务器端安装Shadowsocks" class="headerlink" title="Step 1. 服务器端安装Shadowsocks"></a>Step 1. 服务器端安装Shadowsocks</h4><p>服务端版本：Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev（四选一）</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> chmod +x shadowsocks-all.sh</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span></span><br></pre></td></tr></table></figure>
-
-
-<p>卸载方法</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./shadowsocks-all.sh uninstall</span></span><br></pre></td></tr></table></figure>
-
-
-<h4 id="Step-2-各版本的启动脚本及配置文件名"><a href="#Step-2-各版本的启动脚本及配置文件名" class="headerlink" title="Step 2. 各版本的启动脚本及配置文件名"></a>Step 2. 各版本的启动脚本及配置文件名</h4><p>启动脚本后面的参数含义，从左至右依次为：启动，停止，重启，查看状态。</p>
-<p>Shadowsocks-Python 版：</p>
-<p>/etc/init.d/shadowsocks-python start | stop | restart | status</p>
-<p>ShadowsocksR 版：</p>
-<p>/etc/init.d/shadowsocks-r start | stop | restart | status</p>
-<p>Shadowsocks-Go 版：</p>
-<p>/etc/init.d/shadowsocks-go start | stop | restart | status</p>
-<p>Shadowsocks-libev 版：</p>
-<p>/etc/init.d/shadowsocks-libev start | stop | restart | status</p>
-<p>各版本默认配置文件</p>
-<p>Shadowsocks-Python 版：</p>
-<p>/etc/shadowsocks-python/config.json</p>
-<p>ShadowsocksR 版：</p>
-<p>/etc/shadowsocks-r/config.json</p>
-<p>Shadowsocks-Go 版：</p>
-<p>/etc/shadowsocks-go/config.json</p>
-<p>Shadowsocks-libev 版：</p>
-<p>/etc/shadowsocks-libev/config.json</p>
-<h4 id="Step-3-安装VPN加速器"><a href="#Step-3-安装VPN加速器" class="headerlink" title="Step 3. 安装VPN加速器"></a>Step 3. 安装VPN加速器</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget <span class="string">&quot;https://github.com/chiakge/Linux-NetSpeed/raw/master/tcp.sh&quot;</span> &amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span></span><br></pre></td></tr></table></figure>
-
-
-<p>安装 BBR</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh</span></span><br></pre></td></tr></table></figure>
-<p>获取读写权限</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chmod +x bbr.sh</span></span><br></pre></td></tr></table></figure>
-<p>启动BBR安装</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./bbr.sh</span></span><br></pre></td></tr></table></figure>
-
-
-<h4 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A?"></a>Q &amp; A?</h4><p>Q: 解决Host key verification failed</p>
-<p>A: ssh-keygen -R 你要访问的IP地址</p>
-]]></content>
-      <categories>
-        <category>Configuration</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>VPN</tag>
       </tags>
   </entry>
   <entry>
@@ -508,6 +707,90 @@
       </categories>
       <tags>
         <tag>Camera</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Kubernetes Installation</title>
+    <url>/2021/Kubernetes-Installation/</url>
+    <content><![CDATA[<h2 id="机器配置"><a href="#机器配置" class="headerlink" title="机器配置"></a>机器配置</h2><table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>角色</th>
+<th>IP</th>
+<th>系统</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>centos-istio-0001</td>
+<td>Slave</td>
+<td>159.138.51.216</td>
+<td>CentOS 8.2 64bit</td>
+</tr>
+<tr>
+<td>centos-istio-0002</td>
+<td>Slave</td>
+<td>159.138.57.247</td>
+<td>CentOS 8.2 64bit</td>
+</tr>
+<tr>
+<td>centos-istio-0003</td>
+<td>Master</td>
+<td>182.160.9.140</td>
+<td>CentOS 8.2 64bit</td>
+</tr>
+</tbody></table>
+<p>注⚠️：三台机器均已安装Docker。</p>
+<h2 id="允许-iptables-检查桥接流量"><a href="#允许-iptables-检查桥接流量" class="headerlink" title="允许 iptables 检查桥接流量"></a>允许 iptables 检查桥接流量</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/modules-load.d/k8s.conf</span></span><br><span class="line"><span class="string">br_netfilter</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/sysctl.d/k8s.conf</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">sudo sysctl --system</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="安装-kubeadm、kubelet-和-kubectl"><a href="#安装-kubeadm、kubelet-和-kubectl" class="headerlink" title="安装 kubeadm、kubelet 和 kubectl"></a>安装 kubeadm、kubelet 和 kubectl</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/yum.repos.d/kubernetes.repo</span></span><br><span class="line"><span class="string">[kubernetes]</span></span><br><span class="line"><span class="string">name=Kubernetes</span></span><br><span class="line"><span class="string">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">repo_gpgcheck=1</span></span><br><span class="line"><span class="string">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span></span><br><span class="line"><span class="string">exclude=kubelet kubeadm kubectl</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 SELinux 设置为 permissive 模式（相当于将其禁用）</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">&#x27;s/^SELINUX=enforcing$/SELINUX=permissive/&#x27;</span> /etc/selinux/config</span><br><span class="line"></span><br><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br></pre></td></tr></table></figure>
+<p>查看kubelet、kubeadm和kubectl是否安装成功</p>
+<p><img src="/images/kube/kube-1.png"></p>
+<h2 id="使用kubeadm安装master集群"><a href="#使用kubeadm安装master集群" class="headerlink" title="使用kubeadm安装master集群"></a>使用kubeadm安装master集群</h2><p><img src="/images/kube/kube-2.png"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubeadm init --apiserver-advertise-address=192.168.0.96 --pod-network-cidr=10.244.0.0/16</span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/kube-3.png"></p>
+<p>要使非 root 用户可以运行 kubectl，请运行以下命令， 它们也是 <code>kubeadm init</code> 输出的一部分：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
+<p>或者，如果你是 <code>root</code> 用户，则可以运行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> KUBECONFIG=/etc/kubernetes/admin.conf</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="安装flannel网络"><a href="#安装flannel网络" class="headerlink" title="安装flannel网络"></a>安装flannel网络</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/kube-4.png"></p>
+<h2 id="将Slave节点加入集群"><a href="#将Slave节点加入集群" class="headerlink" title="将Slave节点加入集群"></a>将Slave节点加入集群</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubeadm join 192.168.0.96:6443 --token 8axber.2vzp1am4kcr7qpxd \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:10e0a25cc62687435f0211feeea1896d1ea512f3233a258ab0ef56a921224436</span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/kube-5.png"></p>
+<h2 id="查看集群节点状态"><a href="#查看集群节点状态" class="headerlink" title="查看集群节点状态"></a>查看集群节点状态</h2><p><img src="/images/kube/kube-6.png"></p>
+]]></content>
+      <categories>
+        <category>Cloud Computing</category>
+      </categories>
+      <tags>
+        <tag>Containerization</tag>
+        <tag>Kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux GoLang</title>
+    <url>/2021/Linux-GoLang/</url>
+    <content><![CDATA[<h3 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1. 下载安装包"></a>1. 下载安装包</h3><p>在Go语言下载官网 <a href="https://golang.org/dl/">https://golang.org/dl/</a> ，下载所需的Linux安装包</p>
+<p><img src="/images/go/go-5.png"></p>
+<h3 id="2-上传并解压"><a href="#2-上传并解压" class="headerlink" title="2. 上传并解压"></a>2. 上传并解压</h3><p>将下载的tar.gz包上传到Linux机器上，并使用<strong>tar -zxvf go1.16.2.linux-amd64.tar.gz</strong>解压</p>
+<p><img src="/images/go/go-6.png"></p>
+<h3 id="3-拷贝到-usr-local下"><a href="#3-拷贝到-usr-local下" class="headerlink" title="3. 拷贝到/usr/local下"></a>3. 拷贝到/usr/local下</h3><p>通过<strong>mv go /usr/local/go</strong>，将解压后的文件夹拷贝到/user/local下</p>
+<p><img src="/images/go/go-7.png"></p>
+<h3 id="4-查看go的版本号"><a href="#4-查看go的版本号" class="headerlink" title="4. 查看go的版本号"></a>4. 查看go的版本号</h3><p><img src="/images/go/go-8.png"></p>
+<h3 id="5-设置环境变量"><a href="#5-设置环境变量" class="headerlink" title="5. 设置环境变量"></a>5. 设置环境变量</h3><p>编辑/etc/profile文件，并加入如下代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=~/golib:~/goproject</span><br><span class="line"><span class="built_in">export</span> GBIN=~/gobin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin/:<span class="variable">$GOBIN</span></span><br></pre></td></tr></table></figure>
+<p>执行source /etc/profile命令使得环境变量生效</p>
+<p><img src="/images/go/go-9.png"></p>
+]]></content>
+      <categories>
+        <category>Configuration</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+        <tag>Programming</tag>
       </tags>
   </entry>
   <entry>
@@ -982,366 +1265,6 @@
       </tags>
   </entry>
   <entry>
-    <title>This is xiaoli7</title>
-    <url>/2020/This-is-xiaoli7/</url>
-    <content><![CDATA[<h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><p><img src="/images/Xiaoli_Resume_English.pdf"> </p>
-<h2 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h2><p><img src="/images/Xiaoli_Resume_Chinese.pdf"> </p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Windows GoLang</title>
-    <url>/2021/Windows-GoLang/</url>
-    <content><![CDATA[<h3 id="1-下载安装包，根据操作系统选择GoLang版本"><a href="#1-下载安装包，根据操作系统选择GoLang版本" class="headerlink" title="1. 下载安装包，根据操作系统选择GoLang版本"></a>1. 下载安装包，根据操作系统选择GoLang版本</h3><p>下载地址：<a href="https://golang.org/dl/">https://golang.org/dl/</a></p>
-<p><img src="/images/go/go-1.png"></p>
-<h3 id="2-打开安装包，并根据提示安装GoLang"><a href="#2-打开安装包，并根据提示安装GoLang" class="headerlink" title="2. 打开安装包，并根据提示安装GoLang"></a>2. 打开安装包，并根据提示安装GoLang</h3><p>将安装路径设置为C:\Go\</p>
-<p><img src="/images/go/go-2.png"></p>
-<h3 id="3-打开cmd，查看GoLand是否安装成功"><a href="#3-打开cmd，查看GoLand是否安装成功" class="headerlink" title="3. 打开cmd，查看GoLand是否安装成功"></a>3. 打开cmd，查看GoLand是否安装成功</h3><p>win+R并输入cmd打开命令行界面，接着使用go version来查看GoLand的版本信息</p>
-<p><img src="/images/go/go-3.png"></p>
-<h3 id="4-创建mygo目录，并设置为GOPATH的系统变量"><a href="#4-创建mygo目录，并设置为GOPATH的系统变量" class="headerlink" title="4. 创建mygo目录，并设置为GOPATH的系统变量"></a>4. 创建mygo目录，并设置为GOPATH的系统变量</h3><p><img src="/images/go/go-4.png"></p>
-]]></content>
-      <categories>
-        <category>Configuration</category>
-      </categories>
-      <tags>
-        <tag>Go</tag>
-        <tag>Programming</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Kubernetes Installation</title>
-    <url>/2021/Kubernetes-Installation/</url>
-    <content><![CDATA[<h2 id="机器配置"><a href="#机器配置" class="headerlink" title="机器配置"></a>机器配置</h2><table>
-<thead>
-<tr>
-<th>主机名</th>
-<th>角色</th>
-<th>IP</th>
-<th>系统</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>centos-istio-0001</td>
-<td>Slave</td>
-<td>159.138.51.216</td>
-<td>CentOS 8.2 64bit</td>
-</tr>
-<tr>
-<td>centos-istio-0002</td>
-<td>Slave</td>
-<td>159.138.57.247</td>
-<td>CentOS 8.2 64bit</td>
-</tr>
-<tr>
-<td>centos-istio-0003</td>
-<td>Master</td>
-<td>182.160.9.140</td>
-<td>CentOS 8.2 64bit</td>
-</tr>
-</tbody></table>
-<p>注⚠️：三台机器均已安装Docker。</p>
-<h2 id="允许-iptables-检查桥接流量"><a href="#允许-iptables-检查桥接流量" class="headerlink" title="允许 iptables 检查桥接流量"></a>允许 iptables 检查桥接流量</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/modules-load.d/k8s.conf</span></span><br><span class="line"><span class="string">br_netfilter</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/sysctl.d/k8s.conf</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-ip6tables = 1</span></span><br><span class="line"><span class="string">net.bridge.bridge-nf-call-iptables = 1</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">sudo sysctl --system</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="安装-kubeadm、kubelet-和-kubectl"><a href="#安装-kubeadm、kubelet-和-kubectl" class="headerlink" title="安装 kubeadm、kubelet 和 kubectl"></a>安装 kubeadm、kubelet 和 kubectl</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">EOF | sudo tee /etc/yum.repos.d/kubernetes.repo</span></span><br><span class="line"><span class="string">[kubernetes]</span></span><br><span class="line"><span class="string">name=Kubernetes</span></span><br><span class="line"><span class="string">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">repo_gpgcheck=1</span></span><br><span class="line"><span class="string">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span></span><br><span class="line"><span class="string">exclude=kubelet kubeadm kubectl</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将 SELinux 设置为 permissive 模式（相当于将其禁用）</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">&#x27;s/^SELINUX=enforcing$/SELINUX=permissive/&#x27;</span> /etc/selinux/config</span><br><span class="line"></span><br><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br></pre></td></tr></table></figure>
-<p>查看kubelet、kubeadm和kubectl是否安装成功</p>
-<p><img src="/images/kube/kube-1.png"></p>
-<h2 id="使用kubeadm安装master集群"><a href="#使用kubeadm安装master集群" class="headerlink" title="使用kubeadm安装master集群"></a>使用kubeadm安装master集群</h2><p><img src="/images/kube/kube-2.png"></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubeadm init --apiserver-advertise-address=192.168.0.96 --pod-network-cidr=10.244.0.0/16</span><br></pre></td></tr></table></figure>
-<p><img src="/images/kube/kube-3.png"></p>
-<p>要使非 root 用户可以运行 kubectl，请运行以下命令， 它们也是 <code>kubeadm init</code> 输出的一部分：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir -p <span class="variable">$HOME</span>/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) <span class="variable">$HOME</span>/.kube/config</span><br></pre></td></tr></table></figure>
-<p>或者，如果你是 <code>root</code> 用户，则可以运行：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> KUBECONFIG=/etc/kubernetes/admin.conf</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="安装flannel网络"><a href="#安装flannel网络" class="headerlink" title="安装flannel网络"></a>安装flannel网络</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
-<p><img src="/images/kube/kube-4.png"></p>
-<h2 id="将Slave节点加入集群"><a href="#将Slave节点加入集群" class="headerlink" title="将Slave节点加入集群"></a>将Slave节点加入集群</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">kubeadm join 192.168.0.96:6443 --token 8axber.2vzp1am4kcr7qpxd \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:10e0a25cc62687435f0211feeea1896d1ea512f3233a258ab0ef56a921224436</span><br></pre></td></tr></table></figure>
-<p><img src="/images/kube/kube-5.png"></p>
-<h2 id="查看集群节点状态"><a href="#查看集群节点状态" class="headerlink" title="查看集群节点状态"></a>查看集群节点状态</h2><p><img src="/images/kube/kube-6.png"></p>
-]]></content>
-      <categories>
-        <category>Cloud Computing</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-        <tag>Containerization</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux GoLang</title>
-    <url>/2021/Linux-GoLang/</url>
-    <content><![CDATA[<h3 id="1-下载安装包"><a href="#1-下载安装包" class="headerlink" title="1. 下载安装包"></a>1. 下载安装包</h3><p>在Go语言下载官网 <a href="https://golang.org/dl/">https://golang.org/dl/</a> ，下载所需的Linux安装包</p>
-<p><img src="/images/go/go-5.png"></p>
-<h3 id="2-上传并解压"><a href="#2-上传并解压" class="headerlink" title="2. 上传并解压"></a>2. 上传并解压</h3><p>将下载的tar.gz包上传到Linux机器上，并使用<strong>tar -zxvf go1.16.2.linux-amd64.tar.gz</strong>解压</p>
-<p><img src="/images/go/go-6.png"></p>
-<h3 id="3-拷贝到-usr-local下"><a href="#3-拷贝到-usr-local下" class="headerlink" title="3. 拷贝到/usr/local下"></a>3. 拷贝到/usr/local下</h3><p>通过<strong>mv go /usr/local/go</strong>，将解压后的文件夹拷贝到/user/local下</p>
-<p><img src="/images/go/go-7.png"></p>
-<h3 id="4-查看go的版本号"><a href="#4-查看go的版本号" class="headerlink" title="4. 查看go的版本号"></a>4. 查看go的版本号</h3><p><img src="/images/go/go-8.png"></p>
-<h3 id="5-设置环境变量"><a href="#5-设置环境变量" class="headerlink" title="5. 设置环境变量"></a>5. 设置环境变量</h3><p>编辑/etc/profile文件，并加入如下代码：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/usr/<span class="built_in">local</span>/go</span><br><span class="line"><span class="built_in">export</span> GOPATH=~/golib:~/goproject</span><br><span class="line"><span class="built_in">export</span> GBIN=~/gobin</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin/:<span class="variable">$GOBIN</span></span><br></pre></td></tr></table></figure>
-<p>执行source /etc/profile命令使得环境变量生效</p>
-<p><img src="/images/go/go-9.png"></p>
-]]></content>
-      <categories>
-        <category>Configuration</category>
-      </categories>
-      <tags>
-        <tag>Go</tag>
-        <tag>Programming</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>KubeEdge Beehive</title>
-    <url>/2021/KubeEdge-Beehive/</url>
-    <content><![CDATA[<p>下载地址：<a href="https://github.com/kubeedge/kubeedge">https://github.com/kubeedge/kubeedge</a></p>
-<p>版本：<a href="https://github.com/kubeedge/kubeedge/releases/tag/v1.5.0">KubeEdge v1.5.0 release</a></p>
-]]></content>
-      <categories>
-        <category>Edge Computing</category>
-      </categories>
-      <tags>
-        <tag>Go</tag>
-        <tag>Containerization</tag>
-        <tag>KubeEdge</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>The Introduction to Kube-proxy</title>
-    <url>/2021/The-Introduction-to-Kube-proxy/</url>
-    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Kube-proxy是Kubernetes的核心组件，部署在每个节点上。作为服务的透明代理兼负载均衡器（在K8s中，可以将提供相同服务的一组Pod可以抽象成一个服务，通过服务提供的统一入口对外提供服务，每个服务都有一个虚拟IP地址和端口号供客户端访问），其核心功能是将到某个服务的访问请求转发到后端的多个Pod实例上。Kube-proxy可以执行简单的 TCP、UDP 和 SCTP 流转发，或者在一组后端进行循环 TCP、UDP 和 SCTP 转发。</p>
-<p>此外，服务的Cluster IP与NodePort等概念是kube-proxy服务通过iptables的NAT转换实现的，kube-proxy在运行过程中动态创建与服务相关的iptables规则，这些规则实现了将访问服务（Cluster IP或NodePort）的请求负载分发到后端Pod的功能。</p>
-<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Kube-proxy负责为Service提供集群内部的服务发现和负载均衡，在K8s的每个节点上都有一个Kube-proxy。因此，当需求访问服务的node越多，提供负载均衡能力的Kube-proxy就越多，高可用节点也会随之增多。</p>
-<p>如图所示，Kube-proxy从API Server获取所有的Server信息，并根据Server信息创建代理服务，实现从Server到Pod的请求路由和转发，从而实现K8s层级的虚拟转发网络。</p>
-<img src="/images/kube/kube-7.png" alt="img" style="zoom:80%;" />
-
-<p>Kube-proxy使用DaemonSet进行部署：DaemonSet管理K8s集群中每个node上仅运行一份Pod的副本实例。当node加入集群时创建Pod，当node离开集群时回收Pod。如果删除DaemonSet，其创建的所有Pod也被删除，DaemonSet中的Pod将覆盖整个集群。</p>
-<h2 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h2><h3 id="Userspace模式"><a href="#Userspace模式" class="headerlink" title="Userspace模式"></a>Userspace模式</h3><p>在用户空间模式下，kube-proxy进程是一个TCP/UDP代理，负责从Service到Pod的访问流量的转发。当某个Pod以Cluster IP方式访问某个Service的时候，这个流量会被Pod所在本机的iptables转发到本机的kube-proxy进程，然后由kube-proxy建立起到后端Pod的TCP/UDP链接，随后将请求转发到某个后端的Pod上，并在这个过程中实现负载均衡功能。</p>
-<img src="/images/kube/kube-8.png" alt="img" style="zoom:50%;" />
-
-<p>kube-proxy 会为每个 Service 随机监听一个端口，并增加一条 IPtables 规则。从客户端到 ClusterIP:Port 的报文都会被重定向到该端口，而端口收到报文后，通过负载均衡策略分发给对应的 Pod。</p>
-<p>用户空间模式的问题在于，Service的请求会先从用户空间进入内核iptables，然后再回到用户空间，由kube-proxy完成后端Endpoints的选择和代理工作，这样流量从用户空间进出内核带来的性能损耗是不可接受的。</p>
-<h3 id="Iptables模式"><a href="#Iptables模式" class="headerlink" title="Iptables模式"></a>Iptables模式</h3><p>Iptable模式下的kube-proxy不再起到Proxy的作用，其核心功能：通过API Server的Watch接口实时追踪跟踪Service与Endpoint的变更信息，并更新对应的iptables规则，Client的请求流量则通过iptables的NAT机制“直接路由”到目标Pod。</p>
-<img src="/images/kube/kube-9.png" alt="img" style="zoom:50%;" />
-
-<p>Iptable模式是全自动模式：根据Kubernetes的网络模型，一个Node上的Pod与其他Node上的Pod应该能够直接建立双向的TCP/IP通信通道，所以如果直接修改iptables规则，则也可以实现kube-proxy的功能。并且，iptables模式完全工作在内核态，不再经过用户态的kube-proxy中转，因此性能更强。</p>
-<p>Iptable模式的缺陷在于：在集群中的Service和Pod大量增加以后，iptables中的规则会急速膨胀，导致性能显著下降，在某些极端情况下甚至会出现规则丢失的情况，并且这种故障难以重现与排查。</p>
-<h3 id="IPVS模式"><a href="#IPVS模式" class="headerlink" title="IPVS模式"></a>IPVS模式</h3><p>Iptables是为防火墙而设计的；IPVS（IP Virtual Server）则专门用于高性能负载均衡，并使用更高效的数据结构（Hash表），允许几乎无限的规模扩张。相比iptables，IPVS拥有一下明显优势：</p>
-<p>· 为大型集群提供了更好的可扩展性和性能</p>
-<p>· 支持比iptables更复杂的负载均衡算法（最小负载、最少连接、加权等）</p>
-<p>· 支持服务器健康检查和连接重试等功能</p>
-<p>· 可动态修改ipset的集合</p>
-<img src="/images/kube/kube-10.png" alt="img" style="zoom:50%;" />
-
-<p>Ipset是iptables的一种扩展，引入了带索引的数据结构。因此，当规则很多时，ipset可提供高效地查找和匹配。</p>
-]]></content>
-      <categories>
-        <category>Cloud Computing</category>
-      </categories>
-      <tags>
-        <tag>Kubernetes</tag>
-        <tag>ServiceMesh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>EdgeMesh概述</title>
-    <url>/2021/EdgeMesh%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>EdgeMesh是一种服务网格，它与KubeEdge紧密结合，并适用于边缘场景。</p>
-<p>近年来，随着云原生和微服务架构的越来越流行，边缘节点的功能也越来越完善。在这个场景下，用户能够在边缘节点上部署自己的应用，而这些边缘节点必须通过服务被外部用户所访问。出于这个目的，EdgeMesh向用户（在KubeEdge内运行应用的用户）提供运行在不同节点上的外部访问服务，从而使他们访问其它边缘节点。此外，EdgeMesh还向用户供负载均衡和流量治理的能力。</p>
-<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>EdgeMesh满足边缘场景下的新需求（如边缘资源有限，边云网络不稳定等），即实现了高可用性，高可靠性，和极致轻量化：</p>
-<ul>
-<li>高可用性<ul>
-<li>利用KubeEdge中的边云通道，来打通边缘节点间的网络</li>
-<li>将边缘节点间的通信分为局域网内和跨局域网<ul>
-<li>局域网内的通信：直接访问</li>
-<li>跨局域网的通信：通过云端转发</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>高可靠性 （离线场景）<ul>
-<li>控制面和数据面流量都通过边云通道下发</li>
-<li>EdgeMesh内部实现轻量级的DNS服务器，不再访问云端DNS</li>
-</ul>
-</li>
-<li>极致轻量化<ul>
-<li>每个节点有且仅有一个EdgeMesh，节省边缘资源</li>
-</ul>
-</li>
-</ul>
-<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><img src="/images/kube/em-arch.jpg"></p>
-<p>如图所示，Edgemesh的工作流如下：</p>
-<ul>
-<li>通过服务器域名，客户端向服务器发起请求</li>
-<li>根据iptables规则，DNS被劫持到EdgeMesh，并返回一个虚假IP</li>
-<li>根据iptables规则，请求也被劫持到EdgeMesh</li>
-<li>EdgeMesh解析请求，获得域名，协议和请求等信息，</li>
-<li>EdgeMesh的负载均衡：<ul>
-<li>从域名中获得服务名和命名空间</li>
-<li>在MetaManager中，查询该服务的后端Pods</li>
-<li>基于负载均衡策略，选择一个后端Pod</li>
-</ul>
-</li>
-<li>EdgeMesh向服务器传输请求，等待服务器的响应，并将响应返回给客户端</li>
-</ul>
-<h2 id="功能性"><a href="#功能性" class="headerlink" title="功能性"></a>功能性</h2><table>
-<thead>
-<tr>
-<th align="center">功能</th>
-<th align="center">子功能</th>
-<th align="center">Edgemesh 0.1</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">服务发现</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center">流量治理</td>
-<td align="center">HTTP</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">TCP</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">UDP</td>
-<td align="center"><code>+</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">HTTPS</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Websocket</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">gRPC</td>
-<td align="center"><code>+</code></td>
-</tr>
-<tr>
-<td align="center">负载均衡</td>
-<td align="center">随机</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">轮询</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">会话保持</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center">外部访问</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center">多网卡监听</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-</tbody></table>
-<p>注：</p>
-<ul>
-<li><code>✓</code> EdgeMesh版本所支持的功能</li>
-<li><code>+</code> EdgeMesh版本不具备的功能，但在后续版本中会支持</li>
-<li><code>-</code> EdgeMesh版本不具备的功能，或已弃用的功能</li>
-</ul>
-<h2 id="操作指导"><a href="#操作指导" class="headerlink" title="操作指导"></a>操作指导</h2><h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>在边缘节点，关闭edgemesh，打开metaserver，并重启edgecore</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/edgecore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  edgeMesh:</span><br><span class="line">    enable: false</span><br><span class="line">  metaManager:</span><br><span class="line">    metaServer:</span><br><span class="line">      enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl restart edgecore</span></span><br></pre></td></tr></table></figure>
-<p>在云端，开启dynamic controller模块，并重启cloudcore</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/cloudcore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  dynamicController:</span><br><span class="line">    enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
-<p>在边缘节点，查看listwatch是否开启</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 127.0.0.1:10550/api/v1/services</span></span><br><span class="line">&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;items&quot;:[&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:05Z&quot;,&quot;labels&quot;:&#123;&quot;component&quot;:&quot;apiserver&quot;,&quot;provider&quot;:&quot;kubernetes&quot;&#125;,&quot;name&quot;:&quot;kubernetes&quot;,&quot;namespace&quot;:&quot;default&quot;,&quot;resourceVersion&quot;:&quot;147&quot;,&quot;selfLink&quot;:&quot;default/services/kubernetes&quot;,&quot;uid&quot;:&quot;55eeebea-08cf-4d1a-8b04-e85f8ae112a9&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.1&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;https&quot;,&quot;port&quot;:443,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:6443&#125;],&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;,&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;annotations&quot;:&#123;&quot;prometheus.io/port&quot;:&quot;9153&quot;,&quot;prometheus.io/scrape&quot;:&quot;true&quot;&#125;,&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:07Z&quot;,&quot;labels&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;,&quot;kubernetes.io/cluster-service&quot;:&quot;true&quot;,&quot;kubernetes.io/name&quot;:&quot;KubeDNS&quot;&#125;,&quot;name&quot;:&quot;kube-dns&quot;,&quot;namespace&quot;:&quot;kube-system&quot;,&quot;resourceVersion&quot;:&quot;203&quot;,&quot;selfLink&quot;:&quot;kube-system/services/kube-dns&quot;,&quot;uid&quot;:&quot;c221ac20-cbfa-406b-812a-c44b9d82d6dc&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.10&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;dns&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;UDP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;dns-tcp&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;metrics&quot;,&quot;port&quot;:9153,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:9153&#125;],&quot;selector&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;&#125;,&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;],&quot;kind&quot;:&quot;ServiceList&quot;,&quot;metadata&quot;:&#123;&quot;resourceVersion&quot;:&quot;377360&quot;,&quot;selfLink&quot;:&quot;/api/v1/services&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>部署configmap，并创建Istio的用户自定义资源</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span></span><br><span class="line">configmap/edgemesh-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
-<p>使用daemonset的方式来部署edgemesh</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 05-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="测试样例"><a href="#测试样例" class="headerlink" title="测试样例"></a>测试样例</h3><pre><code>**HTTP协议**
-
-在边缘节点上，部署支持http协议的容器应用和相关服务</code></pre>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f hostname.yaml</span></span><br></pre></td></tr></table></figure>
-<pre><code>到边缘节点上，使用curl去访问相关服务，打印出容器的hostname</code></pre>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl hostname-lb-svc.edgemesh-test:12345</span></span><br></pre></td></tr></table></figure>
-
-
-<pre><code>**TCP协议**
-
-在边缘节点1，部署支持tcp协议的容器应用和相关服务</code></pre>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
-<pre><code>在边缘节点2，使用telnet去访问相关服务</code></pre>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> telnet tcp-echo-service.edgemesh-test 2701</span></span><br></pre></td></tr></table></figure>
-
-
-<pre><code>**Websocket协议**
-
-在边缘节点1，部署支持websocket协议的容器应用和相关服务</code></pre>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
-<pre><code>进入websocket的容器环境，并使用client去访问相关服务</code></pre>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it 2a6ae1a490ae bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./client --addr ws-svc.edgemesh-test:12348</span></span><br></pre></td></tr></table></figure>
-
-
-<pre><code>**负载均衡**
-
-使用DestinationRule中的loadBalancer属性来选择不同的负载均衡模式</code></pre>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim edgemesh-gateway-dr.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
-
-
-<h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh ingress gateway 提供了外部访问集群里服务的能力。</p>
-<p><img src="/images/kube/em-001.png"></p>
-<h3 id="部署-1"><a href="#部署-1" class="headerlink" title="部署"></a>部署</h3><p>创建istio的用户自定义资源</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
-<p>配置configmap，并使用deployment来部署edgemesh-gateway</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span> </span><br><span class="line">configmap/edgemesh-gateway-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 04-deployment.yaml</span> </span><br><span class="line">deployment.apps/edgemesh-gateway created</span><br></pre></td></tr></table></figure>
-<p>创建gateway资源对象，和路由规则Virtual Service</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f edgemesh-gateway-gw-vsvc.yaml</span></span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-vsvc created</span><br></pre></td></tr></table></figure>
-<p>查看edgemesh-gateway是否部署成功</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
-<p>最后，使用IP和Virtual Service暴露的端口来进行访问</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
-<p><a href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
-]]></content>
-      <categories>
-        <category>Cloud Computing</category>
-      </categories>
-      <tags>
-        <tag>KubeEdge</tag>
-        <tag>ServiceMesh</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Sorting Algorithms</title>
     <url>/2021/Sorting-Algorithms/</url>
     <content><![CDATA[<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><ul>
@@ -1570,5 +1493,177 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
         <tag>KubeEdge</tag>
         <tag>ServiceMesh</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>The Introduction to Kube-proxy</title>
+    <url>/2021/The-Introduction-to-Kube-proxy/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Kube-proxy是Kubernetes的核心组件，部署在每个节点上。作为服务的透明代理兼负载均衡器（在K8s中，可以将提供相同服务的一组Pod可以抽象成一个服务，通过服务提供的统一入口对外提供服务，每个服务都有一个虚拟IP地址和端口号供客户端访问），其核心功能是将到某个服务的访问请求转发到后端的多个Pod实例上。Kube-proxy可以执行简单的 TCP、UDP 和 SCTP 流转发，或者在一组后端进行循环 TCP、UDP 和 SCTP 转发。</p>
+<p>此外，服务的Cluster IP与NodePort等概念是kube-proxy服务通过iptables的NAT转换实现的，kube-proxy在运行过程中动态创建与服务相关的iptables规则，这些规则实现了将访问服务（Cluster IP或NodePort）的请求负载分发到后端Pod的功能。</p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Kube-proxy负责为Service提供集群内部的服务发现和负载均衡，在K8s的每个节点上都有一个Kube-proxy。因此，当需求访问服务的node越多，提供负载均衡能力的Kube-proxy就越多，高可用节点也会随之增多。</p>
+<p>如图所示，Kube-proxy从API Server获取所有的Server信息，并根据Server信息创建代理服务，实现从Server到Pod的请求路由和转发，从而实现K8s层级的虚拟转发网络。</p>
+<img src="/images/kube/kube-7.png" alt="img" style="zoom:80%;" />
+
+<p>Kube-proxy使用DaemonSet进行部署：DaemonSet管理K8s集群中每个node上仅运行一份Pod的副本实例。当node加入集群时创建Pod，当node离开集群时回收Pod。如果删除DaemonSet，其创建的所有Pod也被删除，DaemonSet中的Pod将覆盖整个集群。</p>
+<h2 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h2><h3 id="Userspace模式"><a href="#Userspace模式" class="headerlink" title="Userspace模式"></a>Userspace模式</h3><p>在用户空间模式下，kube-proxy进程是一个TCP/UDP代理，负责从Service到Pod的访问流量的转发。当某个Pod以Cluster IP方式访问某个Service的时候，这个流量会被Pod所在本机的iptables转发到本机的kube-proxy进程，然后由kube-proxy建立起到后端Pod的TCP/UDP链接，随后将请求转发到某个后端的Pod上，并在这个过程中实现负载均衡功能。</p>
+<img src="/images/kube/kube-8.png" alt="img" style="zoom:50%;" />
+
+<p>kube-proxy 会为每个 Service 随机监听一个端口，并增加一条 IPtables 规则。从客户端到 ClusterIP:Port 的报文都会被重定向到该端口，而端口收到报文后，通过负载均衡策略分发给对应的 Pod。</p>
+<p>用户空间模式的问题在于，Service的请求会先从用户空间进入内核iptables，然后再回到用户空间，由kube-proxy完成后端Endpoints的选择和代理工作，这样流量从用户空间进出内核带来的性能损耗是不可接受的。</p>
+<h3 id="Iptables模式"><a href="#Iptables模式" class="headerlink" title="Iptables模式"></a>Iptables模式</h3><p>Iptable模式下的kube-proxy不再起到Proxy的作用，其核心功能：通过API Server的Watch接口实时追踪跟踪Service与Endpoint的变更信息，并更新对应的iptables规则，Client的请求流量则通过iptables的NAT机制“直接路由”到目标Pod。</p>
+<img src="/images/kube/kube-9.png" alt="img" style="zoom:50%;" />
+
+<p>Iptable模式是全自动模式：根据Kubernetes的网络模型，一个Node上的Pod与其他Node上的Pod应该能够直接建立双向的TCP/IP通信通道，所以如果直接修改iptables规则，则也可以实现kube-proxy的功能。并且，iptables模式完全工作在内核态，不再经过用户态的kube-proxy中转，因此性能更强。</p>
+<p>Iptable模式的缺陷在于：在集群中的Service和Pod大量增加以后，iptables中的规则会急速膨胀，导致性能显著下降，在某些极端情况下甚至会出现规则丢失的情况，并且这种故障难以重现与排查。</p>
+<h3 id="IPVS模式"><a href="#IPVS模式" class="headerlink" title="IPVS模式"></a>IPVS模式</h3><p>Iptables是为防火墙而设计的；IPVS（IP Virtual Server）则专门用于高性能负载均衡，并使用更高效的数据结构（Hash表），允许几乎无限的规模扩张。相比iptables，IPVS拥有一下明显优势：</p>
+<p>· 为大型集群提供了更好的可扩展性和性能</p>
+<p>· 支持比iptables更复杂的负载均衡算法（最小负载、最少连接、加权等）</p>
+<p>· 支持服务器健康检查和连接重试等功能</p>
+<p>· 可动态修改ipset的集合</p>
+<img src="/images/kube/kube-10.png" alt="img" style="zoom:50%;" />
+
+<p>Ipset是iptables的一种扩展，引入了带索引的数据结构。因此，当规则很多时，ipset可提供高效地查找和匹配。</p>
+]]></content>
+      <categories>
+        <category>Cloud Computing</category>
+      </categories>
+      <tags>
+        <tag>ServiceMesh</tag>
+        <tag>Kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>This is xiaoli7</title>
+    <url>/2020/This-is-xiaoli7/</url>
+    <content><![CDATA[<h1 id="杨-晓礼"><a href="#杨-晓礼" class="headerlink" title="杨 晓礼"></a>杨 晓礼</h1><p><strong><code>互联网实习生</code></strong> &amp; <strong><code>教学助理</code></strong> &amp; <strong><code>研究生</code></strong></p>
+<blockquote>
+<ul>
+<li>Github: <a href="https://github.com/xiaoli777">https://github.com/xiaoli777</a></li>
+<li>电子邮箱: <a href="mailto:&#x78;&#105;&#x61;&#x6f;&#x6c;&#105;&#x79;&#x61;&#110;&#103;&#x31;&#57;&#57;&#x34;&#64;&#x6f;&#117;&#x74;&#x6c;&#x6f;&#x6f;&#107;&#46;&#x63;&#111;&#x6d;">&#x78;&#105;&#x61;&#x6f;&#x6c;&#105;&#x79;&#x61;&#110;&#103;&#x31;&#57;&#57;&#x34;&#64;&#x6f;&#117;&#x74;&#x6c;&#x6f;&#x6f;&#107;&#46;&#x63;&#111;&#x6d;</a></li>
+<li>微信: jueqingzhan163</li>
+</ul>
+</blockquote>
+<h2 id="教育背景"><a href="#教育背景" class="headerlink" title="教育背景"></a>教育背景</h2><h4 id="加利福尼亚大学戴维斯分校"><a href="#加利福尼亚大学戴维斯分校" class="headerlink" title="加利福尼亚大学戴维斯分校"></a>加利福尼亚大学戴维斯分校</h4><p><code>2020年9月 - 至今</code>, <code>萨克拉门托, 美国</code></p>
+<ul>
+<li><strong>计算机科学</strong>研究生</li>
+<li>GPA: <strong>3.7+/4.0</strong></li>
+</ul>
+<h4 id="华中科技大学"><a href="#华中科技大学" class="headerlink" title="华中科技大学"></a><strong>华中科技大学</strong></h4><p><code>2017年9月 - 2020年6月</code>, <code>武汉, 中国</code></p>
+<ul>
+<li><strong>计算机体系结构</strong>工学硕士学位</li>
+<li>GPA: <strong>82.65/100.00</strong></li>
+</ul>
+<h4 id="湖南大学"><a href="#湖南大学" class="headerlink" title="湖南大学"></a>湖南大学</h4><p><code>2013年9月 - 2017年6月</code>, <code>长沙, 中国</code></p>
+<ul>
+<li><strong>计算机体系结构</strong>工学学士学位</li>
+<li>GPA: <strong>82.65/100.00</strong></li>
+</ul>
+<h2 id="项目经历"><a href="#项目经历" class="headerlink" title="项目经历"></a>项目经历</h2><h4 id="服务网格的对比与分析"><a href="#服务网格的对比与分析" class="headerlink" title="服务网格的对比与分析"></a><strong>服务网格的对比与分析</strong></h4><p><code>研究人员</code>, <code>2021年2月 - 至今</code>, <code>华为技术有限公司, 中国</code></p>
+<ul>
+<li>学习并调研3大服务网格 (Istio, Kube-proxy, EdgeMesh)</li>
+<li>从架构、功能和性能的角度, 对比并分析这些服务网格</li>
+<li>设计测试程序来评估这些服务网格的性能 (DOING)</li>
+</ul>
+<h4 id="跨边云服务发现与流量治理"><a href="#跨边云服务发现与流量治理" class="headerlink" title="跨边云服务发现与流量治理"></a>跨边云服务发现与流量治理</h4><p><code>开发人员</code>, <code>2021年1月 - 2021年2月</code>,  <code>华为技术有限公司, 中国</code></p>
+<ul>
+<li>学习边缘云平台的架构, 并调研其APIs</li>
+<li>进行实验来验证该项目的可行性</li>
+<li>通过RESTful APIs来实现自动化环境创建 (LoC: 500+)</li>
+</ul>
+<p>\datedsubsection{\textbf{容器文件系统扩展性的评估与优化}}{2018年6月 - 2020年6月}<br>\role{研究人员}{华中科技大学,\ 中国}<br>\begin{itemize}<br>  \item 扩展FXMARK，来支持Overlay2的扩展性评估(LoC: 1000+)<br>  \item 分析得出两大扩展性瓶颈：文件重定向和重命名锁竞争<br>  \item 提出可记忆重定向策略，将打开容器文件的性能提升约10%<br>  \item 设计并实现免锁重命名策略，将重命名、写时复制和删除文件的性能优化100%-300%<br>\end{itemize}</p>
+<h4 id="EdgeMesh的性能测试"><a href="#EdgeMesh的性能测试" class="headerlink" title="EdgeMesh的性能测试"></a>EdgeMesh的性能测试</h4><p><code>测试人员</code>, <code>2020年11月 - 2020年12月</code>, <code>华为技术有限公司, 中国</code></p>
+<ul>
+<li>通过阅读代码和相关文献, 来学习EdgeMesh的设计和功能</li>
+<li>设计测试程序, 来评估EdgeMesh的性能 (LoC: 100+)</li>
+<li>根据测试结果, 输出一份综合性测试报告Outputted a comprehensive report to analyze the test results</li>
+</ul>
+<h4 id="容器文件系统扩展性的评估与优化"><a href="#容器文件系统扩展性的评估与优化" class="headerlink" title="容器文件系统扩展性的评估与优化"></a>容器文件系统扩展性的评估与优化</h4><p><code>研究人员</code>, <code>2018年6月 - 2020年6月</code>, <code>华中科技大学, 中国</code></p>
+<ul>
+<li>扩展FXMARK，来支持Overlay2的扩展性评估 (LoC: 1000+)</li>
+<li>分析得出两大扩展性瓶颈：文件重定向和重命名锁竞争</li>
+<li>提出可记忆重定向策略，将打开容器文件的性能提升约10%</li>
+<li>设计并实现免锁重命名策略，将重命名、写时复制和删除文件的性能优化100%-300%</li>
+</ul>
+<h4 id="《云计算：信息社会的基础设施和服务引擎》"><a href="#《云计算：信息社会的基础设施和服务引擎》" class="headerlink" title="《云计算：信息社会的基础设施和服务引擎》"></a>《云计算：信息社会的基础设施和服务引擎》</h4><p><code>协助编者</code>, <code>2018年3月 - 2018年6月</code>, <code>华中科技大学, 中国</code></p>
+<ul>
+<li>寻找、整理并组织数百篇相关资料和文献(书籍、网上资料等)</li>
+<li>全程协助写作，包括目录和章节内容(超过100,000字)</li>
+</ul>
+<h4 id="电力负荷预测可视化平台"><a href="#电力负荷预测可视化平台" class="headerlink" title="电力负荷预测可视化平台"></a>电力负荷预测可视化平台</h4><p><code>开发人员</code>, <code>2016年12月 - 2017年6月</code>, <code>湖南大学, 中国</code></p>
+<ul>
+<li>设计平台架构与数据库，可支持TB级别数据的存储与查询</li>
+<li>实现基于SVM的预测算法，其平均准确率高达97%</li>
+<li>设计并实现20种以上的数据可视化图表</li>
+<li>提高跨平台的兼容性，和预测算法的扩展性</li>
+</ul>
+<h2 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h2><h4 id="边缘云创新实验室"><a href="#边缘云创新实验室" class="headerlink" title="边缘云创新实验室"></a>边缘云创新实验室</h4><p><code>开发工程师</code>, <code>2020年11月 - 至今</code>, <code>华为技术有限公司, 中国</code></p>
+<ul>
+<li>学习边缘运平台 (KubeEdge) 的架构</li>
+<li>熟练地使用容器化技术 (Docker, Kubernetes, 服务网格等)</li>
+<li>设计并进行有关EdgeMesh的性能测试</li>
+<li>参与跨边云服务发现与流量治理的开发工作</li>
+<li>对比并分析数个服务网格 (Istio, Kube-proxy, EdgeMesh)</li>
+</ul>
+<h4 id="工程学院"><a href="#工程学院" class="headerlink" title="工程学院"></a>工程学院</h4><p><code>教学助理</code>, <code>2021年1月 - 2021年3月</code>, <code>加州大学戴维斯分校，美国</code></p>
+<ul>
+<li>向200名学生提供ECS 150 (操作系统) 的Office Hours</li>
+<li>引导学生完成3个课程项目 (shell, 线程库, 文件系统)</li>
+<li>口语面试超过50个学生, 并给予有效的反馈</li>
+<li>参与5个评分活动 (3个课程项目, 2次期中考试)</li>
+</ul>
+<h4 id="Cluster-and-Grid-Computing-Lab"><a href="#Cluster-and-Grid-Computing-Lab" class="headerlink" title="Cluster and Grid Computing Lab"></a>Cluster and Grid Computing Lab</h4><p><code>集群管理员</code>, <code>2019年3月 - 2020年6月</code>, <code>华中科技大学, 中国</code></p>
+<ul>
+<li>管理并维护超过300个计算节点的高性能计算集群</li>
+<li>监控并报告近10起集群的潜在风险，包括宕机、断电和设备故障</li>
+<li>修复超过100次集群的软硬件故障，如异常启动、挂载失灵等</li>
+</ul>
+<h2 id="出版物"><a href="#出版物" class="headerlink" title="出版物"></a>出版物</h2><p>梅宏, 金海等. 云计算: 信息社会的基础设施和服务引擎[M]. 中国科学技术出版社, ISBN 978-7-5046-8289-5.</p>
+<h2 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h2><p><strong>语言:</strong></p>
+<p><code>英语 (托福 100, GRE 322+4)</code>, <code>C语言</code>, <code>C++</code>, <code>Go</code>, <code>Python</code>, <code>HTML</code>, <code>Script</code>, <code>MySQL</code></p>
+<p><strong>计算机体系架构:</strong></p>
+<p><code>锁竞争</code>, <code>文件系统</code>, <code>Linux内核</code></p>
+<p><strong>云计算:</strong></p>
+<p><code>Docker</code>, <code>Kubernetes</code></p>
+<p><strong>边缘计算:</strong></p>
+<p><code>KubeEdge</code>, <code>服务网格</code></p>
+<p><strong>机器学习:</strong></p>
+<p><code>神经网络</code>, <code>优化算法</code></p>
+<p><strong>可视化技术:</strong></p>
+<p><code>数据挖掘</code>, <code>预测算法</code></p>
+<h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><p><a href="https://github.com/xiaoli777/xiaoli777.github.io/blob/master/images/Xiaoli_Resume_English.pdf">https://github.com/xiaoli777/xiaoli777.github.io/blob/master/images/Xiaoli_Resume_English.pdf</a></p>
+<h2 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h2><p><a href="https://github.com/xiaoli777/xiaoli777.github.io/blob/master/images/Xiaoli_Resume_Chinese.pdf">https://github.com/xiaoli777/xiaoli777.github.io/blob/master/images/Xiaoli_Resume_Chinese.pdf</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Windows GoLang</title>
+    <url>/2021/Windows-GoLang/</url>
+    <content><![CDATA[<h3 id="1-下载安装包，根据操作系统选择GoLang版本"><a href="#1-下载安装包，根据操作系统选择GoLang版本" class="headerlink" title="1. 下载安装包，根据操作系统选择GoLang版本"></a>1. 下载安装包，根据操作系统选择GoLang版本</h3><p>下载地址：<a href="https://golang.org/dl/">https://golang.org/dl/</a></p>
+<p><img src="/images/go/go-1.png"></p>
+<h3 id="2-打开安装包，并根据提示安装GoLang"><a href="#2-打开安装包，并根据提示安装GoLang" class="headerlink" title="2. 打开安装包，并根据提示安装GoLang"></a>2. 打开安装包，并根据提示安装GoLang</h3><p>将安装路径设置为C:\Go\</p>
+<p><img src="/images/go/go-2.png"></p>
+<h3 id="3-打开cmd，查看GoLand是否安装成功"><a href="#3-打开cmd，查看GoLand是否安装成功" class="headerlink" title="3. 打开cmd，查看GoLand是否安装成功"></a>3. 打开cmd，查看GoLand是否安装成功</h3><p>win+R并输入cmd打开命令行界面，接着使用go version来查看GoLand的版本信息</p>
+<p><img src="/images/go/go-3.png"></p>
+<h3 id="4-创建mygo目录，并设置为GOPATH的系统变量"><a href="#4-创建mygo目录，并设置为GOPATH的系统变量" class="headerlink" title="4. 创建mygo目录，并设置为GOPATH的系统变量"></a>4. 创建mygo目录，并设置为GOPATH的系统变量</h3><p><img src="/images/go/go-4.png"></p>
+]]></content>
+      <categories>
+        <category>Configuration</category>
+      </categories>
+      <tags>
+        <tag>Go</tag>
+        <tag>Programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
 </search>
