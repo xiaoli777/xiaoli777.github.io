@@ -1347,7 +1347,8 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
 
 
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
+<p><a href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
 ]]></content>
       <categories>
         <category>Cloud Computing</category>
@@ -1576,7 +1577,8 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
 
 
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
+<p><a href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
 ]]></content>
       <categories>
         <category>Cloud Computing</category>
