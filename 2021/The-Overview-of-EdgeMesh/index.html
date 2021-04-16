@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-arch.jpg">
 <meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-001.jpg">
 <meta property="article:published_time" content="2021-04-17T02:31:07.000Z">
-<meta property="article:modified_time" content="2021-04-16T12:58:18.882Z">
+<meta property="article:modified_time" content="2021-04-16T13:56:29.902Z">
 <meta property="article:author" content="xiaoli7">
 <meta property="article:tag" content="KubeEdge">
 <meta property="article:tag" content="ServiceMesh">
@@ -209,7 +209,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advantage"><span class="nav-text">Advantage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functionality"><span class="nav-text">Functionality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operation-Guidance"><span class="nav-text">Operation Guidance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Deployment"><span class="nav-text">Deployment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-Case"><span class="nav-text">Test Case</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Edgemesh-Ingress-Gateway"><span class="nav-text">Edgemesh Ingress Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Deployment-1"><span class="nav-text">Deployment</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advantage"><span class="nav-text">Advantage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functionality"><span class="nav-text">Functionality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operation-Guidance"><span class="nav-text">Operation Guidance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Deployment"><span class="nav-text">Deployment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-Case"><span class="nav-text">Test Case</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Edgemesh-Ingress-Gateway"><span class="nav-text">Edgemesh Ingress Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Deployment-1"><span class="nav-text">Deployment</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -316,7 +316,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-04-16 20:31:07 / Modified: 06:58:18" itemprop="dateCreated datePublished" datetime="2021-04-16T20:31:07-06:00">2021-04-16</time>
+      <time title="Created: 2021-04-16 20:31:07 / Modified: 07:56:29" itemprop="dateCreated datePublished" datetime="2021-04-16T20:31:07-06:00">2021-04-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -386,26 +386,17 @@
 <h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/images/kube/em-arch.jpg"></p>
 <p>As shwn in figure above, the workflow of EdgeMesh is as following:</p>
 <ul>
-<li><p>Client sends a request to server by server’s domain name</p>
-</li>
-<li><p>DNS is hijacked to EdgeMesh by iptables rules, then a fake IP returned</p>
-</li>
-<li><p>The request is also hijacked to EdgeMesh by iptables rules</p>
-</li>
-<li><p>EdgeMesh resolves the request, gets domain name, protocol, request and so on</p>
-</li>
-<li><p>The load balancing of EdgeMesh: </p>
-<ul>
-<li><pre><code>Gets the service name and namespace from the domain name </code></pre>
-</li>
-<li><pre><code>Queries backend pods of the service from MetaManager </code></pre>
-</li>
-<li><pre><code>Chooses a backend based on the LB strategy </code></pre>
-</li>
+<li>Client sends a request to server by server’s domain name</li>
+<li>DNS is hijacked to EdgeMesh by iptables rules, then a fake IP returned</li>
+<li>The request is also hijacked to EdgeMesh by iptables rules</li>
+<li>EdgeMesh resolves the request, gets domain name, protocol, request and so on</li>
+<li>The load balancing of EdgeMesh: <ul>
+<li>Gets the service name and namespace from the domain name </li>
+<li>Queries backend pods of the service from MetaManager </li>
+<li>Chooses a backend based on the LB strategy </li>
 </ul>
 </li>
-<li><p>EdgeMesh transports the request to server, waits for a response from server, and then sends the response back to the client</p>
-</li>
+<li>EdgeMesh transports the request to server, waits for a response from server, and then sends the response back to the client</li>
 </ul>
 <h2 id="Functionality"><a href="#Functionality" class="headerlink" title="Functionality"></a>Functionality</h2><table>
 <thead>
@@ -432,13 +423,23 @@
 </tr>
 <tr>
 <td align="center"></td>
-<td align="center">Websocket</td>
-<td align="center"><code>✓</code></td>
+<td align="center">UDP</td>
+<td align="center"><code>+</code></td>
 </tr>
 <tr>
 <td align="center"></td>
 <td align="center">HTTPS</td>
 <td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Websocket</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">gRPC</td>
+<td align="center"><code>+</code></td>
 </tr>
 <tr>
 <td align="center">Load Balance</td>
@@ -453,7 +454,7 @@
 <tr>
 <td align="center"></td>
 <td align="center">Session Persistence</td>
-<td align="center"><code>✓</code></td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="center">External Access</td>
@@ -527,6 +528,10 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
 <p>Finally, use the IP and the port exposed by the Virtual Service to access</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
+
     </div>
 
     
@@ -574,7 +579,7 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
   <p><span>Title:  </span>The Overview of EdgeMesh</a></p>
   <p><span>Author: </span>xiaoli7</a></p>
   <p><span>Created:</span>04/16/2021 - 20:31:07</p>
-  <p><span>Undated:</span>04/16/2021 - 06:58:18</p>
+  <p><span>Undated:</span>04/16/2021 - 07:56:29</p>
   <p><span>WebLink:</span><a href="/2021/The-Overview-of-EdgeMesh/" title="The Overview of EdgeMesh">https://xiaoli777.github.io/2021/The-Overview-of-EdgeMesh/</a>
     <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/The-Overview-of-EdgeMesh/"  aria-label="Copy Successfully!"></i></span>
   </p>

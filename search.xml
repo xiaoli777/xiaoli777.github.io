@@ -1203,23 +1203,17 @@
 <h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><img src="/images/kube/em-arch.jpg"></p>
 <p>如图所示，Edgemesh的工作流如下：</p>
 <ul>
-<li><p>通过服务器域名，客户端向服务器发起请求</p>
-</li>
-<li><p>根据iptables规则，DNS被劫持到EdgeMesh，并返回一个虚假IP</p>
-</li>
-<li><p>根据iptables规则，请求也被劫持到EdgeMesh</p>
-</li>
-<li><p>EdgeMesh解析请求，获得域名，协议和请求等信息，</p>
-</li>
-<li><p>EdgeMesh的负载均衡：</p>
-<ul>
+<li>通过服务器域名，客户端向服务器发起请求</li>
+<li>根据iptables规则，DNS被劫持到EdgeMesh，并返回一个虚假IP</li>
+<li>根据iptables规则，请求也被劫持到EdgeMesh</li>
+<li>EdgeMesh解析请求，获得域名，协议和请求等信息，</li>
+<li>EdgeMesh的负载均衡：<ul>
 <li>从域名中获得服务名和命名空间</li>
 <li>在MetaManager中，查询该服务的后端Pods</li>
 <li>基于负载均衡策略，选择一个后端Pod</li>
 </ul>
 </li>
-<li><p>EdgeMesh向服务器传输请求，等待服务器的响应，并将响应返回给客户端</p>
-</li>
+<li>EdgeMesh向服务器传输请求，等待服务器的响应，并将响应返回给客户端</li>
 </ul>
 <h2 id="功能性"><a href="#功能性" class="headerlink" title="功能性"></a>功能性</h2><table>
 <thead>
@@ -1350,7 +1344,11 @@
 <p>查看edgemesh-gateway是否部署成功</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
 <p>最后，使用IP和Virtual Service暴露的端口来进行访问</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
+]]></content>
       <categories>
         <category>Cloud Computing</category>
       </categories>
@@ -1434,26 +1432,17 @@
 <h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/images/kube/em-arch.jpg"></p>
 <p>As shwn in figure above, the workflow of EdgeMesh is as following:</p>
 <ul>
-<li><p>Client sends a request to server by server’s domain name</p>
-</li>
-<li><p>DNS is hijacked to EdgeMesh by iptables rules, then a fake IP returned</p>
-</li>
-<li><p>The request is also hijacked to EdgeMesh by iptables rules</p>
-</li>
-<li><p>EdgeMesh resolves the request, gets domain name, protocol, request and so on</p>
-</li>
-<li><p>The load balancing of EdgeMesh: </p>
-<ul>
-<li><pre><code>Gets the service name and namespace from the domain name </code></pre>
-</li>
-<li><pre><code>Queries backend pods of the service from MetaManager </code></pre>
-</li>
-<li><pre><code>Chooses a backend based on the LB strategy </code></pre>
-</li>
+<li>Client sends a request to server by server’s domain name</li>
+<li>DNS is hijacked to EdgeMesh by iptables rules, then a fake IP returned</li>
+<li>The request is also hijacked to EdgeMesh by iptables rules</li>
+<li>EdgeMesh resolves the request, gets domain name, protocol, request and so on</li>
+<li>The load balancing of EdgeMesh: <ul>
+<li>Gets the service name and namespace from the domain name </li>
+<li>Queries backend pods of the service from MetaManager </li>
+<li>Chooses a backend based on the LB strategy </li>
 </ul>
 </li>
-<li><p>EdgeMesh transports the request to server, waits for a response from server, and then sends the response back to the client</p>
-</li>
+<li>EdgeMesh transports the request to server, waits for a response from server, and then sends the response back to the client</li>
 </ul>
 <h2 id="Functionality"><a href="#Functionality" class="headerlink" title="Functionality"></a>Functionality</h2><table>
 <thead>
@@ -1480,13 +1469,23 @@
 </tr>
 <tr>
 <td align="center"></td>
-<td align="center">Websocket</td>
-<td align="center"><code>✓</code></td>
+<td align="center">UDP</td>
+<td align="center"><code>+</code></td>
 </tr>
 <tr>
 <td align="center"></td>
 <td align="center">HTTPS</td>
 <td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Websocket</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">gRPC</td>
+<td align="center"><code>+</code></td>
 </tr>
 <tr>
 <td align="center">Load Balance</td>
@@ -1501,7 +1500,7 @@
 <tr>
 <td align="center"></td>
 <td align="center">Session Persistence</td>
-<td align="center"><code>✓</code></td>
+<td align="center"></td>
 </tr>
 <tr>
 <td align="center">External Access</td>
@@ -1574,7 +1573,11 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
 <p>Check if the edgemesh-gateway is successfully deployed</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
 <p>Finally, use the IP and the port exposed by the Virtual Service to access</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
+]]></content>
       <categories>
         <category>Cloud Computing</category>
       </categories>
