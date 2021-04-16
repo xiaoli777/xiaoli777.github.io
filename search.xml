@@ -285,15 +285,17 @@
     <url>/2021/GDB-Installation-on-Mac-OS/</url>
     <content><![CDATA[<h4 id="Step-1-Install-gdb"><a href="#Step-1-Install-gdb" class="headerlink" title="Step 1. Install gdb"></a>Step 1. Install gdb</h4><ol>
 <li><p>To install gdb by the following command on terminal:</p>
-<p><code>brew install gdb</code></p>
-</li>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> brew install gdb</span></span><br></pre></td></tr></table></figure></li>
 <li><p>We can confirm whether gdb is installed successfully by running:</p>
-<p><code>gdb --version</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gdb --version</span></span><br></pre></td></tr></table></figure>
 <p>On my Mac, we can see:</p>
-<img src="/images/gdbversion.png" alt="gdbversion" style="zoom:67%;" />
+<img src="/images/config/gdbversion.png" alt="gdbversion" style="zoom:67%;" />
 </li>
 <li><p>However, we will get the information as follows while try to run a program:</p>
-<p><code>Unable to find Mach task port for process-id XXXXX: (os/kern) failure (0x5).</code><br><code>(please check gdb is codesigned - see taskgated(8))</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Unable to find Mach task port for process-id XXXXX: (os/kern) failure (0x5).</span><br><span class="line">(please check gdb is codesigned - see taskgated(8))</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
 <h4 id="Step-2-Create-a-Certificate"><a href="#Step-2-Create-a-Certificate" class="headerlink" title="Step 2. Create a Certificate"></a>Step 2. Create a Certificate</h4><ol>
@@ -302,24 +304,22 @@
 <li><p>In its menu, open Keychain Access -&gt; Certificate Assistant -&gt; Create a certificate</p>
 </li>
 <li><p>While creating, we set Identity type to Self Signed Root, Certificate type to Code Signing, and check “let me override defaults”. </p>
-<img src="/images/creategdbcert.png" alt="creategdbcert" style="zoom:67%;" />
+<img src="/images/config/creategdbcert.png" alt="creategdbcert" style="zoom:67%;" />
 </li>
 <li><p>We just continue until we get a page which prompts us for “specify a location”, and select Keychain location to System. Then, create a certificate and close assistant.</p>
 <p>Noting: If we get an error as follows, we need to repeat the whole Step 2, but set Keychain location to Login in 4.</p>
-<p><code>Unknown Error = -2,147,414,007</code></p>
-</li>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Unknown Error = -2,147,414,007</span><br></pre></td></tr></table></figure></li>
 <li><p>Find the certificate we just created, and double click it. Then, modify Trust, set Code Signing to Always Trust.</p>
-<img src="/images/gdbtrust.png" alt="gdbtrust" style="zoom:67%;" />
+<img src="/images/config/gdbtrust.png" alt="gdbtrust" style="zoom:67%;" />
 </li>
 <li><p>Restart taskgated in terminal by running:</p>
-<p><code>sudo killall taskgated</code></p>
-</li>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo killall taskgated</span></span><br></pre></td></tr></table></figure></li>
 <li><p>Create a file called gdb-entitlement.xml which allows OS to trust gdb for debugging:</p>
-<p><code>vim  gdb-entitlement.xml</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim gdb-entitlement.xml</span></span><br></pre></td></tr></table></figure>
 <p>which includes:</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">plist</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//Apple//DTD PLIST 1.0//EN&quot;</span> <span class="meta-string">&quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">&quot;1.0&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.allow-jit<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.allow-unsigned-executable-memory<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.allow-dyld-environment-variables<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.disable-library-validation<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.disable-executable-page-protection<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.cs.debugger<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>com.apple.security.get-task-allow<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 <li><p>Run codesign on terminal: </p>
-<p><code>codesign --entitlements gdb-entitlement.xml -fs gdb-cert /usr/local/bin/gdb</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> codesign --entitlements gdb-entitlement.xml -fs gdb-cert /usr/<span class="built_in">local</span>/bin/gdb</span></span><br></pre></td></tr></table></figure>
 <p>And, we will ask for inputting the root password.</p>
 </li>
 <li><p>Finally, reboot!</p>
@@ -327,22 +327,19 @@
 </ol>
 <h4 id="Step-3-Runing-gdb"><a href="#Step-3-Runing-gdb" class="headerlink" title="Step 3. Runing gdb"></a>Step 3. Runing gdb</h4><ol>
 <li><p>Create HelloWorld.c using C:</p>
-<p><code>#include &lt;stdio.h&gt;</code></p>
-<p><code>int main()&#123;</code></p>
-<pre><code>`printf(&quot;Hello World!\n&quot;);`
-`return 0;`</code></pre>
-<p><code>&#125;</code></p>
-</li>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello World!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>Compile it with -g option:</p>
-<p><code>gcc HelloWorld.c -g -o HelloWorld</code></p>
-</li>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gcc HelloWorld.c -g -o HelloWorld</span></span><br></pre></td></tr></table></figure></li>
 <li><p>Run gdb to debug this program. Successfully!!!</p>
-<img src="/images/gdbdebug.png" alt="gdbdebug" style="zoom:67%;" />
+<img src="/images/config/gdbdebug.png" alt="gdbdebug" style="zoom:67%;" />
 
 <p>Noting, if we find the following information, and the debugger is stopped:</p>
-<p><code>[New Thread 0x1a03 of process 3822]</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[New Thread 0x1a03 of process 3822]</span><br></pre></td></tr></table></figure>
 <p>We need to type the following into the terminal, and restart a debugger:</p>
-<p><code>echo &quot;set startup-with-shell off&quot; &gt;&gt; ~/.gdbinit</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;set startup-with-shell off&quot; &gt;&gt; ~/.gdbinit</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
 ]]></content>
@@ -443,14 +440,14 @@
 <li>焦距越长(200mm)，视角越窄，拍进画面的景物范围也越窄，被摄体成像就会越大</li>
 <li>焦距越短(100mm)，视角越广，拍进画面的景物范围也越广，被摄体成像就会越小</li>
 </ul>
-<img src="/images/ViewFromFocus.png" alt="ViewFromFocus" style="zoom:67%;" />
+<img src="/images/photo/ViewFromFocus.png" alt="ViewFromFocus" style="zoom:67%;" />
 </li>
 <li><p><strong>焦距不同带来画面纵深感的差异(被摄体大小不变)</strong></p>
 <ul>
 <li>焦距越长(200mm)，拍进画面的范围越窄，视觉上被摄体离背景更近，纵深感更弱</li>
 <li>焦距越短(100mm)，拍进画面的范围越宽，视觉上被摄体离背景更远，纵深感更强</li>
 </ul>
-<img src="/images/LayerFromFocus.png" alt="LayerFromFocus" style="zoom:67%;" />
+<img src="/images/photo/LayerFromFocus.png" alt="LayerFromFocus" style="zoom:67%;" />
 </li>
 </ul>
 </li>
@@ -518,7 +515,7 @@
     <url>/2021/OverlayFS-A-Container-File-System/</url>
     <content><![CDATA[<h4 id="1-基本概念和特征"><a href="#1-基本概念和特征" class="headerlink" title="1. 基本概念和特征"></a>1. 基本概念和特征</h4><p>Docker容器最常用的文件系统是AUFS, 但随着Linux Kernel 3.18把Overlay纳入其中后，Overlay文件系统的地位就变得尤为重要。目前，Docker默认的存储文件系统是Overlay，相比于AUFS，其速度更快，实现也更为简单。</p>
 <p>Overlay文件系统将不同的目录(底层目录和高层目录)划分为不同的层次，并通过联合挂载过程将数个高、底层目录合并成一个统一的目录，即统一合并视图层。如下图所示，在Docker与Overlay文件系统的分层图中，只读镜像层是底层目录，读写容器层是高层目录，而容器运行实际的应用层是统一合并视图层。</p>
-<img src="/images/overlayarch.png" alt="overlayarch" style="zoom:67%;" />
+<img src="/images/fs/overlayarch.png" alt="overlayarch" style="zoom:67%;" />
 
 <p>在Overlay文件系统中，用户只能看到存在于统一合并视图层中的目录和文件，但这些目录和文件既可能来自于高层目录，也可能来自于底层目录。因此，当用户查看统一合并视图层的目录或文件时，用户会感觉到上下层同名目录合并和上下层同名文件覆盖：</p>
 <ol>
@@ -547,7 +544,7 @@
 <p><strong>场景2.</strong> 删除上下层合并目录：Overlay文件系统必须要保证被删除的目录为空，即目录和文件同时被删除的原子性，不存在部分数据删除，部分数据保留的状态；</p>
 <p><strong>场景3.</strong> 新创建与whiteout同名的文件和目录：Overlay文件系统要保证删除whiteout文件和创建新文件两个操作同时发生的原子性，不存在删除whiteout文件后新文件还未创建的状态；</p>
 <p><strong>场景4.</strong> 底层文件的写时复制：Overlay文件系统要保证文件拷贝的原子性，不存在只拷贝部分数据的状态。</p>
-<img src="/images/overlayatom.png" alt="overlayatom" style="zoom:67%;" />
+<img src="/images/fs/overlayatom.png" alt="overlayatom" style="zoom:67%;" />
 
 <p>为了保证自身文件操作的原子性，Overlay文件系统使用工作目录(workdir)和重命名操作(rename)。如上图所示，以删除同时存在于高 / 底层目录的文件为例，其原子性保证的工作原理主要分为三个步骤：</p>
 <p><strong>①创建：</strong>在工作目录中创建用于同名whiteout文件(若是写时复制过程，则将目标文件从底层目录复制到工作目录)；</p>
@@ -987,22 +984,8 @@
   <entry>
     <title>This is xiaoli7</title>
     <url>/2020/This-is-xiaoli7/</url>
-    <content><![CDATA[<h2 id="Education"><a href="#Education" class="headerlink" title="Education"></a>Education</h2><h3 id="University-of-California-Davis-2020-9-Present"><a href="#University-of-California-Davis-2020-9-Present" class="headerlink" title="University of California, Davis 2020.9 - Present"></a><strong>University of California, Davis</strong> <code>2020.9 - Present</code></h3><figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Sacramento,</span> America</span><br></pre></td></tr></table></figure>
-<ul>
-<li>M.S. in Computer Science</li>
-<li>Cumulative GPA: <strong>3.7+/4.0</strong></li>
-</ul>
-<h3 id="Huazhong-University-of-Science-and-Technology-2017-9-2020-6"><a href="#Huazhong-University-of-Science-and-Technology-2017-9-2020-6" class="headerlink" title="Huazhong University of Science and Technology 2017.9 - 2020.6"></a><strong>Huazhong University of Science and Technology</strong> <code>2017.9 - 2020.6</code></h3><figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Wuhan,</span> China</span><br></pre></td></tr></table></figure>
-<ul>
-<li>M.S. in Computer System Architecture</li>
-<li>Cumulative GPA: <strong>82.65/100.00</strong></li>
-<li>Computer Science Departmental Honors</li>
-</ul>
-<h3 id="Hunan-University-2013-9-2017-6"><a href="#Hunan-University-2013-9-2017-6" class="headerlink" title="Hunan University 2013.9 - 2017.6"></a><strong>Hunan University</strong> <code>2013.9 - 2017.6</code></h3><figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Changsha,</span> China</span><br></pre></td></tr></table></figure>
-<ul>
-<li>B.S. in Software Engineering</li>
-<li>Cumulative GPA: <strong>3.62/4.50</strong></li>
-</ul>
+    <content><![CDATA[<h2 id="English"><a href="#English" class="headerlink" title="English"></a>English</h2><p><img src="/images/Xiaoli_Resume_English.pdf"> </p>
+<h2 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h2><p><img src="/images/Xiaoli_Resume_Chinese.pdf"> </p>
 ]]></content>
   </entry>
   <entry>
