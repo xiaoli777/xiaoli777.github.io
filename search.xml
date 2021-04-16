@@ -1538,7 +1538,7 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
 <blockquote>
 <ul>
 <li>Github: <a href="https://github.com/xiaoli777">https://github.com/xiaoli777</a></li>
-<li>电子邮箱: <a href="mailto:&#120;&#105;&#x61;&#111;&#x6c;&#105;&#x79;&#97;&#110;&#x67;&#49;&#x39;&#57;&#x34;&#x40;&#x6f;&#x75;&#116;&#x6c;&#111;&#111;&#x6b;&#46;&#x63;&#111;&#109;">&#120;&#105;&#x61;&#111;&#x6c;&#105;&#x79;&#97;&#110;&#x67;&#49;&#x39;&#57;&#x34;&#x40;&#x6f;&#x75;&#116;&#x6c;&#111;&#111;&#x6b;&#46;&#x63;&#111;&#109;</a></li>
+<li>电子邮箱: <a href="mailto:&#120;&#x69;&#97;&#111;&#x6c;&#x69;&#121;&#97;&#x6e;&#x67;&#x31;&#x39;&#x39;&#52;&#64;&#x6f;&#117;&#116;&#108;&#x6f;&#111;&#107;&#x2e;&#99;&#x6f;&#x6d;">&#120;&#x69;&#97;&#111;&#x6c;&#x69;&#121;&#97;&#x6e;&#x67;&#x31;&#x39;&#x39;&#52;&#64;&#x6f;&#117;&#116;&#108;&#x6f;&#111;&#107;&#x2e;&#99;&#x6f;&#x6d;</a></li>
 <li>微信: jueqingzhan163</li>
 </ul>
 </blockquote>
@@ -1569,7 +1569,6 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
 <li>进行实验来验证该项目的可行性</li>
 <li>通过RESTful APIs来实现自动化环境创建 (LoC: 500+)</li>
 </ul>
-<p>\datedsubsection{\textbf{容器文件系统扩展性的评估与优化}}{2018年6月 - 2020年6月}<br>\role{研究人员}{华中科技大学,\ 中国}<br>\begin{itemize}<br>  \item 扩展FXMARK，来支持Overlay2的扩展性评估(LoC: 1000+)<br>  \item 分析得出两大扩展性瓶颈：文件重定向和重命名锁竞争<br>  \item 提出可记忆重定向策略，将打开容器文件的性能提升约10%<br>  \item 设计并实现免锁重命名策略，将重命名、写时复制和删除文件的性能优化100%-300%<br>\end{itemize}</p>
 <h4 id="EdgeMesh的性能测试"><a href="#EdgeMesh的性能测试" class="headerlink" title="EdgeMesh的性能测试"></a>EdgeMesh的性能测试</h4><p><code>测试人员</code>, <code>2020年11月 - 2020年12月</code>, <code>华为技术有限公司, 中国</code></p>
 <ul>
 <li>通过阅读代码和相关文献, 来学习EdgeMesh的设计和功能</li>
