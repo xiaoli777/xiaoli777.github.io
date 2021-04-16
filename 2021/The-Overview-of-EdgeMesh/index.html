@@ -30,9 +30,9 @@
 <meta property="og:description" content="This blog introduces EdgeMesh —— a Service Mesh for the new requirements in edge scenarios (e.g., limited edge resources, unstable edge cloud network, etc.).">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-arch.jpg">
-<meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-001.jpg">
+<meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-001.png">
 <meta property="article:published_time" content="2021-04-17T02:31:07.000Z">
-<meta property="article:modified_time" content="2021-04-16T13:56:29.902Z">
+<meta property="article:modified_time" content="2021-04-16T14:14:47.357Z">
 <meta property="article:author" content="xiaoli7">
 <meta property="article:tag" content="KubeEdge">
 <meta property="article:tag" content="ServiceMesh">
@@ -316,7 +316,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-04-16 20:31:07 / Modified: 07:56:29" itemprop="dateCreated datePublished" datetime="2021-04-16T20:31:07-06:00">2021-04-16</time>
+      <time title="Created: 2021-04-16 20:31:07 / Modified: 08:14:47" itemprop="dateCreated datePublished" datetime="2021-04-16T20:31:07-06:00">2021-04-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -517,7 +517,7 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
 
 
 <h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh Ingress Gateway provides a ability to access services in external edge nodes.</p>
-<p><img src="/images/kube/em-001.jpg"></p>
+<p><img src="/images/kube/em-001.png"></p>
 <h4 id="Deployment-1"><a href="#Deployment-1" class="headerlink" title="Deployment"></a>Deployment</h4><p>Create Istio’s crds</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
 <p>Configure configmap, and deploy edgemesh-gateway</p>
@@ -579,7 +579,7 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
   <p><span>Title:  </span>The Overview of EdgeMesh</a></p>
   <p><span>Author: </span>xiaoli7</a></p>
   <p><span>Created:</span>04/16/2021 - 20:31:07</p>
-  <p><span>Undated:</span>04/16/2021 - 07:56:29</p>
+  <p><span>Undated:</span>04/16/2021 - 08:14:47</p>
   <p><span>WebLink:</span><a href="/2021/The-Overview-of-EdgeMesh/" title="The Overview of EdgeMesh">https://xiaoli777.github.io/2021/The-Overview-of-EdgeMesh/</a>
     <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/The-Overview-of-EdgeMesh/"  aria-label="Copy Successfully!"></i></span>
   </p>

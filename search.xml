@@ -1334,7 +1334,7 @@
 
 
 <h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh ingress gateway 提供了外部访问集群里服务的能力。</p>
-<p><img src="/images/kube/em-001.jpg"></p>
+<p><img src="/images/kube/em-001.png"></p>
 <h3 id="部署-1"><a href="#部署-1" class="headerlink" title="部署"></a>部署</h3><p>创建istio的用户自定义资源</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
 <p>配置configmap，并使用deployment来部署edgemesh-gateway</p>
@@ -1563,7 +1563,7 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
 
 
 <h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh Ingress Gateway provides a ability to access services in external edge nodes.</p>
-<p><img src="/images/kube/em-001.jpg"></p>
+<p><img src="/images/kube/em-001.png"></p>
 <h4 id="Deployment-1"><a href="#Deployment-1" class="headerlink" title="Deployment"></a>Deployment</h4><p>Create Istio’s crds</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
 <p>Configure configmap, and deploy edgemesh-gateway</p>
