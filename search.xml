@@ -462,33 +462,26 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 05-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
 
 
-<h3 id="测试样例"><a href="#测试样例" class="headerlink" title="测试样例"></a>测试样例</h3><pre><code>**HTTP协议**
-
-在边缘节点上，部署支持http协议的容器应用和相关服务</code></pre>
+<h3 id="测试样例"><a href="#测试样例" class="headerlink" title="测试样例"></a>测试样例</h3><p><strong>HTTP协议</strong></p>
+<p>在边缘节点上，部署支持http协议的容器应用和相关服务</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f hostname.yaml</span></span><br></pre></td></tr></table></figure>
-<pre><code>到边缘节点上，使用curl去访问相关服务，打印出容器的hostname</code></pre>
+<p>到边缘节点上，使用curl去访问相关服务，打印出容器的hostname</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl hostname-lb-svc.edgemesh-test:12345</span></span><br></pre></td></tr></table></figure>
 
 
-<pre><code>**TCP协议**
-
-在边缘节点1，部署支持tcp协议的容器应用和相关服务</code></pre>
+<p><strong>TCP协议</strong><br>在边缘节点1，部署支持tcp协议的容器应用和相关服务</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
-<pre><code>在边缘节点2，使用telnet去访问相关服务</code></pre>
+<p>在边缘节点2，使用telnet去访问相关服务</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> telnet tcp-echo-service.edgemesh-test 2701</span></span><br></pre></td></tr></table></figure>
 
 
-<pre><code>**Websocket协议**
-
-在边缘节点1，部署支持websocket协议的容器应用和相关服务</code></pre>
+<p><strong>Websocket协议</strong><br>在边缘节点1，部署支持websocket协议的容器应用和相关服务</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
-<pre><code>进入websocket的容器环境，并使用client去访问相关服务</code></pre>
+<p>进入websocket的容器环境，并使用client去访问相关服务</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it 2a6ae1a490ae bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./client --addr ws-svc.edgemesh-test:12348</span></span><br></pre></td></tr></table></figure>
 
 
-<pre><code>**负载均衡**
-
-使用DestinationRule中的loadBalancer属性来选择不同的负载均衡模式</code></pre>
+<p><strong>负载均衡</strong><br>使用DestinationRule中的loadBalancer属性来选择不同的负载均衡模式</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim edgemesh-gateway-dr.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
 
 
@@ -508,6 +501,7 @@
 
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
 <p><a href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
+<p><a href="https://www.bilibili.com/video/BV18i4y1N7SV">https://www.bilibili.com/video/BV18i4y1N7SV</a></p>
 ]]></content>
       <categories>
         <category>Cloud Computing</category>
@@ -1476,33 +1470,25 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 05-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="Test-Case"><a href="#Test-Case" class="headerlink" title="Test Case"></a>Test Case</h4><pre><code>**HTTP**
-
-At the edge node, deploy a HTTP container application, and relevant service</code></pre>
+<h4 id="Test-Case"><a href="#Test-Case" class="headerlink" title="Test Case"></a>Test Case</h4><p><strong>HTTP</strong><br>At the edge node, deploy a HTTP container application, and relevant service</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f hostname.yaml</span></span><br></pre></td></tr></table></figure>
 <pre><code>Go to that edge node, use ‘curl’ to access the service, and print out the hostname of the container</code></pre>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl hostname-lb-svc.edgemesh-test:12345</span></span><br></pre></td></tr></table></figure>
 
 
-<pre><code>**TCP**
-
-At the edge node 1, deploy a TCP container application, and relevant service    </code></pre>
+<p><strong>TCP</strong><br>At the edge node 1, deploy a TCP container application, and relevant service    </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
 <pre><code>At the edge node 1, use ‘telnet’ to access the service        </code></pre>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> telnet tcp-echo-service.edgemesh-test 2701</span></span><br></pre></td></tr></table></figure>
 
 
-<pre><code>**Websocket**
-
-At the edge node, deploy a websocket container application, and relevant service    </code></pre>
+<p><strong>Websocket</strong><br>At the edge node, deploy a websocket container application, and relevant service    </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
 <pre><code>Enter the container, and use ./client to access the service</code></pre>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it 2a6ae1a490ae bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./client --addr ws-svc.edgemesh-test:12348</span></span><br></pre></td></tr></table></figure>
 
 
-<pre><code>**Load Balance**
-
-Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes    </code></pre>
+<p><strong>Load Balance</strong><br>Use the ‘loadBalancer’ in ‘DestinationRule’ to select LB modes    </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim edgemesh-gateway-dr.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
 
 
@@ -1522,6 +1508,7 @@ Use the &#39;loadBalancer&#39; in &#39;DestinationRule&#39; to select LB modes  
 
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
 <p><a href="https://docs.kubeedge.io/en/docs/advanced/edgemesh/">https://docs.kubeedge.io/en/docs/advanced/edgemesh/</a></p>
+<p><a href="https://www.bilibili.com/video/BV18i4y1N7SV">https://www.bilibili.com/video/BV18i4y1N7SV</a></p>
 ]]></content>
       <categories>
         <category>Cloud Computing</category>
