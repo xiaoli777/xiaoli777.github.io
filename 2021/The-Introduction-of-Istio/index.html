@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/DRlogo.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/DRlogo.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/DRlogo.jpeg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaoli777.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="本篇主要介绍了一款功能强大的服务网格——Istio——同时提供控制平面和数据平面组件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Introduction of Istio">
+<meta property="og:url" content="https://xiaoli777.github.io/2021/The-Introduction-of-Istio/index.html">
+<meta property="og:site_name" content="xiaoli7 IS HERE.">
+<meta property="og:description" content="本篇主要介绍了一款功能强大的服务网格——Istio——同时提供控制平面和数据平面组件。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xiaoli777.github.io/images/kube/istio-001.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/kube/istio-002.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/kube/istio-003.jpg">
+<meta property="article:published_time" content="2021-04-18T04:18:50.000Z">
+<meta property="article:modified_time" content="2021-04-17T14:58:10.286Z">
+<meta property="article:author" content="xiaoli7">
+<meta property="article:tag" content="ServiceMesh">
+<meta property="article:tag" content="Kubernetes">
+<meta property="article:tag" content="Istio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaoli777.github.io/images/kube/istio-001.png">
+
+
+<link rel="canonical" href="https://xiaoli777.github.io/2021/The-Introduction-of-Istio/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>The Introduction of Istio | xiaoli7 IS HERE.</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">xiaoli7 IS HERE.</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD"><span class="nav-text">功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xiaoli7"
+      src="/images/Me.jpeg">
+  <p class="site-author-name" itemprop="name">xiaoli7</p>
+  <div class="site-description" itemprop="description">Never too high, never too low.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiaoli777" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiaoli777" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xiaoliyang1994@outlook.com" title="E-Mail → mailto:xiaoliyang1994@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/xiaoli727" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;xiaoli727" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/jueqingzhan163" title="Wechat → jueqingzhan163"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xiaoli777.github.io/2021/The-Introduction-of-Istio/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Me.jpeg">
+      <meta itemprop="name" content="xiaoli7">
+      <meta itemprop="description" content="Never too high, never too low.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoli7 IS HERE.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          The Introduction of Istio
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-04-17 22:18:50 / Modified: 08:58:10" itemprop="dateCreated datePublished" datetime="2021-04-17T22:18:50-06:00">2021-04-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Edge-Computing/" itemprop="url" rel="index"><span itemprop="name">Edge Computing</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/The-Introduction-of-Istio/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/The-Introduction-of-Istio/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">本篇主要介绍了一款功能强大的服务网格——Istio——同时提供控制平面和数据平面组件。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Istio是一个与Kubernetes紧密结合的适用于云原生场景的Service Mesh形态的用于服务治理的开放平台。根据官方介绍，Istio的服务治理涉及连接（Connect）、安全（Secure）、策略执行（Control）和可观察性（Observe），如图所示。</p>
+<img src="/images/kube/istio-001.png" style="zoom:60%;" /> 
+
+<ul>
+<li><strong>连接：</strong>Istio 通过集中配置的流量规则控制服务间的流量和调用，实现负载均衡、熔断、故障注入、重试、重定向等服务治理功能</li>
+<li><strong>安全：</strong>Istio 提供透明的认证机制、通道加密、服务访问授权等安全能力，可增强服务访问的安全性</li>
+<li><strong>策略执行：</strong>Istio 通过可动态插拔、可扩展的策略实现访问控制、速率限制、配额管理、服务计费等能力</li>
+<li><strong>可观察性：</strong>动态获取服务运行数据和输出，提供强大的调用链、监控和调用日志收集输出的能力。配合可视化工具，可方便运维人员了解服务的运行状况，发现并解决问题</li>
+</ul>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Istio服务网格的架构，从逻辑上分为数据平面和控制平面。</p>
+<img src="/images/kube/istio-002.png" style="zoom:60%;" />
+
+<ul>
+<li><strong>数据平面：</strong>由一组智能代理（Envoy）组成。这些代理负责协调和控制微服务之间的所有网络通信。它们还收集和报告所有网络流量的遥测数据</li>
+<li><strong>控制平面：</strong>包括Pilot、Galley、Citadel等服务组件，用于管理并配置代理来精细化的流量控制</li>
+</ul>
+<p>具体而言，Istio中每个核心组件如下：</p>
+<ul>
+<li><strong>Envoy</strong>是唯一与数据平面流量交互的Istio组件，用于协调服务网格中所有服务的入站和出站流量</li>
+<li><strong>Pilot</strong>将流量控制行为的高级路由规则转换为特定的环境配置，并在运行时将它们传播到Sidercar。并且，Pilot将特定于平台的服务发现机制抽象出来，并将它们合成为任何符合Envoy API的Sidercar都可以使用的标准格式</li>
+<li><strong>Citadel</strong>通过内置的身份和证书管理，可以支持强大的服务到服务以及最终用户的身份验证</li>
+<li><strong>Galley</strong>是Istio的配置验证、提取、处理和分发组件。它负责将其余的Istio组件与从底层平台（例如Kubernetes）获取用户配置的细节隔离开来</li>
+</ul>
+<p><strong>Istio的架构决定其部署形态：</strong></p>
+<p>Istio的流量管理、遥测、治理等功能，均需要通过下发配置规则到应用所在的运行环境并执行才能生效。而负责执行这些配置规则的组件在服务网格中被称为服务代理，这些承载这些服务代理的实体称为Sidercar。应用程序发送或接收的流量都被sidecar拦截，并由sidecar进行认证、授权、策略执行及遥测数据上报等众多治理功能。</p>
+<img src="/images/kube/istio-003.jpg" style="zoom:30%;" />
+
+<p>从单个应用来看，sidecar与应用程序的解耦带来的应用完全无侵入、开发语言无关等特点解除了开发语言的约束，从而极大降低了应用开发者的开发成本。</p>
+<p><strong>Istio提供更细粒度的控制：</strong></p>
+<p>Istio的服务发现先从Kube-apiserver中获取Service和Endpoint，在将其转换成Istio服务模型的Service和ServiceInstance，但其数据面组件不再是Kube-proxy，而是部署在每个Pod里的Sidercar，即每个服务实例的Proxy。通过这种方式，Proxy和服务实例的关系更加紧密，从而提供更精细化的流量控制。</p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><table>
+<thead>
+<tr>
+<th align="center">功能</th>
+<th align="center">子功能</th>
+<th align="center">Istio 1.9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Sidercar自动注入</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">服务发现</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">流量拦截</td>
+<td align="center">HTTP流量</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">TLS流量</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">TCP流量</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">UDP流量</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">SCTP流量</td>
+<td align="center"><code>-</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">gRPC流量</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Websocket</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Websocket Secure</td>
+<td align="center"><code>-</code></td>
+</tr>
+<tr>
+<td align="center">流量治理</td>
+<td align="center">负载均衡</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">会话保持</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">动态路由规则</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">熔断限流</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">故障注入</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">灰度发布</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">访问安全</td>
+<td align="center">双向认证</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">通道加密</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">授权管理</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">可观测性</td>
+<td align="center">监控指标</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">调用链追踪</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">访问日志</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">外部访问</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+</tbody></table>
+<p>注：</p>
+<ul>
+<li><code>✓</code> Istio版本所支持的功能</li>
+<li><code>+</code> Istio版本不具备的功能，但在后续版本中会支持</li>
+<li><code>-</code> Istio版本不具备的功能，或已弃用的功能</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://istio.io/latest/zh/">https://istio.io/latest/zh/</a></p>
+<p>《云原生服务网格Istio：原理、实践、架构与源码解析》</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatforReward.jpeg" alt="xiaoli7 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipayforReward.jpeg" alt="xiaoli7 Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/ServiceMesh/" rel="tag"># ServiceMesh</a>
+              <a href="/tags/Kubernetes/" rel="tag"># Kubernetes</a>
+              <a href="/tags/Istio/" rel="tag"># Istio</a>
+          </div>
+
+        
+
+
+	<div>
+    		
+        	
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>Title:  </span>The Introduction of Istio</a></p>
+  <p><span>Author: </span>xiaoli7</a></p>
+  <p><span>Created:</span>04/17/2021 - 22:18:50</p>
+  <p><span>Undated:</span>04/17/2021 - 08:58:10</p>
+  <p><span>WebLink:</span><a href="/2021/The-Introduction-of-Istio/" title="The Introduction of Istio">https://xiaoli777.github.io/2021/The-Introduction-of-Istio/</a>
+    <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/The-Introduction-of-Istio/"  aria-label="Copy Successfully!"></i></span>
+  </p>
+  <p><span>License:</span><i class="fa fa-copyright"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">"CC BY-NC-ND 4.0"</a> Reprint please keep the original link and author. </p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy Successfully!',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+
+
+
+    		
+	</div>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/EdgeMesh%E6%A6%82%E8%BF%B0/" rel="prev" title="EdgeMesh概述">
+                  <i class="fa fa-chevron-left"></i> EdgeMesh概述
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/KubeEdge-Installation/" rel="next" title="KubeEdge Installation">
+                  KubeEdge Installation <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoli7</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://xiaoli7.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://xiaoli777.github.io/2021/The-Introduction-of-Istio/";
+    this.page.identifier = "2021/The-Introduction-of-Istio/";
+    this.page.title = "The Introduction of Istio";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xiaoli7.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -329,8 +329,8 @@
         <category>Configuration</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
         <tag>VPN</tag>
+        <tag>SSR</tag>
       </tags>
   </entry>
   <entry>
@@ -504,7 +504,7 @@
 <p><a href="https://www.bilibili.com/video/BV18i4y1N7SV">https://www.bilibili.com/video/BV18i4y1N7SV</a></p>
 ]]></content>
       <categories>
-        <category>Cloud Computing</category>
+        <category>Edge Computing</category>
       </categories>
       <tags>
         <tag>KubeEdge</tag>
@@ -578,7 +578,6 @@
         <category>Configuration</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
         <tag>C Language</tag>
         <tag>Mac</tag>
       </tags>
@@ -830,13 +829,11 @@
 <p>在上述的每个步骤中，即使系统出现异常或崩溃，磁盘也只会在工作目录中多出未被及时删除的目标文件、whiteout文件或拷贝不完全的文件；当操作系统恢复正常且再次挂载Overlay文件系统时，工作目录中的文件会被继续清除。通过这种方式，Overlay文件系统能够保证文件系统中所有基本文件操作的原子性。</p>
 ]]></content>
       <categories>
-        <category>Container</category>
+        <category>File System</category>
       </categories>
       <tags>
-        <tag>Linux</tag>
         <tag>Docker</tag>
         <tag>Overlay</tag>
-        <tag>File System</tag>
       </tags>
   </entry>
   <entry>
@@ -1302,6 +1299,7 @@
       </categories>
       <tags>
         <tag>C++</tag>
+        <tag>Programming</tag>
       </tags>
   </entry>
   <entry>
@@ -1511,7 +1509,7 @@
 <p><a href="https://www.bilibili.com/video/BV18i4y1N7SV">https://www.bilibili.com/video/BV18i4y1N7SV</a></p>
 ]]></content>
       <categories>
-        <category>Cloud Computing</category>
+        <category>Edge Computing</category>
       </categories>
       <tags>
         <tag>KubeEdge</tag>
@@ -1651,5 +1649,243 @@
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>KubeEdge Installation</title>
+    <url>/2021/KubeEdge-Installation/</url>
+    <content><![CDATA[<h2 id="机器配置"><a href="#机器配置" class="headerlink" title="机器配置"></a>机器配置</h2><table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>角色</th>
+<th>IP</th>
+<th>系统</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ecs-0004</td>
+<td>Cloud</td>
+<td>192.168.0.239</td>
+<td>CentOS 8.0 6U6G</td>
+</tr>
+<tr>
+<td>ecs-0005</td>
+<td>Edge</td>
+<td>192.168.0.211</td>
+<td>CentOS 8.0 6U6G</td>
+</tr>
+</tbody></table>
+<p><strong>注1：</strong>两台机器均已安装Docker，以及K8s工具。此外，将Cloud节点配置为K8s Master，并安装flannel网络（参考博客 <a href="https://xiaoli777.github.io/2021/Kubernetes-Installation/">Kubernetes Installation</a>）。</p>
+<p><strong>注2：</strong>由于仅有部分版本的K8s对KubeEdge支持，因此安装K8s工具时，需要选择相应的版本</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> yum install -y kubelet-1.17.0-0.x86_64 kubeadm-1.17.0-0.x86_64 kubectl-1.17.0-0.x86_64 --disableexcludes=kubernetes</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="禁用Edge节点的flannel网络"><a href="#禁用Edge节点的flannel网络" class="headerlink" title="禁用Edge节点的flannel网络"></a>禁用Edge节点的flannel网络</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl edit daemonset.apps/kube-flannel-ds -n kube-system</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-001.png"></p>
+<h2 id="下载并配置keadm"><a href="#下载并配置keadm" class="headerlink" title="下载并配置keadm"></a>下载并配置keadm</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget https://github.com/kubeedge/kubeedge/releases/download/v1.6.1/keadm-v1.6.1-linux-amd64.tar.gz</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-002.png"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tar -zxvf keadm-v1.6.1-linux-amd64.tar.gz</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-003.png"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp ./keadm-v1.6.1-linux-amd64/keadm/keadm /usr/bin/</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-004.png"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cp -i /etc/kubernetes/admin.conf <span class="variable">$HOME</span>/.kube/config</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-005.png"></p>
+<h2 id="使用keadm来安装Cloud节点"><a href="#使用keadm来安装Cloud节点" class="headerlink" title="使用keadm来安装Cloud节点"></a>使用keadm来安装Cloud节点</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> keadm init --advertise-address=<span class="string">&quot;THE-EXPOSED-IP&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-006.png"></p>
+<h2 id="将Edge节点加入到KubeEdge集群"><a href="#将Edge节点加入到KubeEdge集群" class="headerlink" title="将Edge节点加入到KubeEdge集群"></a>将Edge节点加入到KubeEdge集群</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> scp /root/.kube/config root@192.168.0.211:/root/.kube/</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-007.png"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> keadm gettoken</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-008.png"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> keadm join --cloudcore-ipport=<span class="string">&quot;THE-EXPOSED-IP&quot;</span>:<span class="string">&quot;PORT&quot;</span> --token=<span class="string">&quot;TOKEN&quot;</span></span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-009.png"></p>
+<h2 id="查看Edgecore是否开启，以及Edge节点是否加入集群"><a href="#查看Edgecore是否开启，以及Edge节点是否加入集群" class="headerlink" title="查看Edgecore是否开启，以及Edge节点是否加入集群"></a>查看Edgecore是否开启，以及Edge节点是否加入集群</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl status edgecore.service</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-010.png"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get nodes</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/kube/ke-011.png"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://kubeedge.io/zh/docs/kubeedge/">https://kubeedge.io/zh/docs/kubeedge/</a></p>
+<p><a href="https://github.com/kubeedge/kubeedge">https://github.com/kubeedge/kubeedge</a></p>
+]]></content>
+      <categories>
+        <category>Edge Computing</category>
+      </categories>
+      <tags>
+        <tag>KubeEdge</tag>
+        <tag>Containerization</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>The Introduction of Istio</title>
+    <url>/2021/The-Introduction-of-Istio/</url>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Istio是一个与Kubernetes紧密结合的适用于云原生场景的Service Mesh形态的用于服务治理的开放平台。根据官方介绍，Istio的服务治理涉及连接（Connect）、安全（Secure）、策略执行（Control）和可观察性（Observe），如图所示。</p>
+<img src="/images/kube/istio-001.png" style="zoom:60%;" /> 
+
+<ul>
+<li><strong>连接：</strong>Istio 通过集中配置的流量规则控制服务间的流量和调用，实现负载均衡、熔断、故障注入、重试、重定向等服务治理功能</li>
+<li><strong>安全：</strong>Istio 提供透明的认证机制、通道加密、服务访问授权等安全能力，可增强服务访问的安全性</li>
+<li><strong>策略执行：</strong>Istio 通过可动态插拔、可扩展的策略实现访问控制、速率限制、配额管理、服务计费等能力</li>
+<li><strong>可观察性：</strong>动态获取服务运行数据和输出，提供强大的调用链、监控和调用日志收集输出的能力。配合可视化工具，可方便运维人员了解服务的运行状况，发现并解决问题</li>
+</ul>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Istio服务网格的架构，从逻辑上分为数据平面和控制平面。</p>
+<img src="/images/kube/istio-002.png" style="zoom:60%;" />
+
+<ul>
+<li><strong>数据平面：</strong>由一组智能代理（Envoy）组成。这些代理负责协调和控制微服务之间的所有网络通信。它们还收集和报告所有网络流量的遥测数据</li>
+<li><strong>控制平面：</strong>包括Pilot、Galley、Citadel等服务组件，用于管理并配置代理来精细化的流量控制</li>
+</ul>
+<p>具体而言，Istio中每个核心组件如下：</p>
+<ul>
+<li><strong>Envoy</strong>是唯一与数据平面流量交互的Istio组件，用于协调服务网格中所有服务的入站和出站流量</li>
+<li><strong>Pilot</strong>将流量控制行为的高级路由规则转换为特定的环境配置，并在运行时将它们传播到Sidercar。并且，Pilot将特定于平台的服务发现机制抽象出来，并将它们合成为任何符合Envoy API的Sidercar都可以使用的标准格式</li>
+<li><strong>Citadel</strong>通过内置的身份和证书管理，可以支持强大的服务到服务以及最终用户的身份验证</li>
+<li><strong>Galley</strong>是Istio的配置验证、提取、处理和分发组件。它负责将其余的Istio组件与从底层平台（例如Kubernetes）获取用户配置的细节隔离开来</li>
+</ul>
+<p><strong>Istio的架构决定其部署形态：</strong></p>
+<p>Istio的流量管理、遥测、治理等功能，均需要通过下发配置规则到应用所在的运行环境并执行才能生效。而负责执行这些配置规则的组件在服务网格中被称为服务代理，这些承载这些服务代理的实体称为Sidercar。应用程序发送或接收的流量都被sidecar拦截，并由sidecar进行认证、授权、策略执行及遥测数据上报等众多治理功能。</p>
+<img src="/images/kube/istio-003.jpg" style="zoom:30%;" />
+
+<p>从单个应用来看，sidecar与应用程序的解耦带来的应用完全无侵入、开发语言无关等特点解除了开发语言的约束，从而极大降低了应用开发者的开发成本。</p>
+<p><strong>Istio提供更细粒度的控制：</strong></p>
+<p>Istio的服务发现先从Kube-apiserver中获取Service和Endpoint，在将其转换成Istio服务模型的Service和ServiceInstance，但其数据面组件不再是Kube-proxy，而是部署在每个Pod里的Sidercar，即每个服务实例的Proxy。通过这种方式，Proxy和服务实例的关系更加紧密，从而提供更精细化的流量控制。</p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><table>
+<thead>
+<tr>
+<th align="center">功能</th>
+<th align="center">子功能</th>
+<th align="center">Istio 1.9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Sidercar自动注入</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">服务发现</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">流量拦截</td>
+<td align="center">HTTP流量</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">TLS流量</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">TCP流量</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">UDP流量</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">SCTP流量</td>
+<td align="center"><code>-</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">gRPC流量</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Websocket</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Websocket Secure</td>
+<td align="center"><code>-</code></td>
+</tr>
+<tr>
+<td align="center">流量治理</td>
+<td align="center">负载均衡</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">会话保持</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">动态路由规则</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">熔断限流</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">故障注入</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">灰度发布</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">访问安全</td>
+<td align="center">双向认证</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">通道加密</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">授权管理</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">可观测性</td>
+<td align="center">监控指标</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">调用链追踪</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">访问日志</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">外部访问</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+</tbody></table>
+<p>注：</p>
+<ul>
+<li><code>✓</code> Istio版本所支持的功能</li>
+<li><code>+</code> Istio版本不具备的功能，但在后续版本中会支持</li>
+<li><code>-</code> Istio版本不具备的功能，或已弃用的功能</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://istio.io/latest/zh/">https://istio.io/latest/zh/</a></p>
+<p>《云原生服务网格Istio：原理、实践、架构与源码解析》</p>
+]]></content>
+      <categories>
+        <category>Edge Computing</category>
+      </categories>
+      <tags>
+        <tag>ServiceMesh</tag>
+        <tag>Kubernetes</tag>
+        <tag>Istio</tag>
+      </tags>
   </entry>
 </search>
