@@ -29,15 +29,15 @@
 <meta property="og:site_name" content="xiaoli7 IS HERE.">
 <meta property="og:description" content="本篇主要介绍EdgeMesh——为满足边缘场景下的新需求（如边缘资源有限，边云网络不稳定等）而诞生的服务网格。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-arch.jpg">
-<meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-001.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-principle.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-ig.png">
 <meta property="article:published_time" content="2021-04-17T02:31:45.000Z">
-<meta property="article:modified_time" content="2021-04-17T14:29:13.464Z">
+<meta property="article:modified_time" content="2021-04-20T10:47:06.296Z">
 <meta property="article:author" content="xiaoli7">
 <meta property="article:tag" content="KubeEdge">
 <meta property="article:tag" content="ServiceMesh">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xiaoli777.github.io/images/kube/em-arch.jpg">
+<meta name="twitter:image" content="https://xiaoli777.github.io/images/kube/em-principle.png">
 
 
 <link rel="canonical" href="https://xiaoli777.github.io/2021/EdgeMesh%E6%A6%82%E8%BF%B0/">
@@ -209,7 +209,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-text">优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E6%80%A7"><span class="nav-text">功能性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%8C%87%E5%AF%BC"><span class="nav-text">操作指导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2"><span class="nav-text">部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%A0%B7%E4%BE%8B"><span class="nav-text">测试样例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Edgemesh-Ingress-Gateway"><span class="nav-text">Edgemesh Ingress Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-1"><span class="nav-text">部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8A%BF"><span class="nav-text">优势</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E4%BB%B7%E5%80%BC"><span class="nav-text">用户价值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-text">架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E6%80%A7"><span class="nav-text">功能性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E6%8C%87%E5%AF%BC"><span class="nav-text">操作指导</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2"><span class="nav-text">部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%A0%B7%E4%BE%8B"><span class="nav-text">测试样例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Edgemesh-Ingress-Gateway"><span class="nav-text">Edgemesh Ingress Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-1"><span class="nav-text">部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -322,7 +322,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-17 08:29:13" itemprop="dateModified" datetime="2021-04-17T08:29:13-06:00">2021-04-17</time>
+        <time title="Modified: 2021-04-20 04:47:06" itemprop="dateModified" datetime="2021-04-20T04:47:06-06:00">2021-04-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -389,20 +389,18 @@
 </ul>
 </li>
 </ul>
-<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><img src="/images/kube/em-arch.jpg"></p>
-<p>如图所示，Edgemesh的工作流如下：</p>
-<ul>
-<li>通过服务器域名，客户端向服务器发起请求</li>
-<li>根据iptables规则，DNS被劫持到EdgeMesh，并返回一个虚假IP</li>
-<li>根据iptables规则，请求也被劫持到EdgeMesh</li>
-<li>EdgeMesh解析请求，获得域名，协议和请求等信息，</li>
-<li>EdgeMesh的负载均衡：<ul>
-<li>从域名中获得服务名和命名空间</li>
-<li>在MetaManager中，查询该服务的后端Pods</li>
-<li>基于负载均衡策略，选择一个后端Pod</li>
+<h4 id="用户价值"><a href="#用户价值" class="headerlink" title="用户价值"></a>用户价值</h4><ul>
+<li>对于资源受限的边缘设备，EdgeMesh提供了一个轻量化且具有高集成度的服务发现软件</li>
+<li>在现场边缘的场景下，相对于coredns + kube-proxy + cni 这一套服务发现机制，用户只需要简单地部署一个EdgeMesh就能完成目标</li>
 </ul>
-</li>
-<li>EdgeMesh向服务器传输请求，等待服务器的响应，并将响应返回给客户端</li>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><img src="/images/kube/em-principle.png"></p>
+<p>为了保证一些低版本内核、低版本iptables边缘设备的服务发现能力，edgemesh在实现上采用了userspace模式，除此之外还自带了一个轻量级的DNS服务器。</p>
+<ul>
+<li>EdgeMesh通过KubeEdge边缘侧list-watch的能力，监听service、endpoints等元数据的增删改，再根据service、endpoints的信息创建iptables规则</li>
+<li>EdgeMesh使用域名的方式来访问服务，因为fakeIP不会暴露给用户。fakeIP可以理解为clusterIP，每个节点的fakeIP的CIDR都是9.251.0.0/16网段（后续会统一成K8s的service网络）</li>
+<li>当client访问服务的请求到达带有EdgeMesh的节点后，它首先会进入内核的iptables</li>
+<li>EdgeMesh之前配置的iptables规则会将请求重定向，全部转发到EdgeMesh进程的40001端口里（数据包从内核态-&gt;用户态）</li>
+<li>请求进入EdgeMesh进程后，由EdgeMesh进程完成后端Pod的选择（负载均衡在这里发生），然后将请求发到这个Pod所在的主机上</li>
 </ul>
 <h2 id="功能性"><a href="#功能性" class="headerlink" title="功能性"></a>功能性</h2><table>
 <thead>
@@ -479,53 +477,53 @@
 <li><code>+</code> EdgeMesh版本不具备的功能，但在后续版本中会支持</li>
 <li><code>-</code> EdgeMesh版本不具备的功能，或已弃用的功能</li>
 </ul>
-<h2 id="操作指导"><a href="#操作指导" class="headerlink" title="操作指导"></a>操作指导</h2><h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>在边缘节点，关闭edgemesh，打开metaserver，并重启edgecore</p>
+<h2 id="操作指导"><a href="#操作指导" class="headerlink" title="操作指导"></a>操作指导</h2><h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>​    在边缘节点，关闭edgemesh，打开metaserver，并重启edgecore</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/edgecore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  edgeMesh:</span><br><span class="line">    enable: false</span><br><span class="line">  metaManager:</span><br><span class="line">    metaServer:</span><br><span class="line">      enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl restart edgecore</span></span><br></pre></td></tr></table></figure>
-<p>在云端，开启dynamic controller模块，并重启cloudcore</p>
+<p>​    在云端，开启dynamic controller模块，并重启cloudcore</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/cloudcore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  dynamicController:</span><br><span class="line">    enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
-<p>在边缘节点，查看listwatch是否开启</p>
+<p>​    在边缘节点，查看listwatch是否开启</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 127.0.0.1:10550/api/v1/services</span></span><br><span class="line">&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;items&quot;:[&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:05Z&quot;,&quot;labels&quot;:&#123;&quot;component&quot;:&quot;apiserver&quot;,&quot;provider&quot;:&quot;kubernetes&quot;&#125;,&quot;name&quot;:&quot;kubernetes&quot;,&quot;namespace&quot;:&quot;default&quot;,&quot;resourceVersion&quot;:&quot;147&quot;,&quot;selfLink&quot;:&quot;default/services/kubernetes&quot;,&quot;uid&quot;:&quot;55eeebea-08cf-4d1a-8b04-e85f8ae112a9&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.1&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;https&quot;,&quot;port&quot;:443,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:6443&#125;],&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;,&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;annotations&quot;:&#123;&quot;prometheus.io/port&quot;:&quot;9153&quot;,&quot;prometheus.io/scrape&quot;:&quot;true&quot;&#125;,&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:07Z&quot;,&quot;labels&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;,&quot;kubernetes.io/cluster-service&quot;:&quot;true&quot;,&quot;kubernetes.io/name&quot;:&quot;KubeDNS&quot;&#125;,&quot;name&quot;:&quot;kube-dns&quot;,&quot;namespace&quot;:&quot;kube-system&quot;,&quot;resourceVersion&quot;:&quot;203&quot;,&quot;selfLink&quot;:&quot;kube-system/services/kube-dns&quot;,&quot;uid&quot;:&quot;c221ac20-cbfa-406b-812a-c44b9d82d6dc&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.10&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;dns&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;UDP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;dns-tcp&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;metrics&quot;,&quot;port&quot;:9153,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:9153&#125;],&quot;selector&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;&#125;,&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;],&quot;kind&quot;:&quot;ServiceList&quot;,&quot;metadata&quot;:&#123;&quot;resourceVersion&quot;:&quot;377360&quot;,&quot;selfLink&quot;:&quot;/api/v1/services&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>部署configmap，并创建Istio的用户自定义资源</p>
+<p>​    部署configmap，并创建Istio的用户自定义资源</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span></span><br><span class="line">configmap/edgemesh-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
-<p>使用daemonset的方式来部署edgemesh</p>
+<p>​    使用daemonset的方式来部署edgemesh</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 05-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
 
 
 <h3 id="测试样例"><a href="#测试样例" class="headerlink" title="测试样例"></a>测试样例</h3><p><strong>HTTP协议</strong></p>
-<p>在边缘节点上，部署支持http协议的容器应用和相关服务</p>
+<p>​    在边缘节点上，部署支持http协议的容器应用和相关服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f hostname.yaml</span></span><br></pre></td></tr></table></figure>
-<p>到边缘节点上，使用curl去访问相关服务，打印出容器的hostname</p>
+<p>​    到边缘节点上，使用curl去访问相关服务，打印出容器的hostname</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl hostname-lb-svc.edgemesh-test:12345</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>TCP协议</strong><br>在边缘节点1，部署支持tcp协议的容器应用和相关服务</p>
+<p><strong>TCP协议</strong><br>    在边缘节点1，部署支持tcp协议的容器应用和相关服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
-<p>在边缘节点2，使用telnet去访问相关服务</p>
+<p>​    在边缘节点2，使用telnet去访问相关服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> telnet tcp-echo-service.edgemesh-test 2701</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>Websocket协议</strong><br>在边缘节点1，部署支持websocket协议的容器应用和相关服务</p>
+<p><strong>Websocket协议</strong><br>    在边缘节点1，部署支持websocket协议的容器应用和相关服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
-<p>进入websocket的容器环境，并使用client去访问相关服务</p>
+<p>​    进入websocket的容器环境，并使用client去访问相关服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it 2a6ae1a490ae bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./client --addr ws-svc.edgemesh-test:12348</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>负载均衡</strong><br>使用DestinationRule中的loadBalancer属性来选择不同的负载均衡模式</p>
+<p><strong>负载均衡</strong><br>    使用DestinationRule中的loadBalancer属性来选择不同的负载均衡模式</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim edgemesh-gateway-dr.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
 
 
 <h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh ingress gateway 提供了外部访问集群里服务的能力。</p>
-<p><img src="/images/kube/em-001.png"></p>
-<h3 id="部署-1"><a href="#部署-1" class="headerlink" title="部署"></a>部署</h3><p>创建istio的用户自定义资源</p>
+<p><img src="/images/kube/em-ig.png"></p>
+<h3 id="部署-1"><a href="#部署-1" class="headerlink" title="部署"></a>部署</h3><p>​    创建istio的用户自定义资源</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
-<p>配置configmap，并使用deployment来部署edgemesh-gateway</p>
+<p>​    配置configmap，并使用deployment来部署edgemesh-gateway</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span> </span><br><span class="line">configmap/edgemesh-gateway-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 04-deployment.yaml</span> </span><br><span class="line">deployment.apps/edgemesh-gateway created</span><br></pre></td></tr></table></figure>
-<p>创建gateway资源对象，和路由规则Virtual Service</p>
+<p>​    创建gateway资源对象，和路由规则Virtual Service</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f edgemesh-gateway-gw-vsvc.yaml</span></span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-vsvc created</span><br></pre></td></tr></table></figure>
-<p>查看edgemesh-gateway是否部署成功</p>
+<p>​    查看edgemesh-gateway是否部署成功</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
-<p>最后，使用IP和Virtual Service暴露的端口来进行访问</p>
+<p>​    最后，使用IP和Virtual Service暴露的端口来进行访问</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
 
 
@@ -580,7 +578,7 @@
   <p><span>Title:  </span>EdgeMesh概述</a></p>
   <p><span>Author: </span>xiaoli7</a></p>
   <p><span>Created:</span>04/16/2021 - 20:31:45</p>
-  <p><span>Undated:</span>04/17/2021 - 08:29:13</p>
+  <p><span>Undated:</span>04/20/2021 - 04:47:06</p>
   <p><span>WebLink:</span><a href="/2021/EdgeMesh%E6%A6%82%E8%BF%B0/" title="EdgeMesh概述">https://xiaoli777.github.io/2021/EdgeMesh%E6%A6%82%E8%BF%B0/</a>
     <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/EdgeMesh%E6%A6%82%E8%BF%B0/"  aria-label="Copy Successfully!"></i></span>
   </p>
