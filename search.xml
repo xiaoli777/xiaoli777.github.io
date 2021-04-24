@@ -1303,13 +1303,63 @@
   <entry>
     <title>The Introduction to Kube-proxy</title>
     <url>/2021/The-Introduction-to-Kube-proxy/</url>
-    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Kube-proxy是Kubernetes的核心组件，部署在每个节点上。作为服务的透明代理兼负载均衡器（在K8s中，可以将提供相同服务的一组Pod可以抽象成一个服务，通过服务提供的统一入口对外提供服务，每个服务都有一个虚拟IP地址和端口号供客户端访问），其核心功能是将到某个服务的访问请求转发到后端的多个Pod实例上。Kube-proxy可以执行简单的 TCP、UDP 和 SCTP 流转发，或者在一组后端进行循环 TCP、UDP 和 SCTP 转发。</p>
-<p>此外，服务的Cluster IP与NodePort等概念是kube-proxy服务通过iptables的NAT转换实现的，kube-proxy在运行过程中动态创建与服务相关的iptables规则，这些规则实现了将访问服务（Cluster IP或NodePort）的请求负载分发到后端Pod的功能。</p>
-<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Kube-proxy负责为Service提供集群内部的服务发现和负载均衡，在K8s的每个节点上都有一个Kube-proxy。因此，当需求访问服务的node越多，提供负载均衡能力的Kube-proxy就越多，高可用节点也会随之增多。</p>
-<p>如图所示，Kube-proxy从API Server获取所有的Server信息，并根据Server信息创建代理服务，实现从Server到Pod的请求路由和转发，从而实现K8s层级的虚拟转发网络。</p>
+    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Kube-proxy是Kubernetes的核心组件，部署在每个节点上。作为服务的透明代理兼负载均衡器（在K8s中，提供相同服务的一组Pod可以抽象成一个服务，通过统一入口对外提供服务，每个服务都有一个虚拟IP地址和端口号供客户端访问），其核心功能是将到某个服务的访问请求转发到后端的Pod实例上。</p>
+<p>Kube-proxy维护节点上的网络规则。这些网络规则允许从集群内部或外部的网络会话与Pod进行网络通信。如果操作系统提供了数据包过滤层，Kube-proxy会通过它来实现网络规则。否则，Kube-proxy仅转发流量本身。</p>
+<p>此外，服务的虚拟IP与NodePort等概念是kube-proxy通过iptables的NAT转换实现的，Kube-proxy在运行过程中动态创建与服务相关的iptables规则，这些规则实现了将访问服务请求负载分发到后端Pod的功能。</p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Kube-proxy提供集群内部的服务发现和负载均衡，在每个节点上，Kubernetes都通过DeamonSet的方式部署一个Kube-proxy。这一设计体现了Kube-proxy的伸缩性：需求访问服务的节点越多，提供负载均衡能力的Kube-proxy就越多。</p>
+<p>如图所示，Kube-proxy从API Server获取所有的服务信息，并根据服务信息创建代理服务，实现从服务到Pod的请求路由和转发，以及虚拟转发网络。</p>
 <img src="/images/kube/kube-7.png" alt="img" style="zoom:80%;" />
 
 <p>Kube-proxy使用DaemonSet进行部署：DaemonSet管理K8s集群中每个node上仅运行一份Pod的副本实例。当node加入集群时创建Pod，当node离开集群时回收Pod。如果删除DaemonSet，其创建的所有Pod也被删除，DaemonSet中的Pod将覆盖整个集群。</p>
+<h2 id="功能性"><a href="#功能性" class="headerlink" title="功能性"></a>功能性</h2><table>
+<thead>
+<tr>
+<th align="center">功能</th>
+<th align="center">子功能</th>
+<th align="center">Kube-proxy</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">服务发现</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">流量治理</td>
+<td align="center">HTTP</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">TCP</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">UDP</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">SCTP</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">负载均衡</td>
+<td align="center">随机</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">轮询</td>
+<td align="center"><code>✓</code></td>
+</tr>
+<tr>
+<td align="center">外部访问</td>
+<td align="center"></td>
+<td align="center"><code>✓</code></td>
+</tr>
+</tbody></table>
 <h2 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h2><h3 id="Userspace模式"><a href="#Userspace模式" class="headerlink" title="Userspace模式"></a>Userspace模式</h3><p>在用户空间模式下，kube-proxy进程是一个TCP/UDP代理，负责从Service到Pod的访问流量的转发。当某个Pod以Cluster IP方式访问某个Service的时候，这个流量会被Pod所在本机的iptables转发到本机的kube-proxy进程，然后由kube-proxy建立起到后端Pod的TCP/UDP链接，随后将请求转发到某个后端的Pod上，并在这个过程中实现负载均衡功能。</p>
 <img src="/images/kube/kube-8.png" alt="img" style="zoom:50%;" />
 
@@ -1882,6 +1932,110 @@
         <tag>ServiceMesh</tag>
         <tag>Kubernetes</tag>
         <tag>Istio</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Network Namespace</title>
+    <url>/2021/Network-Namespace/</url>
+    <content><![CDATA[<h4 id="Namespace的作用"><a href="#Namespace的作用" class="headerlink" title="Namespace的作用"></a>Namespace的作用</h4><p>隔离内核资源，分割全局系统资源，并装到抽象的独立空间里。Namespace包括：</p>
+<p>文件系统挂载点 (Mount)</p>
+<p>主机名 (UTS)</p>
+<p>POSIX进程间通信消息队列 (IPC)</p>
+<p>进程PID数字空间 (PID)</p>
+<p>IP地址 (network)</p>
+<p>userID数字空间 (user)</p>
+<p>Linux的namespace给里面的进程造成两个错觉：</p>
+<ol>
+<li>它是系统里唯一的进程</li>
+<li>它独享系统的所有资源</li>
+</ol>
+<p>Network namespace使得每个容器都有自己的虚拟网络设备（IP地址、路由表、端口范围、/proc/net目录等），并且容器里的进程可以放心地绑定在端口上而不必担心冲突，这就使得在一个主机上同时运行多个监听80端口的Web服务器变为可能。</p>
+<h4 id="Network-namespace管理命令"><a href="#Network-namespace管理命令" class="headerlink" title="Network namespace管理命令"></a>Network namespace管理命令</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建新的netns</span></span><br><span class="line">ip netns add netns1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入netns1，并查询其网络配置</span></span><br><span class="line">ip netns exec netns1 ip link list</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看系统中的netns</span></span><br><span class="line">ip netns list</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除netns</span></span><br><span class="line">ip netns delete netns1</span><br></pre></td></tr></table></figure>
+<p>注：删除操作并没有删除netns1，只是移除了netns1对应的挂载点。只要里面还有进程运行着，该network namespace便会一直存在。</p>
+<h4 id="Network-namespace配置命令"><a href="#Network-namespace配置命令" class="headerlink" title="Network namespace配置命令"></a>Network namespace配置命令</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入netns1，并把设备状态设置成UP</span></span><br><span class="line">ip netns exec netns1 ip link set dev lo up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入netns1,并ping本地网卡</span></span><br><span class="line">ip netns exec netns1 ping 127.0.0.1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建一对虚拟以太网卡</span></span><br><span class="line">ip link add veth0 type veth peer name veth1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将veth pair的一端放到netns1</span></span><br><span class="line">ip link set veth1 netns netns1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 为veth pair绑定ip，并设置成UP状态</span></span><br><span class="line">ip netns exec netns1 ifconfig veth1 10.1.1.1/24 up</span><br><span class="line">ifconfig veth0 10.1.1.2/24 up</span><br></pre></td></tr></table></figure>
+
+
+<p>不同network namespace之间的路由表和防火墙规则等也是隔离的。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入netns1，并查询其路由表</span></span><br><span class="line">ip netns exec netns1 route</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入netns1，并iptables规则</span></span><br><span class="line">ip netns exec netns1 iptables -L</span><br></pre></td></tr></table></figure>
+
+
+<p>用户可以随意将虚拟网络设备分配到自定义的network namespace里，而连接真实硬件的物理设备则只能放在系统的根network namespace。</p>
+<p>Network namespace里的root进程能够本network namespace的虚拟网络设备分配到其他network namespace。但通常为了保证安全性，需要结合PID namespace和Mount namespace的隔离特征做到network namespace之间的完全不可达。</p>
+<h4 id="Network-namespace-API的使用"><a href="#Network-namespace-API的使用" class="headerlink" title="Network namespace API的使用"></a>Network namespace API的使用</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"># 只要在clone()设置标志位CLONE_NEW，系统就会创建一个新的对应类型的<span class="keyword">namespace</span>及一个新的进程，并将这个进程放入到这个新创建的<span class="keyword">namespace</span>中</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">clone</span><span class="params">(<span class="keyword">int</span> (*child_func)(<span class="keyword">void</span> *), <span class="keyword">void</span> *child_stack, <span class="keyword">int</span> flags, <span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"></span><br><span class="line"># 往<span class="keyword">namespace</span>添加进程，通常与execve()结合</span><br><span class="line"><span class="meta"># nstype: 让调用者检查第一个参数fd指向的namespace是否符合要求，0表示不检查</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">setns</span><span class="params">(<span class="keyword">int</span> fd, <span class="keyword">int</span> nstype)</span></span>;</span><br><span class="line"></span><br><span class="line"># 先通过指定的flags创建相应的<span class="keyword">namespace</span>，再把这个进程挪到新创建的<span class="keyword">namespace</span>中</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">unshare</span><span class="params">(<span class="keyword">int</span> flags)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>每个Linux进程都拥有一个属于自己的/proc/PID/ns，这个目录下的每个文件都代表一个类型的namespace。</p>
+<p><img src="/images/kube/ns-001.png"></p>
+<p>如图所示，该目录下每一个文件都是一个特殊的符号链接文件。其主要用途有两点：</p>
+<ol>
+<li>确定某两个进程是否属于同一个namespace。</li>
+<li>当打开这些文件时，只要文件描述符保持open状态，对应的namespace就会一直存在，哪怕这个namespace里的所有进程都终止运行了。</li>
+</ol>
+<p>注：一旦系统管理员禁用namespace中的网络设备，即使里面的进程拿到了一些特权，也无法与外界通信。</p>
+<p>参考：</p>
+<p>《Kubernetes网络权威指南》</p>
+]]></content>
+      <categories>
+        <category>Cloud Computing</category>
+      </categories>
+      <tags>
+        <tag>Containerization</tag>
+        <tag>Kubernetes</tag>
+        <tag>Network</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Veth Pair</title>
+    <url>/2021/Veth-Pair/</url>
+    <content><![CDATA[<h4 id="Veth-pair介绍"><a href="#Veth-pair介绍" class="headerlink" title="Veth pair介绍"></a>Veth pair介绍</h4><p>Veth是虚拟以太网（Virtual Ethernet）的缩写。</p>
+<p>Veth pair一端发送的数据会在另一端接受。根据这一特性，veth pair常被用于跨network namespace之间的通信，即分别将veth pair的两端放在不同的namespace中。</p>
+<img src="/images/kube/vp-001.jpg" style="zoom:50%;" />
+
+
+
+<h4 id="Veth-pair配置命令"><a href="#Veth-pair配置命令" class="headerlink" title="Veth pair配置命令"></a>Veth pair配置命令</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建一对虚拟以太网卡</span></span><br><span class="line">ip link add veth0 type veth peer name veth1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将veth pair的一端设置为up状态</span></span><br><span class="line">ip link set dev veth0 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 为veth pair的一端绑定ip，并设置成up状态</span></span><br><span class="line">ifconfig veth0 10.1.1.2/24 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将veth pair的一端放到namespace中（重置状态）</span></span><br><span class="line">ip link set veth1 netns newns</span><br></pre></td></tr></table></figure>
+
+
+<p>查询容器与主机的veth pair</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看iflink和ifindex文件对</span></span><br><span class="line">cat /sys/class/net/eth0/iflink</span><br><span class="line">cat /sys/class/net/veth8080528/ifindex</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用ip link查询</span></span><br><span class="line">ip link show eth0</span><br><span class="line">ip link show | grep if3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过ethtool -S查询</span></span><br><span class="line">ethtool -S eth0</span><br><span class="line">ip addr</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注：第一条命令运行在容器环境，第二条运行在主机环境</span></span><br></pre></td></tr></table></figure>
+
+
+<p>Linux bridge ≈ 虚拟的网络交换机：除了跨机连接网络设备，任意的真实物理设备（如eth0）和虚拟设备（如veth pair和tap设备）都能连接到Linux bridge上。</p>
+<ul>
+<li>Linux网桥：多个端口，数据可以从如何端口进来，再通过MAC地址决定出口</li>
+<li>Linux其它网络设备：只有两端，从一端进来的数据会从另一端出去（外网 -&gt; 物理网卡 -&gt; 内核协议栈）</li>
+</ul>
+<h4 id="Linux-bridge配置命令"><a href="#Linux-bridge配置命令" class="headerlink" title="Linux bridge配置命令"></a>Linux bridge配置命令</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新建网桥</span></span><br><span class="line">ip link add name br0 type bridge</span><br><span class="line"><span class="meta">#</span><span class="bash"> or</span></span><br><span class="line">brctl addbr br0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将网桥设置为up状态</span></span><br><span class="line">ip link set br0 up</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将veth0连接到br0上</span></span><br><span class="line">ip link set dev veth0 master br0</span><br><span class="line"><span class="meta">#</span><span class="bash"> or</span></span><br><span class="line">brctl addif br0 veth0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前网桥上的网络设备</span></span><br><span class="line">bridge link</span><br><span class="line"><span class="meta">#</span><span class="bash"> or</span></span><br><span class="line">brctl show</span><br></pre></td></tr></table></figure>
+
+
+<p>Br0和veth0相连后：</p>
+<p>Br0和veth0之间为双向的通道</p>
+<p>协议栈和veth0之间变成了单通道，协议栈能发送数据给veth0，但veth0从外面收到的数据不会转发给协议栈</p>
+<p>Br0的MAC地址变成了veth0的MAC地址</p>
+<img src="/images/kube/vp-002.png" style="zoom:100%;" />
+
+
+
+<p>在veth0连接到网桥后，veth0的IP将变得没有意义（单向通道）。因此，需要将veth0的IP地址赋给Linux Bridge，之后将veth0视为一根网线。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删除veth0的IP</span></span><br><span class="line">ip addr del 1.2.3.101/24 dev veth0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 将veth0的IP配置给br0</span></span><br><span class="line">ip addr add 1.2.3.101/24 dev br0</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 将物理网卡添加到Linux bridge</span></span><br><span class="line">ip addr set dev eth0 master br0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看ip地址</span></span><br><span class="line">ip add</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看路由表</span></span><br><span class="line">route -v</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加默认网关</span></span><br><span class="line">ip route add default via 192.168.0.1</span><br></pre></td></tr></table></figure>
+
+
+<p>注：以上实验需要打开veth0网卡的混杂模式。</p>
+<p>混杂模式（Promiscuous mode）：一个网卡会把它接收的所有网络流量都交给CPU，而不是只把它向转交的部分给CPU。</p>
+<p>在非混杂模式下，网卡只会接收目的MAC地址是它自己的单播帧，以及多播帧和广播帧。</p>
+<p>在混杂模式下，网卡会接收经过它的所有帧。</p>
+<h4 id="混杂模式命令"><a href="#混杂模式命令" class="headerlink" title="混杂模式命令"></a>混杂模式命令</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 启动网卡的混杂模式</span></span><br><span class="line">ifconfig eth0 promisc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 退出网卡的混杂模式</span></span><br><span class="line">ifconfig eth0 -promisc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看网卡是否开启了混杂模式</span></span><br><span class="line">ifconfig</span><br><span class="line"><span class="meta">#</span><span class="bash"> or</span></span><br><span class="line">netstat -i</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 网络设备加入网桥后，会自动进入混杂模式，且无法退出</span></span><br><span class="line">brctl addif br0 veth0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 网络设备离开Linux bridge，会自动退出混杂模式</span></span><br><span class="line">brctl delif br0 veth0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看是否进入混杂模式</span></span><br><span class="line">dmesg | grep promiscuous</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="附代码"><a href="#附代码" class="headerlink" title="附代码"></a>附代码</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@488dacbfe771 /]# ip netns add newns</span><br><span class="line">[root@488dacbfe771 /]# ip netns exec newns ip link set dev lo up</span><br><span class="line">[root@488dacbfe771 /]# ip link add veth0 type veth peer name veth1</span><br><span class="line">[root@488dacbfe771 /]# ip link set veth1 netns newns</span><br><span class="line">[root@488dacbfe771 /]# ip netns exec newns ifconfig veth1 10.1.1.1/24 up</span><br><span class="line">[root@488dacbfe771 /]# ifconfig veth0 10.1.1.2/24 up</span><br><span class="line">[root@488dacbfe771 /]# ping -c 1 -I veth0 10.1.1.1</span><br><span class="line">PING 10.1.1.1 (10.1.1.1) from 10.1.1.2 veth0: 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.1.1.1: icmp_seq=1 ttl=64 time=0.035 ms</span><br><span class="line"></span><br><span class="line">--- 10.1.1.1 ping statistics ---</span><br><span class="line">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span><br><span class="line">rtt min/avg/max/mdev = 0.035/0.035/0.035/0.000 ms</span><br><span class="line">[root@488dacbfe771 /]# </span><br><span class="line">[root@488dacbfe771 /]# ip link add name br0 type bridge</span><br><span class="line">[root@488dacbfe771 /]# ip link set br0 up</span><br><span class="line">[root@488dacbfe771 /]# ip link set dev veth0 master br0</span><br><span class="line">[root@488dacbfe771 /]# </span><br><span class="line">[root@488dacbfe771 /]# ping -c 1 -I veth0 10.1.1.1</span><br><span class="line">PING 10.1.1.1 (10.1.1.1) from 10.1.1.2 veth0: 56(84) bytes of data.</span><br><span class="line">^C</span><br><span class="line">--- 10.1.1.1 ping statistics ---</span><br><span class="line">1 packets transmitted, 0 received, 100% packet loss, time 0ms</span><br><span class="line"></span><br><span class="line">[root@488dacbfe771 /]# ip addr del 10.1.1.2/24 dev veth0</span><br><span class="line">[root@488dacbfe771 /]# ip addr add 10.1.1.2/24 dev br0</span><br><span class="line">[root@488dacbfe771 /]# ping -c 1 -I br0 10.1.1.1</span><br><span class="line">PING 10.1.1.1 (10.1.1.1) from 10.1.1.2 br0: 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.1.1.1: icmp_seq=1 ttl=64 time=0.040 ms</span><br><span class="line"></span><br><span class="line">--- 10.1.1.1 ping statistics ---</span><br><span class="line">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span><br><span class="line">[root@488dacbfe771 /]#</span><br><span class="line">[root@488dacbfe771 /]# ip link set dev eth0 master br0</span><br><span class="line">[root@488dacbfe771 /]# ifconfig eth0 promisc</span><br><span class="line">[root@488dacbfe771 /]# ping -c 1 -I br0 1.2.3.102</span><br><span class="line">PING 1.2.3.102 (1.2.3.102) from 1.2.3.101 br0: 56(84) bytes of data.</span><br><span class="line">64 bytes from 1.2.3.102: icmp_seq=1 ttl=64 time=0.024 ms</span><br><span class="line"></span><br><span class="line">--- 1.2.3.102 ping statistics ---</span><br><span class="line">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span><br><span class="line">rtt min/avg/max/mdev = 0.024/0.024/0.024/0.000 ms</span><br><span class="line">[root@488dacbfe771 /]#</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Cloud Computing</category>
+      </categories>
+      <tags>
+        <tag>Containerization</tag>
+        <tag>Kubernetes</tag>
+        <tag>Network</tag>
       </tags>
   </entry>
 </search>
