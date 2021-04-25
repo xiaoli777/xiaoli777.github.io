@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-principle.png">
 <meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-ig.png">
 <meta property="article:published_time" content="2021-04-17T02:31:07.000Z">
-<meta property="article:modified_time" content="2021-04-25T14:24:44.673Z">
+<meta property="article:modified_time" content="2021-04-25T14:44:44.523Z">
 <meta property="article:author" content="xiaoli7">
 <meta property="article:tag" content="KubeEdge">
 <meta property="article:tag" content="ServiceMesh">
@@ -322,7 +322,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-25 08:24:44" itemprop="dateModified" datetime="2021-04-25T08:24:44-06:00">2021-04-25</time>
+        <time title="Modified: 2021-04-25 08:44:44" itemprop="dateModified" datetime="2021-04-25T08:44:44-06:00">2021-04-25</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -512,8 +512,6 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim edgemesh-gateway-dr.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
 
 
-
-
 <h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh Ingress Gateway provides a ability to access services in external edge nodes.</p>
 <p><img src="/images/kube/em-ig.png"></p>
 <h4 id="Deployment-1"><a href="#Deployment-1" class="headerlink" title="Deployment"></a>Deployment</h4><p>​    Create Istio’s crds</p>
@@ -526,8 +524,6 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
 <p>​    Finally, use the IP and the port exposed by the Virtual Service to access</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
-
-
 
 
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
@@ -581,7 +577,7 @@
   <p><span>Title:  </span>The Overview of EdgeMesh</a></p>
   <p><span>Author: </span>xiaoli7</a></p>
   <p><span>Created:</span>04/16/2021 - 20:31:07</p>
-  <p><span>Undated:</span>04/25/2021 - 08:24:44</p>
+  <p><span>Undated:</span>04/25/2021 - 08:44:44</p>
   <p><span>WebLink:</span><a href="/2021/The-Overview-of-EdgeMesh/" title="The Overview of EdgeMesh">https://xiaoli777.github.io/2021/The-Overview-of-EdgeMesh/</a>
     <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/The-Overview-of-EdgeMesh/"  aria-label="Copy Successfully!"></i></span>
   </p>
