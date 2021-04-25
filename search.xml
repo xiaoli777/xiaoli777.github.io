@@ -787,7 +787,7 @@
   <entry>
     <title>OverlayFS -- A Container File System</title>
     <url>/2021/OverlayFS-A-Container-File-System/</url>
-    <content><![CDATA[<h4 id="1-基本概念和特征"><a href="#1-基本概念和特征" class="headerlink" title="1. 基本概念和特征"></a>1. 基本概念和特征</h4><p>Docker容器最常用的文件系统是AUFS, 但随着Linux Kernel 3.18把Overlay纳入其中后，Overlay文件系统的地位就变得尤为重要。目前，Docker默认的存储文件系统是Overlay，相比于AUFS，其速度更快，实现也更为简单。</p>
+    <content><![CDATA[<h2 id="基本概念和特征"><a href="#基本概念和特征" class="headerlink" title="基本概念和特征"></a>基本概念和特征</h2><p>Docker容器最常用的文件系统是AUFS, 但随着Linux Kernel 3.18把Overlay纳入其中后，Overlay文件系统的地位就变得尤为重要。目前，Docker默认的存储文件系统是Overlay，相比于AUFS，其速度更快，实现也更为简单。</p>
 <p>Overlay文件系统将不同的目录(底层目录和高层目录)划分为不同的层次，并通过联合挂载过程将数个高、底层目录合并成一个统一的目录，即统一合并视图层。如下图所示，在Docker与Overlay文件系统的分层图中，只读镜像层是底层目录，读写容器层是高层目录，而容器运行实际的应用层是统一合并视图层。</p>
 <img src="/images/fs/overlayarch.png" alt="overlayarch" style="zoom:67%;" />
 
@@ -799,21 +799,21 @@
 </li>
 </ol>
 <p>值得注意的是，高层目录和底层目录中文件的存储和组织方式是基于宿主机文件系统，即Ext4文件系统，而不是基于Overlay文件系统。Overlay文件系统提供的功能仅是将数个目录层联合挂载到统一合并视图层，并提供相应的文件访问接口。</p>
-<h4 id="2-基本文件操作"><a href="#2-基本文件操作" class="headerlink" title="2. 基本文件操作"></a>2. 基本文件操作</h4><p>在Overlay文件系统中，用户视角只能看到统一合并视图层的内容。因此，用户相应的Overlay基本文件操作(如文件创建、删除、读取、写入等)也都起始于统一合并视图层。然而，统一合并视图层仅提供实际文件的视图，并不存储和组织实际的文件(存储在属于Ext4文件系统的高层目录和底层目录中)。因此，当统一合并视图层的基本文件操作发生时，Overlay文件系统通过自身文件系统定义的函数接口找到操作对象在高层目录和底层目录对应的实际文件，然后将控制权转移给Ext4文件系统，最后通过VFS进一步调用操作系统定义的文件操作。而这个跨层文件的转换过程被称为文件重定向(file redirection)。</p>
+<h2 id="基本文件操作"><a href="#基本文件操作" class="headerlink" title="基本文件操作"></a>基本文件操作</h2><p>在Overlay文件系统中，用户视角只能看到统一合并视图层的内容。因此，用户相应的Overlay基本文件操作(如文件创建、删除、读取、写入等)也都起始于统一合并视图层。然而，统一合并视图层仅提供实际文件的视图，并不存储和组织实际的文件(存储在属于Ext4文件系统的高层目录和底层目录中)。因此，当统一合并视图层的基本文件操作发生时，Overlay文件系统通过自身文件系统定义的函数接口找到操作对象在高层目录和底层目录对应的实际文件，然后将控制权转移给Ext4文件系统，最后通过VFS进一步调用操作系统定义的文件操作。而这个跨层文件的转换过程被称为文件重定向(file redirection)。</p>
 <p>Overlay文件系统的基本文件操作包括<strong>文件读取、文件写入、文件创建</strong>和<strong>文件删除</strong>。但是根据不同的操作类型和实际文件所在的层次，Overlay文件系统会分别采取不同的处理策略：</p>
-<h5 id="1-文件读取操作"><a href="#1-文件读取操作" class="headerlink" title="1) 文件读取操作"></a>1) 文件读取操作</h5><p><strong>场景1.</strong> 文件和目录只存在于底层目录，却不存在于高层目录：Overlay文件系统通过视图层的文件和目录的目录项，使用文件重定向找到其在底层目录中对应的实际目录项与索引节点，接着将操作的控制权转交给VFS，并由VFS进一步执行操作系统已定义好的读取操作；</p>
+<h4 id="1-文件读取操作"><a href="#1-文件读取操作" class="headerlink" title="1) 文件读取操作"></a>1) 文件读取操作</h4><p><strong>场景1.</strong> 文件和目录只存在于底层目录，却不存在于高层目录：Overlay文件系统通过视图层的文件和目录的目录项，使用文件重定向找到其在底层目录中对应的实际目录项与索引节点，接着将操作的控制权转交给VFS，并由VFS进一步执行操作系统已定义好的读取操作；</p>
 <p><strong>场景2.</strong> 文件和目录只存在于高层目录，却不存在于底层目录：与场景1的过程基本相同，唯有通过文件重定向找到在高层目录中对应的实际目录项(real_dentry)与索引节点，再将控制权转交给VFS；</p>
 <p><strong>场景3.</strong> 文件和目录同时存在于高层目录和底层目录：由于Overlay文件系统的视图层会用高层目录中的文件覆盖底层目录中的文件，所以读取过程和场景2相同。</p>
-<h5 id="2-文件写入操作"><a href="#2-文件写入操作" class="headerlink" title="2) 文件写入操作"></a>2) 文件写入操作</h5><p><strong>场景1.</strong> 文件和目录是首次写入，仅存在于底层目录，且不存在于高层目录中：Overlay文件系统通过文件重定向找到底层目录中的实际文件，再执行写时复制(Copy-on-Write, CoW)，将对象从底层目录拷贝到高层目录；然后，将复制后的目录和文件的目录项和控制权转交给VFS；接着，VFS进一步执行宿主机文件系统已定义的文件写入操作，读取拷贝的文件和目录并修改，再将修改后的结果保存在高层目录。值得注意的是，Overlay属于文件级别的文件系统：即使文件只有很小一部分的修改，也会触发写时复制；</p>
+<h4 id="2-文件写入操作"><a href="#2-文件写入操作" class="headerlink" title="2) 文件写入操作"></a>2) 文件写入操作</h4><p><strong>场景1.</strong> 文件和目录是首次写入，仅存在于底层目录，且不存在于高层目录中：Overlay文件系统通过文件重定向找到底层目录中的实际文件，再执行写时复制(Copy-on-Write, CoW)，将对象从底层目录拷贝到高层目录；然后，将复制后的目录和文件的目录项和控制权转交给VFS；接着，VFS进一步执行宿主机文件系统已定义的文件写入操作，读取拷贝的文件和目录并修改，再将修改后的结果保存在高层目录。值得注意的是，Overlay属于文件级别的文件系统：即使文件只有很小一部分的修改，也会触发写时复制；</p>
 <p><strong>场景2.</strong> 文件和目录是首次写入，但存在于高层目录：与场景1处理基本相同，但不会发生写时复制(Copy-on-Write)。Overlay文件系统仅通过文件重定向将视图层对象的目录项转换为高层目录中对应的目录项，并将其和它的控制权转交给VFS；</p>
 <p><strong>场景3.</strong> 文件和目录是非首次写入，则一定存在于高层目录：解决方案与场景2完全相同。</p>
-<h5 id="3-文件创建操作"><a href="#3-文件创建操作" class="headerlink" title="3) 文件创建操作"></a>3) 文件创建操作</h5><p><strong>场景1.</strong> 创建在底层目录和高层目录中都不存在的文件或目录：直接在高层目录中创建新的文件或目录；</p>
+<h4 id="3-文件创建操作"><a href="#3-文件创建操作" class="headerlink" title="3) 文件创建操作"></a>3) 文件创建操作</h4><p><strong>场景1.</strong> 创建在底层目录和高层目录中都不存在的文件或目录：直接在高层目录中创建新的文件或目录；</p>
 <p><strong>场景2.</strong> 创建在底层目录已经存在，且在高层目录有whiteout文件的同名文件：Overlay文件系统会删除高层目录中的whiteout文件，并用新创建的文件替换它。通过这种方式，用户就能在统一合并视图层中看到高层目录中创建的新文件；</p>
 <p><strong>场景3.</strong> 创建在底层目录已经存在，且在高层目录有whiteout文件的同名目录：由于同名目录上下层合并，所以若这时仅仅在高层目录中新建一个目录，则底层目录中对应目录中的内容也会暴露。因此，Overlay文件系统引入opaque属性，在读取上下层同名目录的目录项时，对高层目录中具有opaque属性的目录，Overlay文件系统会忽略在底层目录中同名目录下的所有目录项，以保证在用户视图中该新建目录仅是一个空目录。</p>
-<h5 id="4-文件删除操作"><a href="#4-文件删除操作" class="headerlink" title="4) 文件删除操作"></a>4) 文件删除操作</h5><p><strong>场景1.</strong> 删除的文件或目录来自高层目录，且在底层目录中没有同名对象：由于高层目录中的对象是可读可写的，因此所有的文件操作都可以直接作用在高层目录。因此，Overlay文件系统会直接删除高层目录中对应的文件或目录；</p>
+<h4 id="4-文件删除操作"><a href="#4-文件删除操作" class="headerlink" title="4) 文件删除操作"></a>4) 文件删除操作</h4><p><strong>场景1.</strong> 删除的文件或目录来自高层目录，且在底层目录中没有同名对象：由于高层目录中的对象是可读可写的，因此所有的文件操作都可以直接作用在高层目录。因此，Overlay文件系统会直接删除高层目录中对应的文件或目录；</p>
 <p><strong>创建2.</strong> 删除的文件或目录来自底层目录，且在高层目录不存在覆盖文件：由于底层对象是只读的，因此Overlay文件系统不能直接删除底层目录中的文件或目录。Overlay文件系统必须既让用户认为目标已删除，却又不执行真正的删除操作；<br>为了达到这种效果，Overlay文件系统会在高层目录中删除文件的同时，创建同名的whiteout文件，用于屏蔽底层目录中的文件或目录。因此，当用户在视图层查看文件或目录时，由于whiteout文件的存在，底层目录中对应的文件或目录对用户不可见，就像被删除一样。但实际对象依旧存在于底层目录中；</p>
 <p><strong>场景3.</strong> 删除的文件是高层目录的文件覆盖底层目录的文件，或删除的目录是上下层合并的目录：该场景的属于场景1和场景2的合并，Overlay文件系统既要删除高层目录中的文件和目录，也会在高层目录中创建同名的whiteout文件，从而保证高层目录的文件或目录被删除后而不至于底层对象被暴露出来。</p>
-<h4 id="3-原子性保证件"><a href="#3-原子性保证件" class="headerlink" title="3. 原子性保证件"></a>3. 原子性保证件</h4><p>文件系统的原子性指所有的文件操作要么全部完成，要么全部不完成，不可能停滞在中间某个环节，否则有可能会破坏文件数据或元数据的原子性。而Overlay文件系统必须要保证文件创建、文件删除和写时复制等过程的原子性：</p>
+<h2 id="原子性保证"><a href="#原子性保证" class="headerlink" title="原子性保证"></a>原子性保证</h2><p>文件系统的原子性指所有的文件操作要么全部完成，要么全部不完成，不可能停滞在中间某个环节，否则有可能会破坏文件数据或元数据的原子性。而Overlay文件系统必须要保证文件创建、文件删除和写时复制等过程的原子性：</p>
 <p><strong>场景1.</strong> 删除高层目录中的文件并创建whiteout文件：Overlay文件系统要保证高层目录中的删除目标文件和创建whiteout文件两个操作同时发生的原子性，不存在删除文件后whiteout文件还未创建的状态；</p>
 <p><strong>场景2.</strong> 删除上下层合并目录：Overlay文件系统必须要保证被删除的目录为空，即目录和文件同时被删除的原子性，不存在部分数据删除，部分数据保留的状态；</p>
 <p><strong>场景3.</strong> 新创建与whiteout同名的文件和目录：Overlay文件系统要保证删除whiteout文件和创建新文件两个操作同时发生的原子性，不存在删除whiteout文件后新文件还未创建的状态；</p>
@@ -1536,6 +1536,8 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim edgemesh-gateway-dr.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
 
 
+
+
 <h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh Ingress Gateway provides a ability to access services in external edge nodes.</p>
 <p><img src="/images/kube/em-ig.png"></p>
 <h4 id="Deployment-1"><a href="#Deployment-1" class="headerlink" title="Deployment"></a>Deployment</h4><p>​    Create Istio’s crds</p>
@@ -1548,6 +1550,8 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
 <p>​    Finally, use the IP and the port exposed by the Virtual Service to access</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
+
+
 
 
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
@@ -1978,7 +1982,6 @@
       </categories>
       <tags>
         <tag>Containerization</tag>
-        <tag>Kubernetes</tag>
         <tag>Network</tag>
       </tags>
   </entry>
@@ -2034,7 +2037,77 @@
       </categories>
       <tags>
         <tag>Containerization</tag>
-        <tag>Kubernetes</tag>
+        <tag>Network</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker Network</title>
+    <url>/2021/Docker-Network/</url>
+    <content><![CDATA[<h2 id="容器技术"><a href="#容器技术" class="headerlink" title="容器技术"></a>容器技术</h2><p>相比于传统虚拟化技术对硬件资源的虚拟，容器技术是对进程的虚拟，提供更轻量级的虚拟化，实现进程和资源的隔离，更接近裸机性能。</p>
+<p>Docker容器使用Docker Engine进行资源分配调度并调用Linux内核namespace API进行隔离，所有应用共用主机操作系统。</p>
+<h2 id="Docker-的四大网络模式"><a href="#Docker-的四大网络模式" class="headerlink" title="Docker 的四大网络模式"></a>Docker 的四大网络模式</h2><p>bridge模式：通过–network=bridge指定，使用Linux bridge和veth pair为Docker容器创建独立的网络栈，保证容器内的进程使用独立的网络环境，使容器和容器、容器和宿主机之间能实现网络隔离。</p>
+<p>host模式：通过–network=host指定，容器和宿主机共享一个network namespace（网卡，IP和端口等）</p>
+<p>container模式：通过–network=container:NAME_or_ID指定，新的容器将与一个已经存在容器共享network namespace，两个容器的进程可以通过lo网卡进行通信</p>
+<p>none模式：通过–network=none指定，不对Docker容器的network namespace进行任何网络配置</p>
+<h2 id="Docker网络配置"><a href="#Docker网络配置" class="headerlink" title="Docker网络配置"></a>Docker网络配置</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看容器IP</span></span><br><span class="line">docker inspect -f &quot;&#123;&#123; .NetworkSettings.IPAddress &#125;&#125;&quot; &lt;containerNameOrId&gt;</span><br><span class="line">docker inspect &lt;containerNameOrId&gt; | grep &#x27;&quot;IPAddress&quot;&#x27; | grep -n 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 端口映射</span></span><br><span class="line">docker run -p host_Port:container_Port -d &lt;imageName&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 实现原理为在iptable的nat表中添加规则</span></span><br><span class="line">iptables -t nat -nL</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看端口映射</span></span><br><span class="line">docker port &lt;container&gt; &lt;port number&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 访问外网</span></span><br><span class="line">sysctl net.ipv4.ip_forward=1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> DNS和主机名</span></span><br><span class="line">cat /etc/resolv.conf</span><br><span class="line">cat /etc/hosts</span><br><span class="line">cat /etc/hostname</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改dns</span></span><br><span class="line">docker run --dns=address -d &lt;imageName&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改主机名</span></span><br><span class="line">docker run -h hostname -d &lt;imageName&gt;</span><br><span class="line">docker run --hostname=hostname -d &lt;imageName&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建自定义网络</span></span><br><span class="line">docker network create -d bridge --subnet 172.25.0.0/16 netName</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看自定义网络信息</span></span><br><span class="line">ip addr</span><br><span class="line">docker inspect netID</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看主机的docker network</span></span><br><span class="line">docker network ls</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除自定义网络</span></span><br><span class="line">docker network rm netID</span><br><span class="line"><span class="meta">#</span><span class="bash"> 连接容器和网络</span></span><br><span class="line">docker network connect netName_or_Id ContainerName_or_Id</span><br><span class="line"><span class="meta">#</span><span class="bash"> 断开容器和网络的连接（NetworkMode不会改变）</span></span><br><span class="line">docker network disconnect netName_or_Id ContainerName_or_Id</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 发布服务</span></span><br><span class="line">docker network create -d bridge netName</span><br><span class="line">docker service publish svcName.netName</span><br><span class="line">docker service attach containerId svcName.netName</span><br><span class="line"><span class="meta">#</span><span class="bash"> or</span></span><br><span class="line">docker run -itd --publish-service svcName.netName.bridge imageName</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 容器互联</span></span><br><span class="line">docker run -d imageName --link=containerName_or_Id:aliasName</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Cloud Computing</category>
+      </categories>
+      <tags>
+        <tag>Containerization</tag>
+        <tag>Network</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux Tunnel -- ipip</title>
+    <url>/2021/Linux-Tunnel-ipip/</url>
+    <content><![CDATA[<h2 id="查看IP隧道相关操作"><a href="#查看IP隧道相关操作" class="headerlink" title="查看IP隧道相关操作"></a>查看IP隧道相关操作</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip tunnel <span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Linux原生L3隧道支持"><a href="#Linux原生L3隧道支持" class="headerlink" title="Linux原生L3隧道支持"></a>Linux原生L3隧道支持</h2><p>ipip: IPv4 in IPv4</p>
+<p>GRE: Generic Routing Encapsulation</p>
+<p>sit: IPv6 over IPv4</p>
+<p>ISATAP: Intra-Site Automatic Tunnel Addressing Protocol, IPv6</p>
+<p>VTI: Virtual Tunnel Interface</p>
+<h2 id="容器构建ipip隧道"><a href="#容器构建ipip隧道" class="headerlink" title="容器构建ipip隧道"></a>容器构建ipip隧道</h2><p>加载ipip模块</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ modprobe ipip</span><br><span class="line">$ lsmod | grep ipip</span><br><span class="line">ipip                   16384  0</span><br><span class="line">tunnel4                16384  1 ipip</span><br><span class="line">ip_tunnel              28672  1 ipip</span><br></pre></td></tr></table></figure>
+
+
+<p>打开Ipv4转发功能</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line">$ cat /proc/sys/net/ipv4/ip_forward</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+
+<p>启动特权CentOS容器</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker run -it --privileged=<span class="literal">true</span> centos bash</span><br></pre></td></tr></table></figure>
+
+
+<p>安装网络工具组件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum -y install net-tools</span><br></pre></td></tr></table></figure>
+
+
+<p>构建net namesapce、veth pair以及相关IP</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ip netns add ns1</span><br><span class="line">$ ip netns add ns2</span><br><span class="line">$ ip link add v1 <span class="built_in">type</span> veth peer name v1_p</span><br><span class="line">$ ip link add v2 <span class="built_in">type</span> veth peer name v2_p</span><br><span class="line"></span><br><span class="line">$ ip link <span class="built_in">set</span> v1 netns ns1</span><br><span class="line">$ ip link <span class="built_in">set</span> v2 netns ns2</span><br><span class="line"></span><br><span class="line">$ ip addr add 10.10.10.1/24 dev v1_p</span><br><span class="line">$ ip link <span class="built_in">set</span> v1_p up</span><br><span class="line">$ ip addr add 10.10.20.1/24 dev v2_p</span><br><span class="line">$ ip link <span class="built_in">set</span> v2_p up</span><br><span class="line"></span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns1 ip addr add 10.10.10.2/24 dev v1</span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns1 ip link <span class="built_in">set</span> v1 up</span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns2 ip addr add 10.10.20.2/24 dev v2</span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns2 ip link <span class="built_in">set</span> v2 up</span><br></pre></td></tr></table></figure>
+
+
+<p>这时，使用v1 ping v2还不通。查看ns1路由表，发现缺少10.10.20.0/24网段的路由。ns2的路由表同理。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ip netns <span class="built_in">exec</span> ns1 route -n</span><br><span class="line">Kernel IP routing table</span><br><span class="line">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</span><br><span class="line">10.10.10.0      0.0.0.0         255.255.255.0   U     0      0        0 v1</span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns2 route -n</span><br><span class="line">Kernel IP routing table</span><br><span class="line">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</span><br><span class="line">10.10.20.0      0.0.0.0         255.255.255.0   U     0      0        0 v2</span><br></pre></td></tr></table></figure>
+
+
+<p>配置相关路由，再使用v1 ping v2，通！</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ip netns <span class="built_in">exec</span> ns1 route add -net 10.10.20.0 netmask 255.255.255.0 gw 10.10.10.1</span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns2 route add -net 10.10.10.0 netmask 255.255.255.0 gw 10.10.20.1</span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns1 ping -c 1 -I v1 10.10.20.2</span><br><span class="line">PING 10.10.20.2 (10.10.20.2) from 10.10.10.2 v1: 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.10.20.2: icmp_seq=1 ttl=63 time=0.018 ms</span><br><span class="line"></span><br><span class="line">--- 10.10.20.2 ping statistics ---</span><br><span class="line">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span><br><span class="line">rtt min/avg/max/mdev = 0.018/0.018/0.018/0.000 ms</span><br></pre></td></tr></table></figure>
+
+
+<p>配置ipip隧道，以及隧道内外层ip</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ip netns <span class="built_in">exec</span> ns1 ip tunnel add tun1 mode ipip remote 10.10.20.2 <span class="built_in">local</span> 10.10.10.2</span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns1 ip link <span class="built_in">set</span> tun1 up</span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns1 ip addr add 10.10.100.10 peer 10.10.200.10 dev tun1</span><br><span class="line"></span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns2 ip tunnel add tun2 mode ipip remote 10.10.10.2 <span class="built_in">local</span> 10.10.20.2</span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns2 ip link <span class="built_in">set</span> tun2 up</span><br><span class="line">$ ip netns <span class="built_in">exec</span> ns2 ip addr add 10.10.200.10 peer 10.10.100.10 dev tun2</span><br></pre></td></tr></table></figure>
+
+
+<p>使用隧道进行通信</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ip netns <span class="built_in">exec</span> ns1 ping -c 1 -I tun1 10.10.200.10 </span><br><span class="line">PING 10.10.200.10 (10.10.200.10) from 10.10.100.10 tun1: 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.10.200.10: icmp_seq=1 ttl=64 time=0.040 ms</span><br><span class="line"></span><br><span class="line">--- 10.10.200.10 ping statistics ---</span><br><span class="line">1 packets transmitted, 1 received, 0% packet loss, time 0ms</span><br><span class="line">rtt min/avg/max/mdev = 0.040/0.040/0.040/0.000 ms</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Cloud Computing</category>
+      </categories>
+      <tags>
+        <tag>Containerization</tag>
         <tag>Network</tag>
       </tags>
   </entry>
