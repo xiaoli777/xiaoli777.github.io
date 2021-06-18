@@ -2322,9 +2322,9 @@
     <content><![CDATA[<h2 id="Location-Addressing-VS-Content-Addressing"><a href="#Location-Addressing-VS-Content-Addressing" class="headerlink" title="Location Addressing VS Content Addressing"></a>Location Addressing VS Content Addressing</h2><p><strong>Location addressing</strong> points us to the location where data is stored by a specific entity. </p>
 <p>Two Drawbacks of Location Addressing: </p>
 <ol>
-<li><p>Trustiness: it is difficult to verify what content resides at a particular URL and is dependent on central authorities</p>
+<li><p><strong>Trustiness</strong>: it is difficult to verify what content resides at a particular URL and is dependent on central authorities</p>
 </li>
-<li><p>Efficiency: same content on different domains or with different filenames leads to a lot of redundancy</p>
+<li><p><strong>Efficiency</strong>: same content on different domains or with different filenames leads to a lot of redundancy</p>
 </li>
 </ol>
 <p><strong>Content addressing</strong> provides a unique, content-derived identifier for the data, which we can use to retrieve the data from a variety of sources:</p>
