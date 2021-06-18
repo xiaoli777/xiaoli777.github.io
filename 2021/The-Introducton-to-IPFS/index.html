@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/DRlogo.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/DRlogo.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/DRlogo.jpeg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaoli777.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="The InterPlanetary File System (IPFS) is a peer-to-peer network protocol for storing and sharing data in a distributed file system, with addresses based on content, not location. In this section, we w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Introducton to IPFS">
+<meta property="og:url" content="https://xiaoli777.github.io/2021/The-Introducton-to-IPFS/index.html">
+<meta property="og:site_name" content="xiaoli7 IS HERE.">
+<meta property="og:description" content="The InterPlanetary File System (IPFS) is a peer-to-peer network protocol for storing and sharing data in a distributed file system, with addresses based on content, not location. In this section, we w">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-001.jpg">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-002.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-003.svg">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-004.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-005.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-006.png">
+<meta property="article:published_time" content="2021-06-18T15:34:42.000Z">
+<meta property="article:modified_time" content="2021-06-18T02:13:59.470Z">
+<meta property="article:author" content="xiaoli7">
+<meta property="article:tag" content="IPFS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaoli777.github.io/images/fs/ifps-001.jpg">
+
+
+<link rel="canonical" href="https://xiaoli777.github.io/2021/The-Introducton-to-IPFS/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>The Introducton to IPFS | xiaoli7 IS HERE.</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">xiaoli7 IS HERE.</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Location-Addressing-VS-Content-Addressing"><span class="nav-text">Location Addressing VS Content Addressing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Content-Identifiers-CIDs"><span class="nav-text">Content Identifiers (CIDs)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Merkle-DAGs-Directed-Acyclic-Graphs"><span class="nav-text">Merkle DAGs (Directed Acyclic Graphs)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed-hash-table-DHT"><span class="nav-text">Distributed hash table (DHT)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Libp2p"><span class="nav-text">Libp2p</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filecoin"><span class="nav-text">Filecoin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xiaoli7"
+      src="/images/Me.jpeg">
+  <p class="site-author-name" itemprop="name">xiaoli7</p>
+  <div class="site-description" itemprop="description">Never too high, never too low.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiaoli777" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiaoli777" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xiaoliyang1994@outlook.com" title="E-Mail → mailto:xiaoliyang1994@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/xiaoli727" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;xiaoli727" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/jueqingzhan163" title="Wechat → jueqingzhan163"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xiaoli777.github.io/2021/The-Introducton-to-IPFS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Me.jpeg">
+      <meta itemprop="name" content="xiaoli7">
+      <meta itemprop="description" content="Never too high, never too low.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoli7 IS HERE.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          The Introducton to IPFS
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-18 09:34:42" itemprop="dateCreated datePublished" datetime="2021-06-18T09:34:42-06:00">2021-06-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-06-17 20:13:59" itemprop="dateModified" datetime="2021-06-17T20:13:59-06:00">2021-06-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/File-System/" itemprop="url" rel="index"><span itemprop="name">File System</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/The-Introducton-to-IPFS/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/The-Introducton-to-IPFS/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">The InterPlanetary File System (IPFS) is a peer-to-peer network protocol for storing and sharing data in a distributed file system, with addresses based on content, not location. In this section, we will introduce the key concepts in IPFS, such as Content Addressing, CIDs, Merkle DAGs, DHT, Libp2p, and Filecoin, ect.</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Location-Addressing-VS-Content-Addressing"><a href="#Location-Addressing-VS-Content-Addressing" class="headerlink" title="Location Addressing VS Content Addressing"></a>Location Addressing VS Content Addressing</h2><p><strong>Location addressing</strong> points us to the location where data is stored by a specific entity. </p>
+<p>Two Drawbacks of Location Addressing: </p>
+<ol>
+<li><p>Trustiness: it is difficult to verify what content resides at a particular URL and is dependent on central authorities</p>
+</li>
+<li><p>Efficiency: same content on different domains or with different filenames leads to a lot of redundancy</p>
+</li>
+</ol>
+<p><strong>Content addressing</strong> provides a unique, content-derived identifier for the data, which we can use to retrieve the data from a variety of sources:</p>
+<ol>
+<li><p>Content addressing with <strong><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">Cryptographic hashing</a></strong> liberates us from reliance on central authorities: Cryptographic algorithm will generate a completely different hash ,even if the change is small (e.g., a single pixel in an image)</p>
+</li>
+<li><p>Cryptographic hashes can be derived from the content of the data itself, meaning that anyone using the same algorithm on the same data will arrive at the same hash</p>
+</li>
+</ol>
+<h2 id="Content-Identifiers-CIDs"><a href="#Content-Identifiers-CIDs" class="headerlink" title="Content Identifiers (CIDs)"></a>Content Identifiers (CIDs)</h2><p>A content identifier, or <strong><a target="_blank" rel="noopener" href="https://docs.ipfs.io/concepts/content-addressing/">CID (Content Identifier)</a></strong>, is a self-describing content-addressed identifier. It doesn’t indicate <em>where</em> content is stored, but it forms a kind of address based on the content itself.</p>
+<p>A <a target="_blank" rel="noopener" href="https://multiformats.io/multihash/"><strong>multihash</strong></a> is a self-describing hash which itself contains metadata that describes both its length and what cryptographic algorithm generated it.</p>
+<img src="/images/fs/ifps-001.jpg" style="zoom:50%;" />
+
+<ul>
+<li>algo: identifier of the <strong>cryptographic algorithm</strong> used to generate the hash</li>
+<li>length: the actual <strong>length</strong> of the hash</li>
+<li>value: the actual <strong>hash value</strong></li>
+</ul>
+<p>After adding an encoding method (dag-pb) and a version prefix (Version 1), the final CID will become like this:</p>
+<p><code>&lt;cid-version&gt;</code> <code>&lt;multicodec&gt;</code> <code>&lt;multihash-algorithm&gt;</code> <code>&lt;multihash-length&gt;</code> <code>&lt;multihash-hash&gt;</code></p>
+<img src="/images/fs/ifps-002.png" style="zoom:30%;" />
+
+
+
+<h2 id="Merkle-DAGs-Directed-Acyclic-Graphs"><a href="#Merkle-DAGs-Directed-Acyclic-Graphs" class="headerlink" title="Merkle DAGs (Directed Acyclic Graphs)"></a>Merkle DAGs (Directed Acyclic Graphs)</h2><p>IPFS uses CIDs to identify a node uniquely, and uses Merkle DAGs to express an edge from one node to another.</p>
+<img src="/images/fs/ifps-003.svg" style="zoom:80%;" />
+
+<p>In a Merkle DAG, each node’s CID depends on every single one of its descendents; should any of those be different, their own labels would also be different. If, for example, the picture of a tabby cat were photoshopped in some way, then its respective node in the graph would receive a different CID. This means that we <em>always</em> have to build a DAG from the bottom up: parent nodes cannot be created until CIDs of their children can be determined.</p>
+<p>In a Merkle DAG, the CID of each node depends on the CIDs of each of its children. As a result, the CID of a root node uniquely identifies not just that node, but the <strong>entire DAG</strong> of which it’s the root!</p>
+<p>There are 3 features of Merkle DAGs using in IPFS:</p>
+<p><strong>Verifiability</strong>: an individual who retrieves data also verifies its CID</p>
+<p><strong>Distributability</strong>: 1) anybody who has a DAG is capable of acting as a provider for that DAG; 2) we can retrieve both the data and its children in parallel on a DAG</p>
+<p><strong>Deduplication</strong>: Merkle DAGs efficiently store data by encoding redundant sections as links</p>
+<h2 id="Distributed-hash-table-DHT"><a href="#Distributed-hash-table-DHT" class="headerlink" title="Distributed hash table (DHT)"></a>Distributed hash table (DHT)</h2><p>To find which peers are hosting the content you want, IPFS uses a <strong>distributed hash table</strong>, or <strong>DHT</strong>. IPFS uses <a target="_blank" rel="noopener" href="https://libp2p.io/">libp2p</a> to provide the DHT, and to handle peers connecting and talking to each other.</p>
+<p>Once you know where your content is located, you use the DHT again to find the current location of those peers (<em>routing</em>). So, in order to get to content, you use libp2p to query the DHT twice.</p>
+<p>After discovering the content you want and its location(s), you need to connect to that content and get it (<em>exchange</em>). To request blocks from and send blocks to other peers, IPFS currently uses a module called <strong>Bitswap</strong>. Bitswap allows you to connect to the peer or peers that have the content you want, send them your <em>wantlist</em> (a list of all the blocks you’re interested in), and have them send you the blocks you requested. Once those blocks arrive, you can verify them by thier CIDs.</p>
+<h2 id="Libp2p"><a href="#Libp2p" class="headerlink" title="Libp2p"></a>Libp2p</h2><p>Libp2p is the networking stack of IPFS. The aim of libp2p is to solve the discoverability in p2p connection. However, libp2p is extracted away from IPFS, and each project focuses on its own objectives:</p>
+<ul>
+<li>IPFS is more focused on <strong><em>content addressing</em></strong>, i.e., finding, fetching and authenticating any piece of content in the web</li>
+<li>libp2p is more focused on <strong><em>process addressing</em></strong>, i.e., finding, connecting and authenticating any data transfer processes in the network</li>
+</ul>
+<p>Libp2p implements this process addressing by <strong>Modularity</strong>, that is, a user can choose the specific pieces (e.g., Transport, NAT Traversal, Peer routing, etc) they need and compose their own configuration, tailored for their use cases. </p>
+<p>Take the <strong>OSI Model (Open System Interconnection Model)</strong> as an example.</p>
+<img src="/images/fs/ifps-004.png" style="zoom:20%;" />
+
+<p>As we can see, the actual implementations in the current web do not follow the OSI Models exactly, and are much less tidy, e.g. the TCP/IP Protocol Suite shown above.</p>
+<p>Instead, libp2p breaks the OSI Model apart and allows applications to mix and match freely without being restricted to rigid conceptual models.</p>
+<img src="/images/fs/ifps-005.png" style="zoom:50%;" />
+
+<p>Let’s take a look at what a <strong>NodeJs</strong> libp2p configuration (Shown as left figure above):</p>
+<ul>
+<li>the first part imports all the necessary libp2p modules that make up this network stack</li>
+<li>the second part is the libp2p node configuration where we add the different modules for each part of the network</li>
+</ul>
+<p>However, for this code to run in the <strong>browser</strong>, which <strong>doesn’t support TCP transports</strong>, we only need to change the t<strong>ransport protocols</strong> and <strong>peerDiscovery protocols</strong> in our libp2p configuration</p>
+<h2 id="Filecoin"><a href="#Filecoin" class="headerlink" title="Filecoin"></a>Filecoin</h2><p>Filecoin adds an incentive layer to promote long term, verifiable storage on the decentralized web. Thanks to Filecoin’s blockchain, all participants in the network work together to verify each deal. These consensus mechanisms are how users in a distributed network come to agreement without the need for a central authority.</p>
+<p>In the case of Filecoin, the <strong>storage miner</strong> is responsible for proving that they’re storing the correct data over time, and <strong>verifier</strong> duties are shared by all participants in the network.</p>
+<p>Before a system file (e.g. <code>puppy.gif</code>) can be stored on the Filecoin network, it must first be transformed into a Filecoin Piece:</p>
+<ul>
+<li>in the first stage of this transformation, the system file is chunked up with UnixFS to create an IPLD DAG (Directed Acyclic Graph)</li>
+<li>the IPLD DAG is serialized to a <a target="_blank" rel="noopener" href="https://github.com/ipld/specs/blob/master/block-layer/content-addressable-archives.md#summary">CAR file</a> and bit padded to make a Filecoin Piece</li>
+</ul>
+<img src="/images/fs/ifps-006.png" style="zoom:45%;" />
+
+<p>In the negotiation process for storage, a piece CID is wrapped with other deal parameters to create a Deal Proposal. The client sends this deal proposal to a miner, who agrees to store their data. Once the miner has confirmed, the client transfers their data to the miner. Once the miner has the data and verifies that it matches the piece CID noted in the deal proposal, they publish the deal proposal on Filecoin’s blockchain, committing both parties to the deal.</p>
+<p><strong>Proof of Replication (PoRep)</strong>: a storage miner proves that they are storing a physically unique copy, or <em>replica</em>, of the data. Proof of Replication happens just once, at the time the data is first stored by the miner</p>
+<p><strong>Proof of Spacetime (PoSt)</strong>: Proof of Spacetime (PoSt) will run repeatedly to prove that they are continuing to dedicate storage space to that same data over time</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>ProtoSchool: <a target="_blank" rel="noopener" href="https://proto.school/">https://proto.school/</a></p>
+<p>IPFS Docs: <a target="_blank" rel="noopener" href="https://docs.ipfs.io/">https://docs.ipfs.io/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatforReward.jpeg" alt="xiaoli7 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipayforReward.jpeg" alt="xiaoli7 Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/IPFS/" rel="tag"># IPFS</a>
+          </div>
+
+        
+
+
+	<div>
+    		
+        	
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>Title:  </span>The Introducton to IPFS</a></p>
+  <p><span>Author: </span>xiaoli7</a></p>
+  <p><span>Created:</span>06/18/2021 - 09:34:42</p>
+  <p><span>Undated:</span>06/17/2021 - 20:13:59</p>
+  <p><span>WebLink:</span><a href="/2021/The-Introducton-to-IPFS/" title="The Introducton to IPFS">https://xiaoli777.github.io/2021/The-Introducton-to-IPFS/</a>
+    <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/The-Introducton-to-IPFS/"  aria-label="Copy Successfully!"></i></span>
+  </p>
+  <p><span>License:</span><i class="fa fa-copyright"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">"CC BY-NC-ND 4.0"</a> Reprint please keep the original link and author. </p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy Successfully!',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+
+
+
+    		
+	</div>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/Docker-Network/" rel="prev" title="Docker Network">
+                  <i class="fa fa-chevron-left"></i> Docker Network
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/%E6%98%9F%E4%BA%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/" rel="next" title="星云文件系统简介">
+                  星云文件系统简介 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoli7</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://xiaoli7.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://xiaoli777.github.io/2021/The-Introducton-to-IPFS/";
+    this.page.identifier = "2021/The-Introducton-to-IPFS/";
+    this.page.title = "The Introducton to IPFS";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xiaoli7.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

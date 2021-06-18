@@ -2316,4 +2316,90 @@
         <tag>IPFS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>The Introducton to IPFS</title>
+    <url>/2021/The-Introducton-to-IPFS/</url>
+    <content><![CDATA[<h2 id="Location-Addressing-VS-Content-Addressing"><a href="#Location-Addressing-VS-Content-Addressing" class="headerlink" title="Location Addressing VS Content Addressing"></a>Location Addressing VS Content Addressing</h2><p><strong>Location addressing</strong> points us to the location where data is stored by a specific entity. </p>
+<p>Two Drawbacks of Location Addressing: </p>
+<ol>
+<li><p>Trustiness: it is difficult to verify what content resides at a particular URL and is dependent on central authorities</p>
+</li>
+<li><p>Efficiency: same content on different domains or with different filenames leads to a lot of redundancy</p>
+</li>
+</ol>
+<p><strong>Content addressing</strong> provides a unique, content-derived identifier for the data, which we can use to retrieve the data from a variety of sources:</p>
+<ol>
+<li><p>Content addressing with <strong><a href="https://en.wikipedia.org/wiki/Cryptographic_hash_function">Cryptographic hashing</a></strong> liberates us from reliance on central authorities: Cryptographic algorithm will generate a completely different hash ,even if the change is small (e.g., a single pixel in an image)</p>
+</li>
+<li><p>Cryptographic hashes can be derived from the content of the data itself, meaning that anyone using the same algorithm on the same data will arrive at the same hash</p>
+</li>
+</ol>
+<h2 id="Content-Identifiers-CIDs"><a href="#Content-Identifiers-CIDs" class="headerlink" title="Content Identifiers (CIDs)"></a>Content Identifiers (CIDs)</h2><p>A content identifier, or <strong><a href="https://docs.ipfs.io/concepts/content-addressing/">CID (Content Identifier)</a></strong>, is a self-describing content-addressed identifier. It doesn’t indicate <em>where</em> content is stored, but it forms a kind of address based on the content itself.</p>
+<p>A <a href="https://multiformats.io/multihash/"><strong>multihash</strong></a> is a self-describing hash which itself contains metadata that describes both its length and what cryptographic algorithm generated it.</p>
+<img src="/images/fs/ifps-001.jpg" style="zoom:50%;" />
+
+<ul>
+<li>algo: identifier of the <strong>cryptographic algorithm</strong> used to generate the hash</li>
+<li>length: the actual <strong>length</strong> of the hash</li>
+<li>value: the actual <strong>hash value</strong></li>
+</ul>
+<p>After adding an encoding method (dag-pb) and a version prefix (Version 1), the final CID will become like this:</p>
+<p><code>&lt;cid-version&gt;</code> <code>&lt;multicodec&gt;</code> <code>&lt;multihash-algorithm&gt;</code> <code>&lt;multihash-length&gt;</code> <code>&lt;multihash-hash&gt;</code></p>
+<img src="/images/fs/ifps-002.png" style="zoom:30%;" />
+
+
+
+<h2 id="Merkle-DAGs-Directed-Acyclic-Graphs"><a href="#Merkle-DAGs-Directed-Acyclic-Graphs" class="headerlink" title="Merkle DAGs (Directed Acyclic Graphs)"></a>Merkle DAGs (Directed Acyclic Graphs)</h2><p>IPFS uses CIDs to identify a node uniquely, and uses Merkle DAGs to express an edge from one node to another.</p>
+<img src="/images/fs/ifps-003.svg" style="zoom:80%;" />
+
+<p>In a Merkle DAG, each node’s CID depends on every single one of its descendents; should any of those be different, their own labels would also be different. If, for example, the picture of a tabby cat were photoshopped in some way, then its respective node in the graph would receive a different CID. This means that we <em>always</em> have to build a DAG from the bottom up: parent nodes cannot be created until CIDs of their children can be determined.</p>
+<p>In a Merkle DAG, the CID of each node depends on the CIDs of each of its children. As a result, the CID of a root node uniquely identifies not just that node, but the <strong>entire DAG</strong> of which it’s the root!</p>
+<p>There are 3 features of Merkle DAGs using in IPFS:</p>
+<p><strong>Verifiability</strong>: an individual who retrieves data also verifies its CID</p>
+<p><strong>Distributability</strong>: 1) anybody who has a DAG is capable of acting as a provider for that DAG; 2) we can retrieve both the data and its children in parallel on a DAG</p>
+<p><strong>Deduplication</strong>: Merkle DAGs efficiently store data by encoding redundant sections as links</p>
+<h2 id="Distributed-hash-table-DHT"><a href="#Distributed-hash-table-DHT" class="headerlink" title="Distributed hash table (DHT)"></a>Distributed hash table (DHT)</h2><p>To find which peers are hosting the content you want, IPFS uses a <strong>distributed hash table</strong>, or <strong>DHT</strong>. IPFS uses <a href="https://libp2p.io/">libp2p</a> to provide the DHT, and to handle peers connecting and talking to each other.</p>
+<p>Once you know where your content is located, you use the DHT again to find the current location of those peers (<em>routing</em>). So, in order to get to content, you use libp2p to query the DHT twice.</p>
+<p>After discovering the content you want and its location(s), you need to connect to that content and get it (<em>exchange</em>). To request blocks from and send blocks to other peers, IPFS currently uses a module called <strong>Bitswap</strong>. Bitswap allows you to connect to the peer or peers that have the content you want, send them your <em>wantlist</em> (a list of all the blocks you’re interested in), and have them send you the blocks you requested. Once those blocks arrive, you can verify them by thier CIDs.</p>
+<h2 id="Libp2p"><a href="#Libp2p" class="headerlink" title="Libp2p"></a>Libp2p</h2><p>Libp2p is the networking stack of IPFS. The aim of libp2p is to solve the discoverability in p2p connection. However, libp2p is extracted away from IPFS, and each project focuses on its own objectives:</p>
+<ul>
+<li>IPFS is more focused on <strong><em>content addressing</em></strong>, i.e., finding, fetching and authenticating any piece of content in the web</li>
+<li>libp2p is more focused on <strong><em>process addressing</em></strong>, i.e., finding, connecting and authenticating any data transfer processes in the network</li>
+</ul>
+<p>Libp2p implements this process addressing by <strong>Modularity</strong>, that is, a user can choose the specific pieces (e.g., Transport, NAT Traversal, Peer routing, etc) they need and compose their own configuration, tailored for their use cases. </p>
+<p>Take the <strong>OSI Model (Open System Interconnection Model)</strong> as an example.</p>
+<img src="/images/fs/ifps-004.png" style="zoom:20%;" />
+
+<p>As we can see, the actual implementations in the current web do not follow the OSI Models exactly, and are much less tidy, e.g. the TCP/IP Protocol Suite shown above.</p>
+<p>Instead, libp2p breaks the OSI Model apart and allows applications to mix and match freely without being restricted to rigid conceptual models.</p>
+<img src="/images/fs/ifps-005.png" style="zoom:50%;" />
+
+<p>Let’s take a look at what a <strong>NodeJs</strong> libp2p configuration (Shown as left figure above):</p>
+<ul>
+<li>the first part imports all the necessary libp2p modules that make up this network stack</li>
+<li>the second part is the libp2p node configuration where we add the different modules for each part of the network</li>
+</ul>
+<p>However, for this code to run in the <strong>browser</strong>, which <strong>doesn’t support TCP transports</strong>, we only need to change the t<strong>ransport protocols</strong> and <strong>peerDiscovery protocols</strong> in our libp2p configuration</p>
+<h2 id="Filecoin"><a href="#Filecoin" class="headerlink" title="Filecoin"></a>Filecoin</h2><p>Filecoin adds an incentive layer to promote long term, verifiable storage on the decentralized web. Thanks to Filecoin’s blockchain, all participants in the network work together to verify each deal. These consensus mechanisms are how users in a distributed network come to agreement without the need for a central authority.</p>
+<p>In the case of Filecoin, the <strong>storage miner</strong> is responsible for proving that they’re storing the correct data over time, and <strong>verifier</strong> duties are shared by all participants in the network.</p>
+<p>Before a system file (e.g. <code>puppy.gif</code>) can be stored on the Filecoin network, it must first be transformed into a Filecoin Piece:</p>
+<ul>
+<li>in the first stage of this transformation, the system file is chunked up with UnixFS to create an IPLD DAG (Directed Acyclic Graph)</li>
+<li>the IPLD DAG is serialized to a <a href="https://github.com/ipld/specs/blob/master/block-layer/content-addressable-archives.md#summary">CAR file</a> and bit padded to make a Filecoin Piece</li>
+</ul>
+<img src="/images/fs/ifps-006.png" style="zoom:45%;" />
+
+<p>In the negotiation process for storage, a piece CID is wrapped with other deal parameters to create a Deal Proposal. The client sends this deal proposal to a miner, who agrees to store their data. Once the miner has confirmed, the client transfers their data to the miner. Once the miner has the data and verifies that it matches the piece CID noted in the deal proposal, they publish the deal proposal on Filecoin’s blockchain, committing both parties to the deal.</p>
+<p><strong>Proof of Replication (PoRep)</strong>: a storage miner proves that they are storing a physically unique copy, or <em>replica</em>, of the data. Proof of Replication happens just once, at the time the data is first stored by the miner</p>
+<p><strong>Proof of Spacetime (PoSt)</strong>: Proof of Spacetime (PoSt) will run repeatedly to prove that they are continuing to dedicate storage space to that same data over time</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>ProtoSchool: <a href="https://proto.school/">https://proto.school/</a></p>
+<p>IPFS Docs: <a href="https://docs.ipfs.io/">https://docs.ipfs.io/</a></p>
+]]></content>
+      <categories>
+        <category>File System</category>
+      </categories>
+      <tags>
+        <tag>IPFS</tag>
+      </tags>
+  </entry>
 </search>
