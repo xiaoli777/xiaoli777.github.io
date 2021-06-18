@@ -1638,7 +1638,7 @@
 
 
 <h2 id="EdgeMesh-Ingress-Gateway"><a href="#EdgeMesh-Ingress-Gateway" class="headerlink" title="EdgeMesh Ingress Gateway"></a>EdgeMesh Ingress Gateway</h2><p>EdgeMesh ingress gateway provides a ability to access services in external edge nodes.</p>
-<p><img src="/Users/xiaoli/Documents/Codes/github/edgemesh/images/em-ig.png"></p>
+<p><img src="/images/fs/em-ig.png"></p>
 <h4 id="HTTP-Gateway"><a href="#HTTP-Gateway" class="headerlink" title="HTTP Gateway"></a>HTTP Gateway</h4><p>Create two CRDs: ‘Gateway’ and ‘VirtualService’</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/gateway-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/virtualservice-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br></pre></td></tr></table></figure>
 <p>Deploy edgemesh-gateway</p>
