@@ -336,165 +336,197 @@
   <entry>
     <title>EdgeMesh概述</title>
     <url>/2021/EdgeMesh%E6%A6%82%E8%BF%B0/</url>
-    <content><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>EdgeMesh是一种服务网格，它与KubeEdge紧密结合，并适用于边缘场景。</p>
-<p>近年来，随着云原生和微服务架构的越来越流行，边缘节点的功能也越来越完善。在这个场景下，用户能够在边缘节点上部署自己的应用，而这些边缘节点必须通过服务被外部用户所访问。出于这个目的，EdgeMesh向用户（在KubeEdge内运行应用的用户）提供运行在不同节点上的外部访问服务，从而使他们访问其它边缘节点。此外，EdgeMesh还向用户供负载均衡和流量治理的能力。</p>
-<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>EdgeMesh满足边缘场景下的新需求（如边缘资源有限，边云网络不稳定等），即实现了高可用性，高可靠性，和极致轻量化：</p>
+    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>EdgeMesh is a part of KubeEdge, and provides a simple network solution for the inter-communications between services at edge scenarios.</p>
+<h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4><p>KubeEdge is build based on Kubernetes, extending cloud-native containerized application orchestration capabilities to the edge. However, at the scenario of edge computer, the network topology is more complex. Edge nodes in different areas are offen not interconnected, and the inter-communication of traffic between applications is the primary requirement of the business. For this scenairo, EdgeMesh offers a solution.</p>
+<h4 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h4><p>As the component of data panel on a KubeEdge cluster, EdgeMesh offers sample capacities (e.g, service discovery, traffic proxy, etc.) for applications running on the KubeEdge cluster, thus shielding the complex network topology at the edge scenairo.</p>
+<h4 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h4><p>EdgeMesh satisfies the new requirements in edge scenarios (e.g., limited edge resources, unstable edge cloud network, etc.), that is, high availability, high reliability, and extreme lightweight:</p>
 <ul>
-<li>高可用性<ul>
-<li>利用KubeEdge中的边云通道，来打通边缘节点间的网络</li>
-<li>将边缘节点间的通信分为局域网内和跨局域网<ul>
-<li>局域网内的通信：直接访问</li>
-<li>跨局域网的通信：通过云端转发</li>
+<li><strong>High availability</strong><ul>
+<li>Open up the network between edge nodes by using the edge cloud channel in KubeEdge</li>
+<li>Divide the communication between edge nodes into intra-LAN and cross-LAN<ul>
+<li>Intra-LAN communication: direct access</li>
+<li>Cross-LAN communication: forwarding through the cloud</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>高可靠性 （离线场景）<ul>
-<li>控制面和数据面流量都通过边云通道下发</li>
-<li>EdgeMesh内部实现轻量级的DNS服务器，不再访问云端DNS</li>
+<li><strong>High reliability (offline scenario)</strong><ul>
+<li>Both control plane and data plane traffic are delivered through the edge cloud channel</li>
+<li>EdgeMesh internally implements a lightweight DNS server, thus no longer accessing the cloud DNS</li>
 </ul>
 </li>
-<li>极致轻量化<ul>
-<li>每个节点有且仅有一个EdgeMesh，节省边缘资源</li>
+<li><strong>Extreme lightweight</strong><ul>
+<li>Each node has one and only one EdgeMesh, which saves edge resources</li>
 </ul>
 </li>
 </ul>
-<h3 id="用户价值"><a href="#用户价值" class="headerlink" title="用户价值"></a>用户价值</h3><ul>
-<li>对于资源受限的边缘设备，EdgeMesh提供了一个轻量化且具有高集成度的服务发现软件</li>
-<li>在现场边缘的场景下，相对于coredns + kube-proxy + cni 这一套服务发现机制，用户只需要简单地部署一个EdgeMesh就能完成目标</li>
+<h5 id="User-value"><a href="#User-value" class="headerlink" title="User value"></a>User value</h5><ul>
+<li>For edge devices with limited resources, EdgeMesh provides a lightweight and highly integrated software with service discovery</li>
+<li>In the scene of Field Edge, compared to the mechanism of coredns + kube-proxy + cni service discovery , users only need to simply deploy an EdgeMesh to finish their goals</li>
 </ul>
-<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p><img src="/images/kube/em-principle.png"></p>
-<p>为了保证一些低版本内核、低版本iptables边缘设备的服务发现能力，edgemesh在实现上采用了userspace模式，除此之外还自带了一个轻量级的DNS服务器。</p>
+<h4 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h4><table align="center">
+    <tr>
+        <th align="center">Feature</th>
+        <th align="center">Sub-Feature</th>
+        <th align="center">Realization Degree</th>  
+    </tr >
+    <tr >
+        <td align="center">Service Discovery</td>
+        <td align="center">/</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td rowspan="4" align="center">Traffic Governance</td>
+         <td align="center">HTTP</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">TCP</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">Websocket</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">HTTPS</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td rowspan="3" align="center">Load Balance</td>
+         <td align="center">Random</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">Round Robin</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="center">Session Persistence</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="center">External Access</td>
+        <td align="center">/</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="center">Multi-NIC Monitoring</td>
+        <td align="center">/</td>
+        <td align="center">✓</td>
+    </tr>
+  <tr>
+        <td rowspan="2" align="center">Cross-Subnet Communication</td>
+         <td align="center">Cross-Cloud Communication</td>
+        <td align="center">+</td>
+    </tr>
+    <tr>
+         <td align="center">Cross-LAN E2E Communication</td>
+        <td align="center">+</td>
+    </tr>
+  <tr>
+        <td align="center">Edge CNI</td>
+         <td align="center">Cross-Subnet Pod Communication</td>
+        <td align="center">+</td>
+    </tr>
+</table>
+
+
+
+<p><strong>Noting:</strong></p>
 <ul>
-<li>EdgeMesh通过KubeEdge边缘侧list-watch的能力，监听service、endpoints等元数据的增删改，再根据service、endpoints的信息创建iptables规则</li>
-<li>EdgeMesh使用域名的方式来访问服务，因为fakeIP不会暴露给用户。fakeIP可以理解为clusterIP，每个节点的fakeIP的CIDR都是9.251.0.0/16网段（后续会统一成K8s的service网络）</li>
-<li>当client访问服务的请求到达带有EdgeMesh的节点后，它首先会进入内核的iptables</li>
-<li>EdgeMesh之前配置的iptables规则会将请求重定向，全部转发到EdgeMesh进程的40001端口里（数据包从内核态-&gt;用户态）</li>
-<li>请求进入EdgeMesh进程后，由EdgeMesh进程完成后端Pod的选择（负载均衡在这里发生），然后将请求发到这个Pod所在的主机上</li>
+<li><code>✓</code> Features supported by the EdgeMesh version </li>
+<li><code>+</code> Features not available in the EdgeMesh version, but will be supported in subsequent versions</li>
+<li><code>-</code> Features not available in the EdgeMesh version, or deprecated features</li>
 </ul>
-<h2 id="功能性"><a href="#功能性" class="headerlink" title="功能性"></a>功能性</h2><table>
-<thead>
-<tr>
-<th align="center">功能</th>
-<th align="center">子功能</th>
-<th align="center">Edgemesh 0.1</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">服务发现</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center">流量治理</td>
-<td align="center">HTTP</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">TCP</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">UDP</td>
-<td align="center"><code>+</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">HTTPS</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Websocket</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">gRPC</td>
-<td align="center"><code>+</code></td>
-</tr>
-<tr>
-<td align="center">负载均衡</td>
-<td align="center">随机</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">轮询</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">会话保持</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center">外部访问</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center">多网卡监听</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-</tbody></table>
-<p>注：</p>
+<h4 id="Future-Works"><a href="#Future-Works" class="headerlink" title="Future Works"></a>Future Works</h4><img src="/images/kube/em-intro.png" style="zoom:80%;" />
+
+<p>At present, the implementation of EdgeMesh relies on the connectivity of the host network. In the future, EdgeMesh will realize the capabilities of CNI plug-ins, and realize the Pod network connectivity between edge nodes and nodes on the cloud, or edge nodes across LANs in a  compatible manner with mainstream CNI plug-ins (e.g., flannel / calico, etc). Finally, EdgeMesh can even replace part of its own components with cloud-native components (e.g., replacing <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/">kube-proxy</a> to achieve the capabilities of the Cluster IP, replacing <a href="https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/">node local dns cache </a> to achieve node-level dns capabilities, and replace <a href="https://www.envoyproxy.io/">envoy</a> to achieve mesh-layer capabilities).</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><img src="/images/kube/em-arch.png" style="zoom:67%;" />
+
+<p>To ensure the capability of service discovery in some edge devices with low-version kernels or low-version iptables, EdgeMesh adopts the userspace mode in its implementation of the traffic proxy. In addition, it also comes with a lightweight DNS resolver. As shown in the figure above, the core components of EdgeMesh include:</p>
 <ul>
-<li><code>✓</code> EdgeMesh版本所支持的功能</li>
-<li><code>+</code> EdgeMesh版本不具备的功能，但在后续版本中会支持</li>
-<li><code>-</code> EdgeMesh版本不具备的功能，或已弃用的功能</li>
+<li><strong>Proxier</strong>: Responsible for configuring the kernel’s iptables rules, and intercepting requests to the EdgeMesh process</li>
+<li><strong>DNS</strong>: Built-in DNS resolver, which resolves the DNS request in the node into a service cluster IP</li>
+<li><strong>Traffic</strong>: A traffic forwarding module based on the Go-chassis framework, which is responsible for forwarding traffic between applications</li>
+<li><strong>Controller</strong>: Obtains metadata (e.g., Service, Endpoints, Pod, etc.) through the list-watch capability on the edge side of KubeEdge</li>
 </ul>
-<h2 id="操作指南"><a href="#操作指南" class="headerlink" title="操作指南"></a>操作指南</h2><h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>​    在边缘节点，关闭edgemesh，打开metaserver，并重启edgecore</p>
+<h4 id="How-It-Works"><a href="#How-It-Works" class="headerlink" title="How It Works"></a>How It Works</h4><ul>
+<li>Through the capability of list-watch on the edge of KubeEdge, EdgeMesh monitors the addition, deletion and modification of metadata (e.g., Services and Endpoints), and then creates iptables rules based on Services and Endpoints</li>
+<li>EdgeMesh uses the same ways (e.g., Cluster IP, domain name) as the K8s Service to access services</li>
+<li>When client’s requests accessing a service reach a node with EdgeMesh, it will enter the kernel’s iptables at first</li>
+<li>The iptables rules previously configured by EdgeMesh will redirect requests, and forward them all to the port 40001 which is occupied by the EdgeMesh process (data packets from kernel mode to user mode)</li>
+<li>After requests enter the EdgeMesh process, the EdgeMesh process completes the selection of backend Pods (load balancing occurs here), and then sends requests to the host where the Pod is located</li>
+</ul>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><h4 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h4><p>Before using EdgeMesh, you need to understand the following prerequisites at first:</p>
+<ul>
+<li>when using edgemesh’s capabilities, the Pod is required a hostPort (as shown in following examples)</li>
+<li>while using DestinationRule, the name of the DestinationRule must be equal to the name of the corresponding Service. Edgemesh will determine the DestinationRule in the same namespace according to the name of the Service</li>
+<li>Service ports must be named. The key/value pairs of port name must have the following syntax: name: &lt;protocol&gt;[-&lt;suffix&gt;]</li>
+</ul>
+<h4 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h4><p>At the edge node, close EdgeMesh, open metaserver, and restart edgecore</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/edgecore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  edgeMesh:</span><br><span class="line">    enable: false</span><br><span class="line">  metaManager:</span><br><span class="line">    metaServer:</span><br><span class="line">      enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl restart edgecore</span></span><br></pre></td></tr></table></figure>
-<p>​    在云端，开启dynamic controller模块，并重启cloudcore</p>
+<p>On the cloud, open the dynamic controller module, and restart cloudcore</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/cloudcore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  dynamicController:</span><br><span class="line">    enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
-<p>​    在边缘节点，查看listwatch是否开启</p>
+<p>At the edge node, check if list-watch works</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 127.0.0.1:10550/api/v1/services</span></span><br><span class="line">&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;items&quot;:[&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:05Z&quot;,&quot;labels&quot;:&#123;&quot;component&quot;:&quot;apiserver&quot;,&quot;provider&quot;:&quot;kubernetes&quot;&#125;,&quot;name&quot;:&quot;kubernetes&quot;,&quot;namespace&quot;:&quot;default&quot;,&quot;resourceVersion&quot;:&quot;147&quot;,&quot;selfLink&quot;:&quot;default/services/kubernetes&quot;,&quot;uid&quot;:&quot;55eeebea-08cf-4d1a-8b04-e85f8ae112a9&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.1&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;https&quot;,&quot;port&quot;:443,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:6443&#125;],&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;,&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;annotations&quot;:&#123;&quot;prometheus.io/port&quot;:&quot;9153&quot;,&quot;prometheus.io/scrape&quot;:&quot;true&quot;&#125;,&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:07Z&quot;,&quot;labels&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;,&quot;kubernetes.io/cluster-service&quot;:&quot;true&quot;,&quot;kubernetes.io/name&quot;:&quot;KubeDNS&quot;&#125;,&quot;name&quot;:&quot;kube-dns&quot;,&quot;namespace&quot;:&quot;kube-system&quot;,&quot;resourceVersion&quot;:&quot;203&quot;,&quot;selfLink&quot;:&quot;kube-system/services/kube-dns&quot;,&quot;uid&quot;:&quot;c221ac20-cbfa-406b-812a-c44b9d82d6dc&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.10&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;dns&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;UDP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;dns-tcp&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;metrics&quot;,&quot;port&quot;:9153,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:9153&#125;],&quot;selector&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;&#125;,&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;],&quot;kind&quot;:&quot;ServiceList&quot;,&quot;metadata&quot;:&#123;&quot;resourceVersion&quot;:&quot;377360&quot;,&quot;selfLink&quot;:&quot;/api/v1/services&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>​    部署configmap，并创建Istio的用户自定义资源</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span></span><br><span class="line">configmap/edgemesh-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
-<p>​    使用daemonset的方式来部署edgemesh</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 05-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
+<p>Build EdgeMesh image (not necessary)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker build -t edgemesh:0.1 -f build/Dockerfile .</span></span><br></pre></td></tr></table></figure>
+<p>Deploy EdgeMesh</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Please <span class="built_in">set</span> the subNet to the value of service-cluster-ip-range of kube-apiserver.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> You can obtain the value from the /etc/kubernetes/manifests/kube-apiserver.yaml file on the master node</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/kubernetes/edgemesh/03-configmap.yaml</span></span><br><span class="line">configmap/edgemesh-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/kubernetes/edgemesh/04-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
 
 
-<h3 id="测试样例"><a href="#测试样例" class="headerlink" title="测试样例"></a>测试样例</h3><p><strong>HTTP协议</strong></p>
-<p>​    在边缘节点上，部署支持http协议的容器应用和相关服务</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f hostname.yaml</span></span><br></pre></td></tr></table></figure>
-<p>​    到边缘节点上，使用curl去访问相关服务，打印出容器的hostname</p>
+<h4 id="Test-Case"><a href="#Test-Case" class="headerlink" title="Test Case"></a>Test Case</h4><p><strong>HTTP</strong></p>
+<p>At the edge node, deploy a HTTP container application, and relevant service</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/hostname.yaml</span></span><br></pre></td></tr></table></figure>
+<p>Go to that edge node, use ‘curl’ to access the service, and print out the hostname of the container</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl hostname-lb-svc.edgemesh-test:12345</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>TCP协议</strong><br>    在边缘节点1，部署支持tcp协议的容器应用和相关服务</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
-<p>​    在边缘节点2，使用telnet去访问相关服务</p>
+<p><strong>TCP</strong></p>
+<p>At the edge node 1, deploy a TCP container application, and relevant service    </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
+<p>At the edge node 1, use ‘telnet’ to access the service        </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> telnet tcp-echo-service.edgemesh-test 2701</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>Websocket协议</strong><br>    在边缘节点1，部署支持websocket协议的容器应用和相关服务</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
-<p>​    进入websocket的容器环境，并使用client去访问相关服务</p>
+<p><strong>Websocket</strong></p>
+<p>At the edge node 1, deploy a websocket container application, and relevant service    </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
+<p>Enter the container, and use ./client to access the service</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it 2a6ae1a490ae bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./client --addr ws-svc.edgemesh-test:12348</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>负载均衡</strong><br>    使用DestinationRule中的loadBalancer属性来选择不同的负载均衡模式</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim edgemesh-gateway-dr.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
+<p><strong>Load Balance</strong></p>
+<p>The capability of load balance needs to add the CRD ‘DestinationRule’</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/destinationrule-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br></pre></td></tr></table></figure>
+<p>Use the ‘loadBalancer’ in ‘DestinationRule’ to select LB modes    </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim example/hostname-lb-random.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
 
 
-<h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh ingress gateway 提供了外部访问集群里服务的能力。</p>
-<p><img src="/images/kube/em-ig.png"></p>
-<h3 id="部署-1"><a href="#部署-1" class="headerlink" title="部署"></a>部署</h3><p>​    创建istio的用户自定义资源</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
-<p>​    配置configmap，并使用deployment来部署edgemesh-gateway</p>
+<h2 id="EdgeMesh-Ingress-Gateway"><a href="#EdgeMesh-Ingress-Gateway" class="headerlink" title="EdgeMesh Ingress Gateway"></a>EdgeMesh Ingress Gateway</h2><p>EdgeMesh ingress gateway provides a ability to access services in external edge nodes.</p>
+<p><img src="/images/fs/em-ig.png"></p>
+<h4 id="HTTP-Gateway"><a href="#HTTP-Gateway" class="headerlink" title="HTTP Gateway"></a>HTTP Gateway</h4><p>Create two CRDs: ‘Gateway’ and ‘VirtualService’</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/gateway-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/virtualservice-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br></pre></td></tr></table></figure>
+<p>Deploy edgemesh-gateway</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span> </span><br><span class="line">configmap/edgemesh-gateway-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 04-deployment.yaml</span> </span><br><span class="line">deployment.apps/edgemesh-gateway created</span><br></pre></td></tr></table></figure>
-<p>​    创建gateway资源对象，和路由规则Virtual Service</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f edgemesh-gateway-gw-vsvc.yaml</span></span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-vsvc created</span><br></pre></td></tr></table></figure>
-<p>​    查看edgemesh-gateway是否部署成功</p>
+<p>Create ‘Gateway’ and ‘VirtualService’</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/hostname-lb-random-gateway.yaml</span></span><br><span class="line">pod/hostname-lb-edge2 created</span><br><span class="line">pod/hostname-lb-edge3 created</span><br><span class="line">service/hostname-lb-svc created</span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway configured</span><br><span class="line">destinationrule.networking.istio.io/hostname-lb-edge created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-svc created</span><br></pre></td></tr></table></figure>
+<p>Check if the edgemesh-gateway is successfully deployed</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
-<p>​    最后，使用IP和Virtual Service暴露的端口来进行访问</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
+<p>Finally, use the IP and the port exposed by the VirtualService to access</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:12345</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="HTTPS-GateWay"><a href="#HTTPS-GateWay" class="headerlink" title="HTTPS GateWay"></a>HTTPS GateWay</h4><p>Create a test key file</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj <span class="string">&quot;/CN=kubeedge.io&quot;</span></span><br><span class="line">Generating a RSA private key</span><br><span class="line">............+++++</span><br><span class="line">.......................................................................................+++++</span><br><span class="line">writing new private key to <span class="string">&#x27;tls.key&#x27;</span></span><br><span class="line">-----</span><br></pre></td></tr></table></figure>
+<p>Create a ‘Secret’ according to the key file</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl create secret tls gw-secret --key tls.key --cert tls.crt -n edgemesh-test</span><br><span class="line">secret/gw-secret created</span><br></pre></td></tr></table></figure>
+<p>Create a Secret-bound ‘Gateway’ and routing rules ‘VirtualService’</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl apply -f example/hostname-lb-random-gateway-tls.yaml</span><br><span class="line">pod/hostname-lb-edge2 created</span><br><span class="line">pod/hostname-lb-edge3 created</span><br><span class="line">service/hostname-lb-svc created</span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway configured</span><br><span class="line">destinationrule.networking.istio.io/hostname-lb-edge created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-svc created</span><br></pre></td></tr></table></figure>
+<p>Finally, use the certificate for a HTTPS access</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ curl -k --cert ./tls.crt --key ./tls.key https://192.168.0.129:12345</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
@@ -1256,41 +1288,87 @@
   <entry>
     <title>Sorting Algorithms</title>
     <url>/2021/Sorting-Algorithms/</url>
-    <content><![CDATA[<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><ul>
-<li>概念：从头到尾逐个处理数据，将当前数据和它前面的序列进行比较：若当前数据小于前一个数据，则交换位置；否则移动数组，处理下一个数据。</li>
-<li>特征：稳定性</li>
-<li>时间复杂度：O(n) / O(n^2) / O(n^2)</li>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><ul>
+<li>概念: 从头到尾逐个处理数据，将当前数据和它前面的序列进行比较：若当前数据小于前一个数据，则交换位置；否则移动数组，处理下一个数据</li>
+<li>特征: 稳定</li>
+<li>性能: O(n) / O(n^2) / O(n^2)</li>
+<li>代码: </li>
 </ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insSort</span><span class="params">(type Arr[], <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size<span class="number">-1</span>; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &gt;= <span class="number">1</span> &amp;&amp; Arr[j] &lt; Arr[j<span class="number">-1</span>]; j--)</span><br><span class="line">            swap(Arr, j<span class="number">-1</span>, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><ul>
-<li>概念：从头到尾逐个处理数据，每次将当前数据和它后面的序列进行比较：若当前数据大于后一个数据，则交换位置，并后移下标；否则仅后移下标。</li>
-<li>特征：稳定性</li>
-<li>时间复杂度：O(n^2) / O(n^2) / O(n^2)</li>
+<li>概念: 从头到尾逐个处理数据，每次将当前数据和它后面的序列进行比较：若当前数据大于后一个数据，则交换位置，并后移下标；否则仅后移下标</li>
+<li>特征: 稳定</li>
+<li>性能: O(n^2) / O(n^2) / O(n^2)</li>
+<li>代码:</li>
 </ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubSort</span><span class="params">(type Arr[], <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = size<span class="number">-1</span>; j &gt; i; j--)</span><br><span class="line">            <span class="keyword">if</span>(Arr[j] &lt; Arr[j<span class="number">-1</span>])</span><br><span class="line">                swap(Arr, j<span class="number">-1</span>, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><ul>
-<li>概念：第i次选择数组中第i小的数值，插入到第i个位置。</li>
-<li>特征：不稳定性</li>
-<li>时间复杂度：O(n^2) / O(n^2) / O(n^2)</li>
+<li>概念: 第i次选择数组中第i小的数值，插入到第i个位置</li>
+<li>特征: 不稳定</li>
+<li>性能: O(n^2) / O(n^2) / O(n^2)</li>
+<li>代码: </li>
 </ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">selSort</span><span class="params">(type Arr[], <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> lowIndex = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; size; j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Arr[lowIndex] &gt; Arr[j])</span><br><span class="line">                lowIndex = j;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(Arr, i, lowIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="shell排序"><a href="#shell排序" class="headerlink" title="shell排序"></a>shell排序</h2><ul>
-<li>概念：用INTERVAL将数组等分划分，对较小的划分数组进行插入排序，再将较小的划分数组合并为较大的数据，并进行插入排序，直到得到完整的有序数组。</li>
-<li>特征：不稳定性</li>
-<li>时间复杂度(INTERVAL=3)：O(n) / O(n^2) / O(n^1.5)</li>
+<li><p>概念: 用 Gap 将数组等分划分，对较小的划分数组进行插入排序，再将较小的划分数组合并为较大的数据，并进行插入排序，直到得到完整的有序数组</p>
+<p><img src="/images/bt/sort-1.png"></p>
+</li>
+<li><p>特征: 不稳定</p>
+</li>
+<li><p>性能 (Gap = 2): O(n) / O(n^2) / O(n^1.5)</p>
+</li>
+<li><p>代码:</p>
+</li>
 </ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">shellSort</span><span class="params">(type Arr[], <span class="keyword">int</span> size, <span class="keyword">int</span> gap)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> inc = size/gap; inc &gt; <span class="number">0</span>; inc/=gap)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; inc; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i; j &lt; size-inc; j+=inc)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = j+inc; k &gt;= inc &amp;&amp; Arr[k] &lt; Arr[k-inc]; k-=inc)</span><br><span class="line">                    swap(Arr, k-inc, k);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><ul>
-<li>概念：选择数组中的一个数字作为轴值，将比轴值小的数放在轴值左边，比轴值大的数放在轴值右边，并通过递归依次处理轴值左边和右边的序列。</li>
-<li>特征：不稳定性</li>
-<li>时间复杂度：O(nlogn) / O(n^2) / O(nlogn)</li>
+<li>概念: 选择数组中的一个数字作为轴值，将比轴值小的数放在轴值左边，比轴值大的数放在轴值右边，并通过递归依次处理轴值左边和右边的序列</li>
+<li>特征: 不稳定</li>
+<li>性能: O(nlogn) / O(n^2) / O(nlogn)</li>
+<li>代码:</li>
 </ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(type Arr[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp = left;</span><br><span class="line">    <span class="keyword">int</span> tmp_val = Arr[tmp];</span><br><span class="line">    left++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right &amp;&amp; Arr[left] &lt;= tmp_val)  left++;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right &amp;&amp; Arr[right] &gt;= tmp_val) right--;</span><br><span class="line">        <span class="keyword">if</span>(left &gt; right)    <span class="keyword">break</span>;</span><br><span class="line">        swap(Arr, left, right);</span><br><span class="line">    &#125;</span><br><span class="line">    swap(Arr, tmp, right);</span><br><span class="line">    <span class="keyword">return</span> right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quickSort</span><span class="params">(type Arr[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &gt;= right) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> p = partition(Arr, left, right);</span><br><span class="line">    quickSort(Arr, left, p<span class="number">-1</span>);</span><br><span class="line">    quickSort(Arr, p+<span class="number">1</span>, right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><ul>
-<li>概念：每次通过递归将数组划分为长度相同的子序列，并用临时数组来进行排序；接着将子序列合并为一个更大的数组并排序。</li>
-<li>特征：稳定性 / 使用等长度的临时数组(也可以通过reverse来实现)</li>
-<li>时间复杂度：O(nlogn) / O(nlogn) / O(nlogn)</li>
+<li>概念: 每次通过递归将数组划分为长度相同的子序列，并用临时数组来进行排序；接着将子序列合并为一个更大的数组并排序</li>
+<li>特征: 稳定 / 使用等长度的临时数组 (也可以通过 reverse 来实现)</li>
+<li>性能: O(nlogn) / O(nlogn) / O(nlogn)</li>
+<li>代码:</li>
 </ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSortCore</span><span class="params">(type Arr[], type tmp[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &gt;= right)   <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    mergeSortCore(Arr, tmp, left, mid);</span><br><span class="line">    mergeSortCore(Arr, tmp, mid+<span class="number">1</span>, right);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> i = left, j = mid + <span class="number">1</span>, cur = left;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= right)&#123;</span><br><span class="line">        <span class="keyword">if</span>(Arr[i] &lt; Arr[j]) tmp[cur++] = Arr[i++];</span><br><span class="line">        <span class="keyword">else</span> tmp[cur++] = Arr[j++];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(i &lt;= mid) tmp[cur++] = Arr[i++];</span><br><span class="line">    <span class="keyword">while</span>(j &lt;= right)   tmp[cur++] = Arr[j++];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(cur = left; cur &lt;= right; cur++)</span><br><span class="line">        Arr[cur] = tmp[cur];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(type Arr[], <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">    type *tmp_arr = <span class="keyword">new</span> type[size];</span><br><span class="line">    mergeSortCore(Arr, tmp_arr, <span class="number">0</span>, size<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">delete</span>[] tmp_arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>优化: 不需要临时数组</li>
+</ul>
+<p><img src="/images/bt/sort-2.png"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(type Arr[], <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = len<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; j)  swap(Arr, i++, j--);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exchange</span><span class="params">(type Arr[], <span class="keyword">int</span> leftLen, <span class="keyword">int</span> rightLen)</span></span>&#123;</span><br><span class="line">    reverse(Arr, leftLen);</span><br><span class="line">    reverse(Arr + leftLen, rightLen);</span><br><span class="line">    reverse(Arr, leftLen + rightLen);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSortExchange</span><span class="params">(type Arr[], <span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = left, j = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= right)&#123;</span><br><span class="line">        <span class="keyword">while</span>(i &lt;= mid &amp;&amp; Arr[i] &lt;= Arr[j])   i++;</span><br><span class="line">        <span class="keyword">while</span>(j &lt;= right &amp;&amp; Arr[j] &lt; Arr[i])   j++;</span><br><span class="line">        exchange(Arr + i, mid + <span class="number">1</span> - i, j - mid - <span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        i = i + j - mid;</span><br><span class="line">        mid = j - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSortNoTmp</span><span class="params">(type Arr[], <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left &gt;= right)   <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">    mergeSortNoTmp(Arr, left, mid); <span class="comment">// [left, mid]</span></span><br><span class="line">    mergeSortNoTmp(Arr, mid + <span class="number">1</span>, right);    <span class="comment">// [mid+1, right]</span></span><br><span class="line">    mergeSortExchange(Arr, left, mid, right);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><ul>
-<li>概念：构建最大堆，每次将堆顶元素弹出，并用剩余元素继续构建最大堆，直到空堆。</li>
-<li>特征：不稳定性</li>
-<li>时间复杂度：O(nlogn)</li>
+<li><p>概念: 构建最大堆，每次将堆顶元素弹出，并用剩余元素继续构建最大堆，直到空堆</p>
+<p><img src="/images/bt/sort-3.png"></p>
+</li>
+<li><p>特征: 不稳定</p>
+</li>
+<li><p>性能: O(nlogn)</p>
+</li>
+<li><p>代码:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushHeap</span><span class="params">(type Arr[], <span class="keyword">int</span> hole)</span></span>&#123;</span><br><span class="line">    type t = Arr[hole];</span><br><span class="line">    <span class="keyword">int</span> parent = (hole - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span>(hole &gt; <span class="number">0</span> &amp;&amp; Arr[parent] &lt; t)&#123;</span><br><span class="line">        Arr[hole] = Arr[parent];</span><br><span class="line">        hole = parent;</span><br><span class="line">        parent = (hole - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Arr[hole] = t;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">popHeap</span><span class="params">(type Arr[], <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">    type t = Arr[size<span class="number">-1</span>];</span><br><span class="line">    Arr[size<span class="number">-1</span>] = Arr[<span class="number">0</span>];</span><br><span class="line">    size--;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> hole = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> child = <span class="number">2</span> * (hole + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">while</span>(child &lt; size)&#123;</span><br><span class="line">        <span class="keyword">if</span>(Arr[child - <span class="number">1</span>] &gt; Arr[child])</span><br><span class="line">            child--;</span><br><span class="line">        Arr[hole] = Arr[child];</span><br><span class="line">        hole = child;</span><br><span class="line">        child = <span class="number">2</span> * (hole + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(child == size)&#123;</span><br><span class="line">        Arr[hole] = Arr[child - <span class="number">1</span>];</span><br><span class="line">        hole = child - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Arr[hole] = t;</span><br><span class="line">    pushHeap(Arr, hole);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">makeHeap</span><span class="params">(type Arr[], <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">        pushHeap(Arr, i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">makeHeap2</span><span class="params">(type Arr[], <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> parent = (size - <span class="number">2</span>) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(parent &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> hole = parent;</span><br><span class="line">        <span class="keyword">int</span> child = <span class="number">2</span> * (hole + <span class="number">1</span>);</span><br><span class="line">        type t = Arr[hole];</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">while</span>(child &lt; size)&#123;</span><br><span class="line">            <span class="keyword">if</span>(Arr[child - <span class="number">1</span>] &gt; Arr[child])</span><br><span class="line">                child--;</span><br><span class="line">            Arr[hole] = Arr[child];</span><br><span class="line">            hole = child;</span><br><span class="line">            child = <span class="number">2</span> * (hole + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(child == size)&#123;</span><br><span class="line">            Arr[hole] = Arr[child - <span class="number">1</span>];</span><br><span class="line">            hole = child - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Arr[hole] = t;</span><br><span class="line">        pushHeap(Arr, hole);</span><br><span class="line">        parent--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">type</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(type Arr[], <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">    makeHeap(Arr, size);</span><br><span class="line">    <span class="comment">// makeHeap2(Arr, size);</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = size; j&gt;<span class="number">1</span>; j--)</span><br><span class="line">        popHeap(Arr, j);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
 </ul>
+<p>代码下载地址：<a href="https://xiaoli777.github.io/codes/Sortings.cpp">https://xiaoli777.github.io/codes/Sortings.cpp</a></p>
 ]]></content>
       <categories>
         <category>Algorithm</category>
@@ -1390,11 +1468,12 @@
   <entry>
     <title>The Overview of EdgeMesh</title>
     <url>/2021/The-Overview-of-EdgeMesh/</url>
-    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>EdgeMesh is a type of service mesh, which is closely related to KubeEdge, and is applicable to the edge scenarios.</p>
-<p>In recent years, as cloud native and microservice architectures have become more and more popular, the functions of edge nodes have become more and more complete. In this scenario, users can deploy their own applications on edge nodes, and these edge nodes must be accessed by external users through services. For this purpose, EdgeMesh provides users (users running applications in KubeEdge) with external access services running on different nodes, allowing them to access other edge nodes. In addition, EdgeMesh also provides capabilities of load balancing and traffic management for users.</p>
-<h2 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h2><p>EdgeMesh satisfies the new requirements in edge scenarios (e.g., limited edge resources, unstable edge cloud network, etc.), that is, high availability, high reliability, and extreme lightweight:</p>
+    <content><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>EdgeMesh is a part of KubeEdge, and provides a simple network solution for the inter-communications between services at edge scenarios.</p>
+<h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4><p>KubeEdge is build based on Kubernetes, extending cloud-native containerized application orchestration capabilities to the edge. However, at the scenario of edge computer, the network topology is more complex. Edge nodes in different areas are offen not interconnected, and the inter-communication of traffic between applications is the primary requirement of the business. For this scenairo, EdgeMesh offers a solution.</p>
+<h4 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h4><p>As the component of data panel on a KubeEdge cluster, EdgeMesh offers sample capacities (e.g, service discovery, traffic proxy, etc.) for applications running on the KubeEdge cluster, thus shielding the complex network topology at the edge scenairo.</p>
+<h4 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h4><p>EdgeMesh satisfies the new requirements in edge scenarios (e.g., limited edge resources, unstable edge cloud network, etc.), that is, high availability, high reliability, and extreme lightweight:</p>
 <ul>
-<li>High availability<ul>
+<li><strong>High availability</strong><ul>
 <li>Open up the network between edge nodes by using the edge cloud channel in KubeEdge</li>
 <li>Divide the communication between edge nodes into intra-LAN and cross-LAN<ul>
 <li>Intra-LAN communication: direct access</li>
@@ -1403,151 +1482,183 @@
 </li>
 </ul>
 </li>
-<li>High reliability (offline scenario)<ul>
+<li><strong>High reliability (offline scenario)</strong><ul>
 <li>Both control plane and data plane traffic are delivered through the edge cloud channel</li>
 <li>EdgeMesh internally implements a lightweight DNS server, thus no longer accessing the cloud DNS</li>
 </ul>
 </li>
-<li>Extreme lightweight<ul>
+<li><strong>Extreme lightweight</strong><ul>
 <li>Each node has one and only one EdgeMesh, which saves edge resources</li>
 </ul>
 </li>
 </ul>
-<h4 id="User-value"><a href="#User-value" class="headerlink" title="User value"></a>User value</h4><ul>
+<h5 id="User-value"><a href="#User-value" class="headerlink" title="User value"></a>User value</h5><ul>
 <li>For edge devices with limited resources, EdgeMesh provides a lightweight and highly integrated software with service discovery</li>
 <li>In the scene of Field Edge, compared to the mechanism of coredns + kube-proxy + cni service discovery , users only need to simply deploy an EdgeMesh to finish their goals</li>
 </ul>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/images/kube/em-principle.png"></p>
-<p>To ensure the capability of service discovery in some edge devices with low-version kernels or low-version iptables, EdgeMesh adopts the userspace mode in its implementation. In addition, it also comes with a lightweight DNS server.</p>
-<ul>
-<li>Through the capability of list-watch on the edge of KubeEdge, EdgeMesh monitors the addition, deletion and modification of metadata (e.g., services and endpoints), and then creates iptables rules based on services and endpoints</li>
-<li>EdgeMesh uses domain names to access services, since fakeIP does NOT be exposed to users. FakeIP is similar to clusterIP, and its CIDR is between the network segment of 9.251.0.0/16 in each node (which will be unified into K8s service network in the future)</li>
-<li>When client’s requests accessing a service reach a node with EdgeMesh, it will enter the kernel’s iptables at first</li>
-<li>The iptables rules previously configured by EdgeMesh will redirect requests, and forward them all to the port 40001 which is occupied by the EdgeMesh process (data packets from kernel mode to user mode)</li>
-<li>After requests enter the EdgeMesh process, the EdgeMesh process completes the selection of backend Pods (load balancing occurs here), and then sends requests to the host where the Pod is located</li>
-</ul>
-<h2 id="Functionality"><a href="#Functionality" class="headerlink" title="Functionality"></a>Functionality</h2><table>
-<thead>
-<tr>
-<th align="center">Feature</th>
-<th align="center">Sub-Feature</th>
-<th align="center">Edgemesh 0.1</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Service Discovery</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center">Traffic Governance</td>
-<td align="center">HTTP</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">TCP</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">UDP</td>
-<td align="center"><code>+</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">HTTPS</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Websocket</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">gRPC</td>
-<td align="center"><code>+</code></td>
-</tr>
-<tr>
-<td align="center">Load Balance</td>
-<td align="center">Random</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Round Robin</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Session Persistence</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">External Access</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center">Multi-NIC Monitoring</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-</tbody></table>
-<p>Noting：</p>
+<h4 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h4><table align="center">
+    <tr>
+        <th align="center">Feature</th>
+        <th align="center">Sub-Feature</th>
+        <th align="center">Realization Degree</th>  
+    </tr >
+    <tr >
+        <td align="center">Service Discovery</td>
+        <td align="center">/</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td rowspan="4" align="center">Traffic Governance</td>
+         <td align="center">HTTP</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">TCP</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">Websocket</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">HTTPS</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td rowspan="3" align="center">Load Balance</td>
+         <td align="center">Random</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">Round Robin</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="center">Session Persistence</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="center">External Access</td>
+        <td align="center">/</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="center">Multi-NIC Monitoring</td>
+        <td align="center">/</td>
+        <td align="center">✓</td>
+    </tr>
+  <tr>
+        <td rowspan="2" align="center">Cross-Subnet Communication</td>
+         <td align="center">Cross-Cloud Communication</td>
+        <td align="center">+</td>
+    </tr>
+    <tr>
+         <td align="center">Cross-LAN E2E Communication</td>
+        <td align="center">+</td>
+    </tr>
+  <tr>
+        <td align="center">Edge CNI</td>
+         <td align="center">Cross-Subnet Pod Communication</td>
+        <td align="center">+</td>
+    </tr>
+</table>
+
+
+
+<p><strong>Noting:</strong></p>
 <ul>
 <li><code>✓</code> Features supported by the EdgeMesh version </li>
 <li><code>+</code> Features not available in the EdgeMesh version, but will be supported in subsequent versions</li>
 <li><code>-</code> Features not available in the EdgeMesh version, or deprecated features</li>
 </ul>
-<h2 id="Operation-Guidance"><a href="#Operation-Guidance" class="headerlink" title="Operation Guidance"></a>Operation Guidance</h2><h4 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h4><p>​    At the edge node, close EdgeMesh, open metaserver, and restart edgecore</p>
+<h4 id="Future-Works"><a href="#Future-Works" class="headerlink" title="Future Works"></a>Future Works</h4><img src="/images/kube/em-intro.png" style="zoom:80%;" />
+
+<p>At present, the implementation of EdgeMesh relies on the connectivity of the host network. In the future, EdgeMesh will realize the capabilities of CNI plug-ins, and realize the Pod network connectivity between edge nodes and nodes on the cloud, or edge nodes across LANs in a  compatible manner with mainstream CNI plug-ins (e.g., flannel / calico, etc). Finally, EdgeMesh can even replace part of its own components with cloud-native components (e.g., replacing <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/">kube-proxy</a> to achieve the capabilities of the Cluster IP, replacing <a href="https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/">node local dns cache </a> to achieve node-level dns capabilities, and replace <a href="https://www.envoyproxy.io/">envoy</a> to achieve mesh-layer capabilities).</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><img src="/images/kube/em-arch.png" style="zoom:67%;" />
+
+<p>To ensure the capability of service discovery in some edge devices with low-version kernels or low-version iptables, EdgeMesh adopts the userspace mode in its implementation of the traffic proxy. In addition, it also comes with a lightweight DNS resolver. As shown in the figure above, the core components of EdgeMesh include:</p>
+<ul>
+<li><strong>Proxier</strong>: Responsible for configuring the kernel’s iptables rules, and intercepting requests to the EdgeMesh process</li>
+<li><strong>DNS</strong>: Built-in DNS resolver, which resolves the DNS request in the node into a service cluster IP</li>
+<li><strong>Traffic</strong>: A traffic forwarding module based on the Go-chassis framework, which is responsible for forwarding traffic between applications</li>
+<li><strong>Controller</strong>: Obtains metadata (e.g., Service, Endpoints, Pod, etc.) through the list-watch capability on the edge side of KubeEdge</li>
+</ul>
+<h4 id="How-It-Works"><a href="#How-It-Works" class="headerlink" title="How It Works"></a>How It Works</h4><ul>
+<li>Through the capability of list-watch on the edge of KubeEdge, EdgeMesh monitors the addition, deletion and modification of metadata (e.g., Services and Endpoints), and then creates iptables rules based on Services and Endpoints</li>
+<li>EdgeMesh uses the same ways (e.g., Cluster IP, domain name) as the K8s Service to access services</li>
+<li>When client’s requests accessing a service reach a node with EdgeMesh, it will enter the kernel’s iptables at first</li>
+<li>The iptables rules previously configured by EdgeMesh will redirect requests, and forward them all to the port 40001 which is occupied by the EdgeMesh process (data packets from kernel mode to user mode)</li>
+<li>After requests enter the EdgeMesh process, the EdgeMesh process completes the selection of backend Pods (load balancing occurs here), and then sends requests to the host where the Pod is located</li>
+</ul>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><h4 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h4><p>Before using EdgeMesh, you need to understand the following prerequisites at first:</p>
+<ul>
+<li>when using edgemesh’s capabilities, the Pod is required a hostPort (as shown in following examples)</li>
+<li>while using DestinationRule, the name of the DestinationRule must be equal to the name of the corresponding Service. Edgemesh will determine the DestinationRule in the same namespace according to the name of the Service</li>
+<li>Service ports must be named. The key/value pairs of port name must have the following syntax: name: &lt;protocol&gt;[-&lt;suffix&gt;]</li>
+</ul>
+<h4 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h4><p>At the edge node, close EdgeMesh, open metaserver, and restart edgecore</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/edgecore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  edgeMesh:</span><br><span class="line">    enable: false</span><br><span class="line">  metaManager:</span><br><span class="line">    metaServer:</span><br><span class="line">      enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl restart edgecore</span></span><br></pre></td></tr></table></figure>
-<p>​    On the cloud, open the dynamic controller module, and restart cloudcore</p>
+<p>On the cloud, open the dynamic controller module, and restart cloudcore</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/cloudcore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  dynamicController:</span><br><span class="line">    enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
-<p>​    At the edge node, check if listwatch works</p>
+<p>At the edge node, check if list-watch works</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 127.0.0.1:10550/api/v1/services</span></span><br><span class="line">&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;items&quot;:[&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:05Z&quot;,&quot;labels&quot;:&#123;&quot;component&quot;:&quot;apiserver&quot;,&quot;provider&quot;:&quot;kubernetes&quot;&#125;,&quot;name&quot;:&quot;kubernetes&quot;,&quot;namespace&quot;:&quot;default&quot;,&quot;resourceVersion&quot;:&quot;147&quot;,&quot;selfLink&quot;:&quot;default/services/kubernetes&quot;,&quot;uid&quot;:&quot;55eeebea-08cf-4d1a-8b04-e85f8ae112a9&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.1&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;https&quot;,&quot;port&quot;:443,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:6443&#125;],&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;,&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;annotations&quot;:&#123;&quot;prometheus.io/port&quot;:&quot;9153&quot;,&quot;prometheus.io/scrape&quot;:&quot;true&quot;&#125;,&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:07Z&quot;,&quot;labels&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;,&quot;kubernetes.io/cluster-service&quot;:&quot;true&quot;,&quot;kubernetes.io/name&quot;:&quot;KubeDNS&quot;&#125;,&quot;name&quot;:&quot;kube-dns&quot;,&quot;namespace&quot;:&quot;kube-system&quot;,&quot;resourceVersion&quot;:&quot;203&quot;,&quot;selfLink&quot;:&quot;kube-system/services/kube-dns&quot;,&quot;uid&quot;:&quot;c221ac20-cbfa-406b-812a-c44b9d82d6dc&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.10&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;dns&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;UDP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;dns-tcp&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;metrics&quot;,&quot;port&quot;:9153,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:9153&#125;],&quot;selector&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;&#125;,&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;],&quot;kind&quot;:&quot;ServiceList&quot;,&quot;metadata&quot;:&#123;&quot;resourceVersion&quot;:&quot;377360&quot;,&quot;selfLink&quot;:&quot;/api/v1/services&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>​    Deploy configmap, and create Istio’s crds</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span></span><br><span class="line">configmap/edgemesh-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
-<p>​    Use daemonset to deploy EdgeMesh</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 05-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
+<p>Build EdgeMesh image (not necessary)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker build -t edgemesh:0.1 -f build/Dockerfile .</span></span><br></pre></td></tr></table></figure>
+<p>Deploy EdgeMesh</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Please <span class="built_in">set</span> the subNet to the value of service-cluster-ip-range of kube-apiserver.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> You can obtain the value from the /etc/kubernetes/manifests/kube-apiserver.yaml file on the master node</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/kubernetes/edgemesh/03-configmap.yaml</span></span><br><span class="line">configmap/edgemesh-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/kubernetes/edgemesh/04-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="Test-Case"><a href="#Test-Case" class="headerlink" title="Test Case"></a>Test Case</h4><p><strong>HTTP</strong><br>    At the edge node, deploy a HTTP container application, and relevant service</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f hostname.yaml</span></span><br></pre></td></tr></table></figure>
-<p>​    Go to that edge node, use ‘curl’ to access the service, and print out the hostname of the container</p>
+<h4 id="Test-Case"><a href="#Test-Case" class="headerlink" title="Test Case"></a>Test Case</h4><p><strong>HTTP</strong></p>
+<p>At the edge node, deploy a HTTP container application, and relevant service</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/hostname.yaml</span></span><br></pre></td></tr></table></figure>
+<p>Go to that edge node, use ‘curl’ to access the service, and print out the hostname of the container</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl hostname-lb-svc.edgemesh-test:12345</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>TCP</strong><br>    At the edge node 1, deploy a TCP container application, and relevant service    </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
-<p>​    At the edge node 1, use ‘telnet’ to access the service        </p>
+<p><strong>TCP</strong></p>
+<p>At the edge node 1, deploy a TCP container application, and relevant service    </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
+<p>At the edge node 1, use ‘telnet’ to access the service        </p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> telnet tcp-echo-service.edgemesh-test 2701</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>Websocket</strong><br>    At the edge node, deploy a websocket container application, and relevant service    </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
-<p>​    Enter the container, and use ./client to access the service</p>
+<p><strong>Websocket</strong></p>
+<p>At the edge node 1, deploy a websocket container application, and relevant service    </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
+<p>Enter the container, and use ./client to access the service</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it 2a6ae1a490ae bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./client --addr ws-svc.edgemesh-test:12348</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>Load Balance</strong><br>    Use the ‘loadBalancer’ in ‘DestinationRule’ to select LB modes    </p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim edgemesh-gateway-dr.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
+<p><strong>Load Balance</strong></p>
+<p>The capability of load balance needs to add the CRD ‘DestinationRule’</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/destinationrule-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br></pre></td></tr></table></figure>
+<p>Use the ‘loadBalancer’ in ‘DestinationRule’ to select LB modes    </p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim example/hostname-lb-random.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
 
 
-<h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh Ingress Gateway provides a ability to access services in external edge nodes.</p>
-<p><img src="/images/kube/em-ig.png"></p>
-<h4 id="Deployment-1"><a href="#Deployment-1" class="headerlink" title="Deployment"></a>Deployment</h4><p>​    Create Istio’s crds</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
-<p>​    Configure configmap, and deploy edgemesh-gateway</p>
+<h2 id="EdgeMesh-Ingress-Gateway"><a href="#EdgeMesh-Ingress-Gateway" class="headerlink" title="EdgeMesh Ingress Gateway"></a>EdgeMesh Ingress Gateway</h2><p>EdgeMesh ingress gateway provides a ability to access services in external edge nodes.</p>
+<p><img src="/Users/xiaoli/Documents/Codes/github/edgemesh/images/em-ig.png"></p>
+<h4 id="HTTP-Gateway"><a href="#HTTP-Gateway" class="headerlink" title="HTTP Gateway"></a>HTTP Gateway</h4><p>Create two CRDs: ‘Gateway’ and ‘VirtualService’</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/gateway-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/virtualservice-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br></pre></td></tr></table></figure>
+<p>Deploy edgemesh-gateway</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span> </span><br><span class="line">configmap/edgemesh-gateway-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 04-deployment.yaml</span> </span><br><span class="line">deployment.apps/edgemesh-gateway created</span><br></pre></td></tr></table></figure>
-<p>​    Create ‘gateway’ and ‘Virtual Service’</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f edgemesh-gateway-gw-vsvc.yaml</span></span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-vsvc created</span><br></pre></td></tr></table></figure>
-<p>​    Check if the edgemesh-gateway is successfully deployed</p>
+<p>Create ‘Gateway’ and ‘VirtualService’</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/hostname-lb-random-gateway.yaml</span></span><br><span class="line">pod/hostname-lb-edge2 created</span><br><span class="line">pod/hostname-lb-edge3 created</span><br><span class="line">service/hostname-lb-svc created</span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway configured</span><br><span class="line">destinationrule.networking.istio.io/hostname-lb-edge created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-svc created</span><br></pre></td></tr></table></figure>
+<p>Check if the edgemesh-gateway is successfully deployed</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
-<p>​    Finally, use the IP and the port exposed by the Virtual Service to access</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
+<p>Finally, use the IP and the port exposed by the VirtualService to access</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:12345</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="HTTPS-GateWay"><a href="#HTTPS-GateWay" class="headerlink" title="HTTPS GateWay"></a>HTTPS GateWay</h4><p>Create a test key file</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj <span class="string">&quot;/CN=kubeedge.io&quot;</span></span><br><span class="line">Generating a RSA private key</span><br><span class="line">............+++++</span><br><span class="line">.......................................................................................+++++</span><br><span class="line">writing new private key to <span class="string">&#x27;tls.key&#x27;</span></span><br><span class="line">-----</span><br></pre></td></tr></table></figure>
+<p>Create a ‘Secret’ according to the key file</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl create secret tls gw-secret --key tls.key --cert tls.crt -n edgemesh-test</span><br><span class="line">secret/gw-secret created</span><br></pre></td></tr></table></figure>
+<p>Create a Secret-bound ‘Gateway’ and routing rules ‘VirtualService’</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl apply -f example/hostname-lb-random-gateway-tls.yaml</span><br><span class="line">pod/hostname-lb-edge2 created</span><br><span class="line">pod/hostname-lb-edge3 created</span><br><span class="line">service/hostname-lb-svc created</span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway configured</span><br><span class="line">destinationrule.networking.istio.io/hostname-lb-edge created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-svc created</span><br></pre></td></tr></table></figure>
+<p>Finally, use the certificate for a HTTPS access</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ curl -k --cert ./tls.crt --key ./tls.key https://192.168.0.129:12345</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
@@ -2116,6 +2227,93 @@
       <tags>
         <tag>Containerization</tag>
         <tag>Network</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>星云文件系统简介</title>
+    <url>/2021/%E6%98%9F%E4%BA%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h2 id="位置寻址-VS-内容寻址"><a href="#位置寻址-VS-内容寻址" class="headerlink" title="位置寻址 VS 内容寻址"></a>位置寻址 VS 内容寻址</h2><p><strong>位置寻址</strong>指向特定实体所存储的数据位置。</p>
+<p>位置寻址的两个缺陷：</p>
+<ol>
+<li><p>可信度: 难以验证内容存储的URL，以及内容是否与中心权威机构相关</p>
+</li>
+<li><p>效率: 不同域上或不同文件名的相同内容导致大量的冗余</p>
+</li>
+</ol>
+<p><strong>内容寻址</strong>为数据提供独特的，内容驱动的标识符，我们可以用这些标识符去检索数据:</p>
+<ol>
+<li><p>结合加密哈希，内容寻址不在依赖于权威机构：即使改变非常小（一个图像中的一个像素点的改变），加密算法也会产生完全不同的哈希值</p>
+</li>
+<li><p>加密哈希能够从数据的内容中产生，意味着任何人对相同数据使用相同算法将产生相同的哈希值</p>
+</li>
+</ol>
+<h2 id="内容标识符-CIDs"><a href="#内容标识符-CIDs" class="headerlink" title="内容标识符 (CIDs)"></a>内容标识符 (CIDs)</h2><p>内容标识符是自描述型的内容寻址标识符。它不能表示内容在哪儿存储，但它基于内容本身形成了一个地址。</p>
+<p>多哈希是自描述型哈希值，它本身包含描述加密算法和哈希长度的元数据。</p>
+<img src="/images/fs/ifps-001.jpg" style="zoom:50%;" />
+
+<ul>
+<li>algo: 用于生成哈希值的<strong>加密算法</strong>标识符</li>
+<li>length: 哈希值的实际<strong>长度</strong></li>
+<li>value: 实际<strong>哈希值</strong></li>
+</ul>
+<p>在添加<strong>加密方式</strong>（dag-pd）和<strong>版本前缀</strong>后（version 1），最终的CID将如下所示：</p>
+<p><code>&lt;cid-version&gt;</code> <code>&lt;multicodec&gt;</code> <code>&lt;multihash-algorithm&gt;</code> <code>&lt;multihash-length&gt;</code> <code>&lt;multihash-hash&gt;</code></p>
+<img src="/images/fs/ifps-002.png" style="zoom:30%;" />
+
+
+
+<h2 id="Merkle-DAGs-有向无环图"><a href="#Merkle-DAGs-有向无环图" class="headerlink" title="Merkle DAGs (有向无环图)"></a>Merkle DAGs (有向无环图)</h2><p>IPFS使用CIDs去唯一地表示一个节点，并使用Merkle DAGs去表示从一个节点到另一个节点的边。</p>
+<img src="/images/fs/ifps-003.svg" style="zoom:80%;" />
+
+<p>在Merkle DAG中，每个节点的CID都依赖于它的每一个后代节点；如果任何后代节点出现不同，他们的标识符也会不同。例如，如果图片tabby猫被修改，则它在图中相应的节点会接受到不同的CID。这意味着，我们总要自上而下构建DAG：在子节点的CID未被决定前，父节点不能被创建。</p>
+<p>在Merkle DAG中，每个节点的CID依赖于它的每一个孩子节点。因此，根节点的CID可以表示整个有向无环图。</p>
+<p>IPFS的Merkle DAGs有三个特点：</p>
+<p><strong>可验证性</strong>：需要检索数据的节点可以验证它的CID</p>
+<p><strong>分布性</strong>：1) 任何拥有DAG的人可以作为该DAG的提供者; 2) 我们能够并行检索数据以及它的孩子节点</p>
+<p><strong>去重性</strong>：通过将冗余部分加密为链接，Merkle DAGs能高效地存储数据</p>
+<h2 id="分布式哈希表-DHT"><a href="#分布式哈希表-DHT" class="headerlink" title="分布式哈希表 (DHT)"></a>分布式哈希表 (DHT)</h2><p>为了寻找所需内容的节点，IPFS使用<strong>分布式哈希表</strong>，即 <strong>DHT</strong>。IPFS使用 <strong><a href="https://libp2p.io/">libp2p</a></strong> 去提供 DHT，并处理节点间的连接以及交流。</p>
+<p>一旦知晓所需内容的节点，将再次使用 DHT 来查询这些节点（路由）的位置。因此，为了得到该内容，需要使用两次 libp2p 来查询 DHT。</p>
+<p>在发现所需内容及其位置后，需要连接到该内容并交换。为了请求所需块并向其它节点发送块，IPFS当前使用 <strong>BitSwap</strong> 模块。Bitswap 允许连接到所需内容的节点，向它们发送 <strong>wantlist</strong> (所需块的列表)，并让它们发生请求块。一旦这些块到达，使用它们的CIDs进行验证。</p>
+<h2 id="Libp2p"><a href="#Libp2p" class="headerlink" title="Libp2p"></a>Libp2p</h2><p>libp2p是IPFS的网络栈。libp2p的目标是解决p2p连接中的发现能力。但是，libp2p已从IPFS中剥离出来，两个项目分别有各自的目标：</p>
+<ul>
+<li>IPFS更多关注内容寻址，例如，查找、提取和验证web中的每个内容块</li>
+<li>libp2p更多关注过程寻址，例如，查找、链接和验证任何数据在网络中的转移过程</li>
+</ul>
+<p>libp2p通过<strong>模块化</strong>实现过程寻址，即定制用户样例——用户能够根据自己的需求来选择特定的模块（传输、网络地址转换等），并组成相关的配置。</p>
+<p>以<strong>OSI模型</strong>（开放系统互连模型）作为例子。</p>
+<img src="/images/fs/ifps-004.png" style="zoom:20%;" />
+
+<p>正如我们所示，在web中的实际实现并没有完全遵循OSI模型，并且比较混乱。例如，上图所示的TCP/IP协议。</p>
+<p>Instead, libp2p breaks the OSI Model apart and allows applications to mix and match freely without being restricted to rigid conceptual models.</p>
+<p>但是，libp2p分解了OSI模型，并使得应用程序不再受概念模型的制约，能够自由地组合。</p>
+<img src="/images/fs/ifps-005.png" style="zoom:50%;" />
+
+<p>如上左图所示，<strong>NodeJs</strong> libp2p配置文件：</p>
+<ul>
+<li>第一部分导入组成网络栈所有需要的libp2p模块</li>
+<li>第二部分是libp2p节点配置，在这里我们为每个网络块添加不同模块</li>
+</ul>
+<p>但是，对于运行在<strong>浏览器</strong>中的代码（<strong>不需要支持TCP传输</strong>），我们只需要在libp2p配置中改变<strong>传输协议</strong>和<strong>对等发现协议</strong>。</p>
+<h2 id="Filecoin"><a href="#Filecoin" class="headerlink" title="Filecoin"></a>Filecoin</h2><p>Filecoin添加激励层，来促进在去中心化web中长期、可验证的存储。由于Filecoin的区块，网络中的所有参与者共同工作来验证交易。在没有中心权威机构时，这些共识机制使得分布式网络中的用户能够达成一致。</p>
+<p>在Filecoin中，存储矿工负责验证他们是否存储了正确的数据，验证器的功能被网络中的所有参与者所共享。</p>
+<p>在系统文件（如puppy.gif）能被Filecoin网络共享前，它必须将自己转化为Filecoin块：</p>
+<ul>
+<li>第一阶段，系统文件被分割来创建IPLD DAG</li>
+<li>第二阶段，IPLD DAG被序列化为CAR文件，并填充来生产Filecoin块</li>
+</ul>
+<img src="/images/fs/ifps-006.png" style="zoom:45%;" />
+
+<p>在存储的协商过程中，CID和其它交易参数合并来生产一个交易协议。接着，客户端发送该协议到存储数据的矿工。一旦矿工确认该协议，客户端向矿工传输数据。一旦矿工传输数据，并验证这些数据匹配协议中的CID，它们就向Filecoin的区块中发送交易协议，来提交协议块。</p>
+<p>**重复证明 (PoRep)**：存储矿工验证存储的数据块是唯一的。重复证明只在数据第一次被矿工存储时发生一次</p>
+<p><strong>时空证明 (PoSt)</strong>: 重复地验证存储空间中是否有相同的数据</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>ProtoSchool: <a href="https://proto.school/">https://proto.school/</a></p>
+<p>IPFS Docs: <a href="https://docs.ipfs.io/">https://docs.ipfs.io/</a></p>
+]]></content>
+      <categories>
+        <category>File System</category>
+      </categories>
+      <tags>
+        <tag>IPFS</tag>
       </tags>
   </entry>
 </search>

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/DRlogo.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/DRlogo.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/DRlogo.jpeg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xiaoli777.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.1.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="星际文件系统（IPFS）是一个在分布式文件系统中为存储和共享数据的p2p网络协议，它基于内容寻址而不是位置寻址。在这个部分，我们将介绍IPFS的关键概念：内容寻址、CIDs、Merkle DAGs、DHT、libpip 和 Filecoin 等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="星云文件系统简介">
+<meta property="og:url" content="https://xiaoli777.github.io/2021/%E6%98%9F%E4%BA%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:site_name" content="xiaoli7 IS HERE.">
+<meta property="og:description" content="星际文件系统（IPFS）是一个在分布式文件系统中为存储和共享数据的p2p网络协议，它基于内容寻址而不是位置寻址。在这个部分，我们将介绍IPFS的关键概念：内容寻址、CIDs、Merkle DAGs、DHT、libpip 和 Filecoin 等。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-001.jpg">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-002.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-003.svg">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-004.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-005.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/fs/ifps-006.png">
+<meta property="article:published_time" content="2021-06-18T15:34:58.000Z">
+<meta property="article:modified_time" content="2021-06-18T01:49:41.675Z">
+<meta property="article:author" content="xiaoli7">
+<meta property="article:tag" content="IPFS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xiaoli777.github.io/images/fs/ifps-001.jpg">
+
+
+<link rel="canonical" href="https://xiaoli777.github.io/2021/%E6%98%9F%E4%BA%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>星云文件系统简介 | xiaoli7 IS HERE.</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">xiaoli7 IS HERE.</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E5%AF%BB%E5%9D%80-VS-%E5%86%85%E5%AE%B9%E5%AF%BB%E5%9D%80"><span class="nav-text">位置寻址 VS 内容寻址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AE%B9%E6%A0%87%E8%AF%86%E7%AC%A6-CIDs"><span class="nav-text">内容标识符 (CIDs)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Merkle-DAGs-%E6%9C%89%E5%90%91%E6%97%A0%E7%8E%AF%E5%9B%BE"><span class="nav-text">Merkle DAGs (有向无环图)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%93%88%E5%B8%8C%E8%A1%A8-DHT"><span class="nav-text">分布式哈希表 (DHT)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Libp2p"><span class="nav-text">Libp2p</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Filecoin"><span class="nav-text">Filecoin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xiaoli7"
+      src="/images/Me.jpeg">
+  <p class="site-author-name" itemprop="name">xiaoli7</p>
+  <div class="site-description" itemprop="description">Never too high, never too low.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xiaoli777" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xiaoli777" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:xiaoliyang1994@outlook.com" title="E-Mail → mailto:xiaoliyang1994@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/xiaoli727" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;xiaoli727" rel="noopener" target="_blank"><i class="fab fa-linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/jueqingzhan163" title="Wechat → jueqingzhan163"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://xiaoli777.github.io/2021/%E6%98%9F%E4%BA%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/Me.jpeg">
+      <meta itemprop="name" content="xiaoli7">
+      <meta itemprop="description" content="Never too high, never too low.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoli7 IS HERE.">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          星云文件系统简介
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-18 09:34:58" itemprop="dateCreated datePublished" datetime="2021-06-18T09:34:58-06:00">2021-06-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-06-17 19:49:41" itemprop="dateModified" datetime="2021-06-17T19:49:41-06:00">2021-06-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/File-System/" itemprop="url" rel="index"><span itemprop="name">File System</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/%E6%98%9F%E4%BA%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/星云文件系统简介/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">星际文件系统（IPFS）是一个在分布式文件系统中为存储和共享数据的p2p网络协议，它基于内容寻址而不是位置寻址。在这个部分，我们将介绍IPFS的关键概念：内容寻址、CIDs、Merkle DAGs、DHT、libpip 和 Filecoin 等。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="位置寻址-VS-内容寻址"><a href="#位置寻址-VS-内容寻址" class="headerlink" title="位置寻址 VS 内容寻址"></a>位置寻址 VS 内容寻址</h2><p><strong>位置寻址</strong>指向特定实体所存储的数据位置。</p>
+<p>位置寻址的两个缺陷：</p>
+<ol>
+<li><p>可信度: 难以验证内容存储的URL，以及内容是否与中心权威机构相关</p>
+</li>
+<li><p>效率: 不同域上或不同文件名的相同内容导致大量的冗余</p>
+</li>
+</ol>
+<p><strong>内容寻址</strong>为数据提供独特的，内容驱动的标识符，我们可以用这些标识符去检索数据:</p>
+<ol>
+<li><p>结合加密哈希，内容寻址不在依赖于权威机构：即使改变非常小（一个图像中的一个像素点的改变），加密算法也会产生完全不同的哈希值</p>
+</li>
+<li><p>加密哈希能够从数据的内容中产生，意味着任何人对相同数据使用相同算法将产生相同的哈希值</p>
+</li>
+</ol>
+<h2 id="内容标识符-CIDs"><a href="#内容标识符-CIDs" class="headerlink" title="内容标识符 (CIDs)"></a>内容标识符 (CIDs)</h2><p>内容标识符是自描述型的内容寻址标识符。它不能表示内容在哪儿存储，但它基于内容本身形成了一个地址。</p>
+<p>多哈希是自描述型哈希值，它本身包含描述加密算法和哈希长度的元数据。</p>
+<img src="/images/fs/ifps-001.jpg" style="zoom:50%;" />
+
+<ul>
+<li>algo: 用于生成哈希值的<strong>加密算法</strong>标识符</li>
+<li>length: 哈希值的实际<strong>长度</strong></li>
+<li>value: 实际<strong>哈希值</strong></li>
+</ul>
+<p>在添加<strong>加密方式</strong>（dag-pd）和<strong>版本前缀</strong>后（version 1），最终的CID将如下所示：</p>
+<p><code>&lt;cid-version&gt;</code> <code>&lt;multicodec&gt;</code> <code>&lt;multihash-algorithm&gt;</code> <code>&lt;multihash-length&gt;</code> <code>&lt;multihash-hash&gt;</code></p>
+<img src="/images/fs/ifps-002.png" style="zoom:30%;" />
+
+
+
+<h2 id="Merkle-DAGs-有向无环图"><a href="#Merkle-DAGs-有向无环图" class="headerlink" title="Merkle DAGs (有向无环图)"></a>Merkle DAGs (有向无环图)</h2><p>IPFS使用CIDs去唯一地表示一个节点，并使用Merkle DAGs去表示从一个节点到另一个节点的边。</p>
+<img src="/images/fs/ifps-003.svg" style="zoom:80%;" />
+
+<p>在Merkle DAG中，每个节点的CID都依赖于它的每一个后代节点；如果任何后代节点出现不同，他们的标识符也会不同。例如，如果图片tabby猫被修改，则它在图中相应的节点会接受到不同的CID。这意味着，我们总要自上而下构建DAG：在子节点的CID未被决定前，父节点不能被创建。</p>
+<p>在Merkle DAG中，每个节点的CID依赖于它的每一个孩子节点。因此，根节点的CID可以表示整个有向无环图。</p>
+<p>IPFS的Merkle DAGs有三个特点：</p>
+<p><strong>可验证性</strong>：需要检索数据的节点可以验证它的CID</p>
+<p><strong>分布性</strong>：1) 任何拥有DAG的人可以作为该DAG的提供者; 2) 我们能够并行检索数据以及它的孩子节点</p>
+<p><strong>去重性</strong>：通过将冗余部分加密为链接，Merkle DAGs能高效地存储数据</p>
+<h2 id="分布式哈希表-DHT"><a href="#分布式哈希表-DHT" class="headerlink" title="分布式哈希表 (DHT)"></a>分布式哈希表 (DHT)</h2><p>为了寻找所需内容的节点，IPFS使用<strong>分布式哈希表</strong>，即 <strong>DHT</strong>。IPFS使用 <strong><a target="_blank" rel="noopener" href="https://libp2p.io/">libp2p</a></strong> 去提供 DHT，并处理节点间的连接以及交流。</p>
+<p>一旦知晓所需内容的节点，将再次使用 DHT 来查询这些节点（路由）的位置。因此，为了得到该内容，需要使用两次 libp2p 来查询 DHT。</p>
+<p>在发现所需内容及其位置后，需要连接到该内容并交换。为了请求所需块并向其它节点发送块，IPFS当前使用 <strong>BitSwap</strong> 模块。Bitswap 允许连接到所需内容的节点，向它们发送 <strong>wantlist</strong> (所需块的列表)，并让它们发生请求块。一旦这些块到达，使用它们的CIDs进行验证。</p>
+<h2 id="Libp2p"><a href="#Libp2p" class="headerlink" title="Libp2p"></a>Libp2p</h2><p>libp2p是IPFS的网络栈。libp2p的目标是解决p2p连接中的发现能力。但是，libp2p已从IPFS中剥离出来，两个项目分别有各自的目标：</p>
+<ul>
+<li>IPFS更多关注内容寻址，例如，查找、提取和验证web中的每个内容块</li>
+<li>libp2p更多关注过程寻址，例如，查找、链接和验证任何数据在网络中的转移过程</li>
+</ul>
+<p>libp2p通过<strong>模块化</strong>实现过程寻址，即定制用户样例——用户能够根据自己的需求来选择特定的模块（传输、网络地址转换等），并组成相关的配置。</p>
+<p>以<strong>OSI模型</strong>（开放系统互连模型）作为例子。</p>
+<img src="/images/fs/ifps-004.png" style="zoom:20%;" />
+
+<p>正如我们所示，在web中的实际实现并没有完全遵循OSI模型，并且比较混乱。例如，上图所示的TCP/IP协议。</p>
+<p>Instead, libp2p breaks the OSI Model apart and allows applications to mix and match freely without being restricted to rigid conceptual models.</p>
+<p>但是，libp2p分解了OSI模型，并使得应用程序不再受概念模型的制约，能够自由地组合。</p>
+<img src="/images/fs/ifps-005.png" style="zoom:50%;" />
+
+<p>如上左图所示，<strong>NodeJs</strong> libp2p配置文件：</p>
+<ul>
+<li>第一部分导入组成网络栈所有需要的libp2p模块</li>
+<li>第二部分是libp2p节点配置，在这里我们为每个网络块添加不同模块</li>
+</ul>
+<p>但是，对于运行在<strong>浏览器</strong>中的代码（<strong>不需要支持TCP传输</strong>），我们只需要在libp2p配置中改变<strong>传输协议</strong>和<strong>对等发现协议</strong>。</p>
+<h2 id="Filecoin"><a href="#Filecoin" class="headerlink" title="Filecoin"></a>Filecoin</h2><p>Filecoin添加激励层，来促进在去中心化web中长期、可验证的存储。由于Filecoin的区块，网络中的所有参与者共同工作来验证交易。在没有中心权威机构时，这些共识机制使得分布式网络中的用户能够达成一致。</p>
+<p>在Filecoin中，存储矿工负责验证他们是否存储了正确的数据，验证器的功能被网络中的所有参与者所共享。</p>
+<p>在系统文件（如puppy.gif）能被Filecoin网络共享前，它必须将自己转化为Filecoin块：</p>
+<ul>
+<li>第一阶段，系统文件被分割来创建IPLD DAG</li>
+<li>第二阶段，IPLD DAG被序列化为CAR文件，并填充来生产Filecoin块</li>
+</ul>
+<img src="/images/fs/ifps-006.png" style="zoom:45%;" />
+
+<p>在存储的协商过程中，CID和其它交易参数合并来生产一个交易协议。接着，客户端发送该协议到存储数据的矿工。一旦矿工确认该协议，客户端向矿工传输数据。一旦矿工传输数据，并验证这些数据匹配协议中的CID，它们就向Filecoin的区块中发送交易协议，来提交协议块。</p>
+<p>**重复证明 (PoRep)**：存储矿工验证存储的数据块是唯一的。重复证明只在数据第一次被矿工存储时发生一次</p>
+<p><strong>时空证明 (PoSt)</strong>: 重复地验证存储空间中是否有相同的数据</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>ProtoSchool: <a target="_blank" rel="noopener" href="https://proto.school/">https://proto.school/</a></p>
+<p>IPFS Docs: <a target="_blank" rel="noopener" href="https://docs.ipfs.io/">https://docs.ipfs.io/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatforReward.jpeg" alt="xiaoli7 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/alipayforReward.jpeg" alt="xiaoli7 Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/IPFS/" rel="tag"># IPFS</a>
+          </div>
+
+        
+
+
+	<div>
+    		
+        	
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>Title:  </span>星云文件系统简介</a></p>
+  <p><span>Author: </span>xiaoli7</a></p>
+  <p><span>Created:</span>06/18/2021 - 09:34:58</p>
+  <p><span>Undated:</span>06/17/2021 - 19:49:41</p>
+  <p><span>WebLink:</span><a href="/2021/%E6%98%9F%E4%BA%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/" title="星云文件系统简介">https://xiaoli777.github.io/2021/%E6%98%9F%E4%BA%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/</a>
+    <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/%E6%98%9F%E4%BA%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/"  aria-label="Copy Successfully!"></i></span>
+  </p>
+  <p><span>License:</span><i class="fa fa-copyright"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">"CC BY-NC-ND 4.0"</a> Reprint please keep the original link and author. </p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy Successfully!',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+
+
+
+    		
+	</div>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/Docker-Network/" rel="prev" title="Docker Network">
+                  <i class="fa fa-chevron-left"></i> Docker Network
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoli7</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://xiaoli7.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://xiaoli777.github.io/2021/%E6%98%9F%E4%BA%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B/";
+    this.page.identifier = "2021/星云文件系统简介/";
+    this.page.title = "星云文件系统简介";
+    };
+  NexT.utils.loadComments('#disqus_thread', () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://xiaoli7.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -29,15 +29,16 @@
 <meta property="og:site_name" content="xiaoli7 IS HERE.">
 <meta property="og:description" content="This blog introduces EdgeMesh —— a Service Mesh for the new requirements in edge scenarios (e.g., limited edge resources, unstable edge cloud network, etc.).">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-principle.png">
-<meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-ig.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-intro.png">
+<meta property="og:image" content="https://xiaoli777.github.io/images/kube/em-arch.png">
+<meta property="og:image" content="https://xiaoli777.github.io/Users/xiaoli/Documents/Codes/github/edgemesh/images/em-ig.png">
 <meta property="article:published_time" content="2021-04-17T02:31:07.000Z">
-<meta property="article:modified_time" content="2021-04-25T14:44:44.523Z">
+<meta property="article:modified_time" content="2021-06-18T01:59:18.621Z">
 <meta property="article:author" content="xiaoli7">
 <meta property="article:tag" content="KubeEdge">
 <meta property="article:tag" content="ServiceMesh">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://xiaoli777.github.io/images/kube/em-principle.png">
+<meta name="twitter:image" content="https://xiaoli777.github.io/images/kube/em-intro.png">
 
 
 <link rel="canonical" href="https://xiaoli777.github.io/2021/The-Overview-of-EdgeMesh/">
@@ -209,7 +210,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advantage"><span class="nav-text">Advantage</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#User-value"><span class="nav-text">User value</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functionality"><span class="nav-text">Functionality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operation-Guidance"><span class="nav-text">Operation Guidance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Deployment"><span class="nav-text">Deployment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-Case"><span class="nav-text">Test Case</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Edgemesh-Ingress-Gateway"><span class="nav-text">Edgemesh Ingress Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Deployment-1"><span class="nav-text">Deployment</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Background"><span class="nav-text">Background</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Advantage"><span class="nav-text">Advantage</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#User-value"><span class="nav-text">User value</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Key-Features"><span class="nav-text">Key Features</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Future-Works"><span class="nav-text">Future Works</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-text">Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#How-It-Works"><span class="nav-text">How It Works</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting-Started"><span class="nav-text">Getting Started</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prerequisites"><span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deployment"><span class="nav-text">Deployment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-Case"><span class="nav-text">Test Case</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EdgeMesh-Ingress-Gateway"><span class="nav-text">EdgeMesh Ingress Gateway</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP-Gateway"><span class="nav-text">HTTP Gateway</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS-GateWay"><span class="nav-text">HTTPS GateWay</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -225,7 +226,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -238,7 +239,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -322,7 +323,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-04-25 08:44:44" itemprop="dateModified" datetime="2021-04-25T08:44:44-06:00">2021-04-25</time>
+        <time title="Modified: 2021-06-17 19:59:18" itemprop="dateModified" datetime="2021-06-17T19:59:18-06:00">2021-06-17</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -366,11 +367,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>EdgeMesh is a type of service mesh, which is closely related to KubeEdge, and is applicable to the edge scenarios.</p>
-<p>In recent years, as cloud native and microservice architectures have become more and more popular, the functions of edge nodes have become more and more complete. In this scenario, users can deploy their own applications on edge nodes, and these edge nodes must be accessed by external users through services. For this purpose, EdgeMesh provides users (users running applications in KubeEdge) with external access services running on different nodes, allowing them to access other edge nodes. In addition, EdgeMesh also provides capabilities of load balancing and traffic management for users.</p>
-<h2 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h2><p>EdgeMesh satisfies the new requirements in edge scenarios (e.g., limited edge resources, unstable edge cloud network, etc.), that is, high availability, high reliability, and extreme lightweight:</p>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>EdgeMesh is a part of KubeEdge, and provides a simple network solution for the inter-communications between services at edge scenarios.</p>
+<h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4><p>KubeEdge is build based on Kubernetes, extending cloud-native containerized application orchestration capabilities to the edge. However, at the scenario of edge computer, the network topology is more complex. Edge nodes in different areas are offen not interconnected, and the inter-communication of traffic between applications is the primary requirement of the business. For this scenairo, EdgeMesh offers a solution.</p>
+<h4 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h4><p>As the component of data panel on a KubeEdge cluster, EdgeMesh offers sample capacities (e.g, service discovery, traffic proxy, etc.) for applications running on the KubeEdge cluster, thus shielding the complex network topology at the edge scenairo.</p>
+<h4 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h4><p>EdgeMesh satisfies the new requirements in edge scenarios (e.g., limited edge resources, unstable edge cloud network, etc.), that is, high availability, high reliability, and extreme lightweight:</p>
 <ul>
-<li>High availability<ul>
+<li><strong>High availability</strong><ul>
 <li>Open up the network between edge nodes by using the edge cloud channel in KubeEdge</li>
 <li>Divide the communication between edge nodes into intra-LAN and cross-LAN<ul>
 <li>Intra-LAN communication: direct access</li>
@@ -379,151 +381,183 @@
 </li>
 </ul>
 </li>
-<li>High reliability (offline scenario)<ul>
+<li><strong>High reliability (offline scenario)</strong><ul>
 <li>Both control plane and data plane traffic are delivered through the edge cloud channel</li>
 <li>EdgeMesh internally implements a lightweight DNS server, thus no longer accessing the cloud DNS</li>
 </ul>
 </li>
-<li>Extreme lightweight<ul>
+<li><strong>Extreme lightweight</strong><ul>
 <li>Each node has one and only one EdgeMesh, which saves edge resources</li>
 </ul>
 </li>
 </ul>
-<h4 id="User-value"><a href="#User-value" class="headerlink" title="User value"></a>User value</h4><ul>
+<h5 id="User-value"><a href="#User-value" class="headerlink" title="User value"></a>User value</h5><ul>
 <li>For edge devices with limited resources, EdgeMesh provides a lightweight and highly integrated software with service discovery</li>
 <li>In the scene of Field Edge, compared to the mechanism of coredns + kube-proxy + cni service discovery , users only need to simply deploy an EdgeMesh to finish their goals</li>
 </ul>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/images/kube/em-principle.png"></p>
-<p>To ensure the capability of service discovery in some edge devices with low-version kernels or low-version iptables, EdgeMesh adopts the userspace mode in its implementation. In addition, it also comes with a lightweight DNS server.</p>
-<ul>
-<li>Through the capability of list-watch on the edge of KubeEdge, EdgeMesh monitors the addition, deletion and modification of metadata (e.g., services and endpoints), and then creates iptables rules based on services and endpoints</li>
-<li>EdgeMesh uses domain names to access services, since fakeIP does NOT be exposed to users. FakeIP is similar to clusterIP, and its CIDR is between the network segment of 9.251.0.0/16 in each node (which will be unified into K8s service network in the future)</li>
-<li>When client’s requests accessing a service reach a node with EdgeMesh, it will enter the kernel’s iptables at first</li>
-<li>The iptables rules previously configured by EdgeMesh will redirect requests, and forward them all to the port 40001 which is occupied by the EdgeMesh process (data packets from kernel mode to user mode)</li>
-<li>After requests enter the EdgeMesh process, the EdgeMesh process completes the selection of backend Pods (load balancing occurs here), and then sends requests to the host where the Pod is located</li>
-</ul>
-<h2 id="Functionality"><a href="#Functionality" class="headerlink" title="Functionality"></a>Functionality</h2><table>
-<thead>
-<tr>
-<th align="center">Feature</th>
-<th align="center">Sub-Feature</th>
-<th align="center">Edgemesh 0.1</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Service Discovery</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center">Traffic Governance</td>
-<td align="center">HTTP</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">TCP</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">UDP</td>
-<td align="center"><code>+</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">HTTPS</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Websocket</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">gRPC</td>
-<td align="center"><code>+</code></td>
-</tr>
-<tr>
-<td align="center">Load Balance</td>
-<td align="center">Random</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Round Robin</td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center">Session Persistence</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">External Access</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-<tr>
-<td align="center">Multi-NIC Monitoring</td>
-<td align="center"></td>
-<td align="center"><code>✓</code></td>
-</tr>
-</tbody></table>
-<p>Noting：</p>
+<h4 id="Key-Features"><a href="#Key-Features" class="headerlink" title="Key Features"></a>Key Features</h4><table align="center">
+    <tr>
+        <th align="center">Feature</th>
+        <th align="center">Sub-Feature</th>
+        <th align="center">Realization Degree</th>  
+    </tr >
+    <tr >
+        <td align="center">Service Discovery</td>
+        <td align="center">/</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td rowspan="4" align="center">Traffic Governance</td>
+         <td align="center">HTTP</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">TCP</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">Websocket</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">HTTPS</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td rowspan="3" align="center">Load Balance</td>
+         <td align="center">Random</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+         <td align="center">Round Robin</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="center">Session Persistence</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="center">External Access</td>
+        <td align="center">/</td>
+        <td align="center">✓</td>
+    </tr>
+    <tr>
+        <td align="center">Multi-NIC Monitoring</td>
+        <td align="center">/</td>
+        <td align="center">✓</td>
+    </tr>
+  <tr>
+        <td rowspan="2" align="center">Cross-Subnet Communication</td>
+         <td align="center">Cross-Cloud Communication</td>
+        <td align="center">+</td>
+    </tr>
+    <tr>
+         <td align="center">Cross-LAN E2E Communication</td>
+        <td align="center">+</td>
+    </tr>
+  <tr>
+        <td align="center">Edge CNI</td>
+         <td align="center">Cross-Subnet Pod Communication</td>
+        <td align="center">+</td>
+    </tr>
+</table>
+
+
+
+<p><strong>Noting:</strong></p>
 <ul>
 <li><code>✓</code> Features supported by the EdgeMesh version </li>
 <li><code>+</code> Features not available in the EdgeMesh version, but will be supported in subsequent versions</li>
 <li><code>-</code> Features not available in the EdgeMesh version, or deprecated features</li>
 </ul>
-<h2 id="Operation-Guidance"><a href="#Operation-Guidance" class="headerlink" title="Operation Guidance"></a>Operation Guidance</h2><h4 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h4><p>​    At the edge node, close EdgeMesh, open metaserver, and restart edgecore</p>
+<h4 id="Future-Works"><a href="#Future-Works" class="headerlink" title="Future Works"></a>Future Works</h4><img src="/images/kube/em-intro.png" style="zoom:80%;" />
+
+<p>At present, the implementation of EdgeMesh relies on the connectivity of the host network. In the future, EdgeMesh will realize the capabilities of CNI plug-ins, and realize the Pod network connectivity between edge nodes and nodes on the cloud, or edge nodes across LANs in a  compatible manner with mainstream CNI plug-ins (e.g., flannel / calico, etc). Finally, EdgeMesh can even replace part of its own components with cloud-native components (e.g., replacing <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/">kube-proxy</a> to achieve the capabilities of the Cluster IP, replacing <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/">node local dns cache </a> to achieve node-level dns capabilities, and replace <a target="_blank" rel="noopener" href="https://www.envoyproxy.io/">envoy</a> to achieve mesh-layer capabilities).</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><img src="/images/kube/em-arch.png" style="zoom:67%;" />
+
+<p>To ensure the capability of service discovery in some edge devices with low-version kernels or low-version iptables, EdgeMesh adopts the userspace mode in its implementation of the traffic proxy. In addition, it also comes with a lightweight DNS resolver. As shown in the figure above, the core components of EdgeMesh include:</p>
+<ul>
+<li><strong>Proxier</strong>: Responsible for configuring the kernel’s iptables rules, and intercepting requests to the EdgeMesh process</li>
+<li><strong>DNS</strong>: Built-in DNS resolver, which resolves the DNS request in the node into a service cluster IP</li>
+<li><strong>Traffic</strong>: A traffic forwarding module based on the Go-chassis framework, which is responsible for forwarding traffic between applications</li>
+<li><strong>Controller</strong>: Obtains metadata (e.g., Service, Endpoints, Pod, etc.) through the list-watch capability on the edge side of KubeEdge</li>
+</ul>
+<h4 id="How-It-Works"><a href="#How-It-Works" class="headerlink" title="How It Works"></a>How It Works</h4><ul>
+<li>Through the capability of list-watch on the edge of KubeEdge, EdgeMesh monitors the addition, deletion and modification of metadata (e.g., Services and Endpoints), and then creates iptables rules based on Services and Endpoints</li>
+<li>EdgeMesh uses the same ways (e.g., Cluster IP, domain name) as the K8s Service to access services</li>
+<li>When client’s requests accessing a service reach a node with EdgeMesh, it will enter the kernel’s iptables at first</li>
+<li>The iptables rules previously configured by EdgeMesh will redirect requests, and forward them all to the port 40001 which is occupied by the EdgeMesh process (data packets from kernel mode to user mode)</li>
+<li>After requests enter the EdgeMesh process, the EdgeMesh process completes the selection of backend Pods (load balancing occurs here), and then sends requests to the host where the Pod is located</li>
+</ul>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><h4 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h4><p>Before using EdgeMesh, you need to understand the following prerequisites at first:</p>
+<ul>
+<li>when using edgemesh’s capabilities, the Pod is required a hostPort (as shown in following examples)</li>
+<li>while using DestinationRule, the name of the DestinationRule must be equal to the name of the corresponding Service. Edgemesh will determine the DestinationRule in the same namespace according to the name of the Service</li>
+<li>Service ports must be named. The key/value pairs of port name must have the following syntax: name: &lt;protocol&gt;[-&lt;suffix&gt;]</li>
+</ul>
+<h4 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h4><p>At the edge node, close EdgeMesh, open metaserver, and restart edgecore</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/edgecore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  edgeMesh:</span><br><span class="line">    enable: false</span><br><span class="line">  metaManager:</span><br><span class="line">    metaServer:</span><br><span class="line">      enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl restart edgecore</span></span><br></pre></td></tr></table></figure>
-<p>​    On the cloud, open the dynamic controller module, and restart cloudcore</p>
+<p>On the cloud, open the dynamic controller module, and restart cloudcore</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim /etc/kubeedge/config/cloudcore.yaml</span></span><br><span class="line">modules:</span><br><span class="line">  ..</span><br><span class="line">  dynamicController:</span><br><span class="line">    enable: true</span><br><span class="line">..</span><br></pre></td></tr></table></figure>
-<p>​    At the edge node, check if listwatch works</p>
+<p>At the edge node, check if list-watch works</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 127.0.0.1:10550/api/v1/services</span></span><br><span class="line">&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;items&quot;:[&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:05Z&quot;,&quot;labels&quot;:&#123;&quot;component&quot;:&quot;apiserver&quot;,&quot;provider&quot;:&quot;kubernetes&quot;&#125;,&quot;name&quot;:&quot;kubernetes&quot;,&quot;namespace&quot;:&quot;default&quot;,&quot;resourceVersion&quot;:&quot;147&quot;,&quot;selfLink&quot;:&quot;default/services/kubernetes&quot;,&quot;uid&quot;:&quot;55eeebea-08cf-4d1a-8b04-e85f8ae112a9&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.1&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;https&quot;,&quot;port&quot;:443,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:6443&#125;],&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;,&#123;&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:&#123;&quot;annotations&quot;:&#123;&quot;prometheus.io/port&quot;:&quot;9153&quot;,&quot;prometheus.io/scrape&quot;:&quot;true&quot;&#125;,&quot;creationTimestamp&quot;:&quot;2021-04-14T06:30:07Z&quot;,&quot;labels&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;,&quot;kubernetes.io/cluster-service&quot;:&quot;true&quot;,&quot;kubernetes.io/name&quot;:&quot;KubeDNS&quot;&#125;,&quot;name&quot;:&quot;kube-dns&quot;,&quot;namespace&quot;:&quot;kube-system&quot;,&quot;resourceVersion&quot;:&quot;203&quot;,&quot;selfLink&quot;:&quot;kube-system/services/kube-dns&quot;,&quot;uid&quot;:&quot;c221ac20-cbfa-406b-812a-c44b9d82d6dc&quot;&#125;,&quot;spec&quot;:&#123;&quot;clusterIP&quot;:&quot;10.96.0.10&quot;,&quot;ports&quot;:[&#123;&quot;name&quot;:&quot;dns&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;UDP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;dns-tcp&quot;,&quot;port&quot;:53,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:53&#125;,&#123;&quot;name&quot;:&quot;metrics&quot;,&quot;port&quot;:9153,&quot;protocol&quot;:&quot;TCP&quot;,&quot;targetPort&quot;:9153&#125;],&quot;selector&quot;:&#123;&quot;k8s-app&quot;:&quot;kube-dns&quot;&#125;,&quot;sessionAffinity&quot;:&quot;None&quot;,&quot;type&quot;:&quot;ClusterIP&quot;&#125;,&quot;status&quot;:&#123;&quot;loadBalancer&quot;:&#123;&#125;&#125;&#125;],&quot;kind&quot;:&quot;ServiceList&quot;,&quot;metadata&quot;:&#123;&quot;resourceVersion&quot;:&quot;377360&quot;,&quot;selfLink&quot;:&quot;/api/v1/services&quot;&#125;&#125;</span><br></pre></td></tr></table></figure>
-<p>​    Deploy configmap, and create Istio’s crds</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span></span><br><span class="line">configmap/edgemesh-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
-<p>​    Use daemonset to deploy EdgeMesh</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 05-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
+<p>Build EdgeMesh image (not necessary)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker build -t edgemesh:0.1 -f build/Dockerfile .</span></span><br></pre></td></tr></table></figure>
+<p>Deploy EdgeMesh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Please <span class="built_in">set</span> the subNet to the value of service-cluster-ip-range of kube-apiserver.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> You can obtain the value from the /etc/kubernetes/manifests/kube-apiserver.yaml file on the master node</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/kubernetes/edgemesh/03-configmap.yaml</span></span><br><span class="line">configmap/edgemesh-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/kubernetes/edgemesh/04-daemonset.yaml</span></span><br><span class="line">daemonset.apps/edgemesh created</span><br></pre></td></tr></table></figure>
 
 
-<h4 id="Test-Case"><a href="#Test-Case" class="headerlink" title="Test Case"></a>Test Case</h4><p><strong>HTTP</strong><br>    At the edge node, deploy a HTTP container application, and relevant service</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f hostname.yaml</span></span><br></pre></td></tr></table></figure>
-<p>​    Go to that edge node, use ‘curl’ to access the service, and print out the hostname of the container</p>
+<h4 id="Test-Case"><a href="#Test-Case" class="headerlink" title="Test Case"></a>Test Case</h4><p><strong>HTTP</strong></p>
+<p>At the edge node, deploy a HTTP container application, and relevant service</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/hostname.yaml</span></span><br></pre></td></tr></table></figure>
+<p>Go to that edge node, use ‘curl’ to access the service, and print out the hostname of the container</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl hostname-lb-svc.edgemesh-test:12345</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>TCP</strong><br>    At the edge node 1, deploy a TCP container application, and relevant service    </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
-<p>​    At the edge node 1, use ‘telnet’ to access the service        </p>
+<p><strong>TCP</strong></p>
+<p>At the edge node 1, deploy a TCP container application, and relevant service    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/tcp-echo-service.yaml</span></span><br></pre></td></tr></table></figure>
+<p>At the edge node 1, use ‘telnet’ to access the service        </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> telnet tcp-echo-service.edgemesh-test 2701</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>Websocket</strong><br>    At the edge node, deploy a websocket container application, and relevant service    </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
-<p>​    Enter the container, and use ./client to access the service</p>
+<p><strong>Websocket</strong></p>
+<p>At the edge node 1, deploy a websocket container application, and relevant service    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/websocket-pod-svc.yaml</span></span><br></pre></td></tr></table></figure>
+<p>Enter the container, and use ./client to access the service</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it 2a6ae1a490ae bash</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./client --addr ws-svc.edgemesh-test:12348</span></span><br></pre></td></tr></table></figure>
 
 
-<p><strong>Load Balance</strong><br>    Use the ‘loadBalancer’ in ‘DestinationRule’ to select LB modes    </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim edgemesh-gateway-dr.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
+<p><strong>Load Balance</strong></p>
+<p>The capability of load balance needs to add the CRD ‘DestinationRule’</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/destinationrule-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br></pre></td></tr></table></figure>
+<p>Use the ‘loadBalancer’ in ‘DestinationRule’ to select LB modes    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim example/hostname-lb-random.yaml</span></span><br><span class="line">spec</span><br><span class="line">..</span><br><span class="line">  trafficPolicy:</span><br><span class="line">    loadBalancer:</span><br><span class="line">      simple: RANDOM</span><br><span class="line">..    </span><br></pre></td></tr></table></figure>
 
 
-<h2 id="Edgemesh-Ingress-Gateway"><a href="#Edgemesh-Ingress-Gateway" class="headerlink" title="Edgemesh Ingress Gateway"></a>Edgemesh Ingress Gateway</h2><p>Edgemesh Ingress Gateway provides a ability to access services in external edge nodes.</p>
-<p><img src="/images/kube/em-ig.png"></p>
-<h4 id="Deployment-1"><a href="#Deployment-1" class="headerlink" title="Deployment"></a>Deployment</h4><p>​    Create Istio’s crds</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f istio-crds-simple.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/destinationrules.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/serviceentries.networking.istio.io created</span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br></pre></td></tr></table></figure>
-<p>​    Configure configmap, and deploy edgemesh-gateway</p>
+<h2 id="EdgeMesh-Ingress-Gateway"><a href="#EdgeMesh-Ingress-Gateway" class="headerlink" title="EdgeMesh Ingress Gateway"></a>EdgeMesh Ingress Gateway</h2><p>EdgeMesh ingress gateway provides a ability to access services in external edge nodes.</p>
+<p><img src="/Users/xiaoli/Documents/Codes/github/edgemesh/images/em-ig.png"></p>
+<h4 id="HTTP-Gateway"><a href="#HTTP-Gateway" class="headerlink" title="HTTP Gateway"></a>HTTP Gateway</h4><p>Create two CRDs: ‘Gateway’ and ‘VirtualService’</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/gateway-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/gateways.networking.istio.io created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f build/istio/virtualservice-crd.yaml</span></span><br><span class="line">customresourcedefinition.apiextensions.k8s.io/virtualservices.networking.istio.io created</span><br></pre></td></tr></table></figure>
+<p>Deploy edgemesh-gateway</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 03-configmap.yaml</span> </span><br><span class="line">configmap/edgemesh-gateway-cfg created</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f 04-deployment.yaml</span> </span><br><span class="line">deployment.apps/edgemesh-gateway created</span><br></pre></td></tr></table></figure>
-<p>​    Create ‘gateway’ and ‘Virtual Service’</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f edgemesh-gateway-gw-vsvc.yaml</span></span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-vsvc created</span><br></pre></td></tr></table></figure>
-<p>​    Check if the edgemesh-gateway is successfully deployed</p>
+<p>Create ‘Gateway’ and ‘VirtualService’</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl apply -f example/hostname-lb-random-gateway.yaml</span></span><br><span class="line">pod/hostname-lb-edge2 created</span><br><span class="line">pod/hostname-lb-edge3 created</span><br><span class="line">service/hostname-lb-svc created</span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway configured</span><br><span class="line">destinationrule.networking.istio.io/hostname-lb-edge created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-svc created</span><br></pre></td></tr></table></figure>
+<p>Check if the edgemesh-gateway is successfully deployed</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> kubectl get gw -n edgemesh-test</span></span><br><span class="line">NAME               AGE</span><br><span class="line">edgemesh-gateway   3m30s</span><br></pre></td></tr></table></figure>
-<p>​    Finally, use the IP and the port exposed by the Virtual Service to access</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:23333</span></span><br></pre></td></tr></table></figure>
+<p>Finally, use the IP and the port exposed by the VirtualService to access</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> curl 192.168.0.211:12345</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="HTTPS-GateWay"><a href="#HTTPS-GateWay" class="headerlink" title="HTTPS GateWay"></a>HTTPS GateWay</h4><p>Create a test key file</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj <span class="string">&quot;/CN=kubeedge.io&quot;</span></span><br><span class="line">Generating a RSA private key</span><br><span class="line">............+++++</span><br><span class="line">.......................................................................................+++++</span><br><span class="line">writing new private key to <span class="string">&#x27;tls.key&#x27;</span></span><br><span class="line">-----</span><br></pre></td></tr></table></figure>
+<p>Create a ‘Secret’ according to the key file</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl create secret tls gw-secret --key tls.key --cert tls.crt -n edgemesh-test</span><br><span class="line">secret/gw-secret created</span><br></pre></td></tr></table></figure>
+<p>Create a Secret-bound ‘Gateway’ and routing rules ‘VirtualService’</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f example/hostname-lb-random-gateway-tls.yaml</span><br><span class="line">pod/hostname-lb-edge2 created</span><br><span class="line">pod/hostname-lb-edge3 created</span><br><span class="line">service/hostname-lb-svc created</span><br><span class="line">gateway.networking.istio.io/edgemesh-gateway configured</span><br><span class="line">destinationrule.networking.istio.io/hostname-lb-edge created</span><br><span class="line">virtualservice.networking.istio.io/edgemesh-gateway-svc created</span><br></pre></td></tr></table></figure>
+<p>Finally, use the certificate for a HTTPS access</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -k --cert ./tls.crt --key ./tls.key https://192.168.0.129:12345</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://github.com/xiaoli777/edgemesh">https://github.com/xiaoli777/edgemesh</a></p>
@@ -577,7 +611,7 @@
   <p><span>Title:  </span>The Overview of EdgeMesh</a></p>
   <p><span>Author: </span>xiaoli7</a></p>
   <p><span>Created:</span>04/16/2021 - 20:31:07</p>
-  <p><span>Undated:</span>04/25/2021 - 08:44:44</p>
+  <p><span>Undated:</span>06/17/2021 - 19:59:18</p>
   <p><span>WebLink:</span><a href="/2021/The-Overview-of-EdgeMesh/" title="The Overview of EdgeMesh">https://xiaoli777.github.io/2021/The-Overview-of-EdgeMesh/</a>
     <span class="copy-path"  title="Copy this URL"><i class="fa fa-clipboard" data-clipboard-text="https://xiaoli777.github.io/2021/The-Overview-of-EdgeMesh/"  aria-label="Copy Successfully!"></i></span>
   </p>
